@@ -1,12 +1,12 @@
 import firebase from 'firebase';
 // Initialize Firebase
 var config = {
-    apiKey: "AIzaSyDrNdnPHhnT2Btz0VHHhbNWZCypPCwkZh8",
-    authDomain: "fun-food-friends-33123.firebaseapp.com",
-    databaseURL: "https://fun-food-friends-33123.firebaseio.com",
-    projectId: "fun-food-friends-33123",
-    storageBucket: "",
-    messagingSenderId: "1075131320059"
+    apiKey: "AIzaSyAqtI5Is5e83rbmKOGHqeSU4sJwOvHIrDg",
+    authDomain: "fmaps-ax.firebaseapp.com",
+    databaseURL: "https://fmaps-ax.firebaseio.com",
+    projectId: "fmaps-ax",
+    storageBucket: "fmaps-ax.appspot.com",
+    messagingSenderId: "777480926020"
 };
 firebase.initializeApp(config);
 

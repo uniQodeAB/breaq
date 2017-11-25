@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import firebase, {auth, provider} from './firebase.js';
 import MapComponent from './components/MapComponent';
+import SignUpComponent from './components/SignUpComponent';
+import RegisterComponent from './components/RegisterComponent';
+
 
 class App extends Component {
 
@@ -11,11 +14,13 @@ class App extends Component {
             currentItem: '',
             username: '',
             items: [],
-            user: null
+            user: null,
+            userData: null
         }
     }
 
     login = () => {
+
         provider.setCustomParameters({
             prompt: 'select_account'
         });
@@ -24,6 +29,21 @@ class App extends Component {
                 const user = result.user;
                 this.setState({
                     user
+                });
+
+                const usersRef = firebase.database().ref('users');
+                usersRef.orderByChild('uid').equalTo(this.state.user.uid).once('value', snapshot => {
+                    const userData = snapshot.val();
+                    if (userData) {
+                        /* const newUser = {
+                            user: this.state.user.displayName || this.state.user.email,
+                            uid: this.state.user.uid
+                        };
+                        usersRef.push(newUser); */
+                        this.setState({
+                            userData
+                        })
+                    }
                 });
             });
     }
@@ -67,29 +87,10 @@ class App extends Component {
         });
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        const itemsRef = firebase.database().ref('items');
-        const item = {
-            title: this.state.currentItem,
-            user: this.state.user.displayName || this.state.user.email
-        };
-        itemsRef.push(item);
-        this.setState({
-            currentItem: '',
-            username: ''
-        });
-    }
-
-    static removeItem(itemId) {
-        const itemRef = firebase.database().ref(`/items/${itemId}`);
-        itemRef.remove();
-    }
-
     render() {
         return (
-            <div class="box">
-                <header class="row header">
+            <div className={'box'}>
+                <header className={'row header'}>
                     <div className="wrapper">
                         <h1>Fun Food Friends</h1>
                         {this.state.user ?
@@ -99,17 +100,18 @@ class App extends Component {
                         }
                     </div>
                 </header>
-                <section class="row content">
+                <section className={'row content'}>
                     {this.state.user ?
-                        <MapComponent />
+                        this.state.userData ?
+                            <MapComponent />
+                            :
+                            <RegisterComponent/>
                         :
-                        <div className='wrapper'>
-                            <p>You must be logged in to see the potluck list and submit to it.</p>
-                        </div>
+                        <SignUpComponent/>
                     }
 
                 </section>
-                <footer class="row footer">
+                <footer className={'row footer'}>
                     <p><b>footer</b> (fixed height)</p>
                         <div className='user-profile'>
                             {this.state.user ?
