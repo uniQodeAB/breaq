@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { compose, withProps } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
-const MyMapComponent = compose(
+const GMapComponent = compose(
     withProps({
         googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
         loadingElement: <div style={{ height: `100%` }} />,
@@ -20,7 +20,7 @@ const MyMapComponent = compose(
     </GoogleMap>
 );
 
-class MyFancyComponent extends PureComponent {
+class GMap extends PureComponent {
     state = {
         isMarkerShown: false,
     }
@@ -42,7 +42,7 @@ class MyFancyComponent extends PureComponent {
 
     render() {
         return (
-            <MyMapComponent
+            <GMapComponent
                 isMarkerShown={this.state.isMarkerShown}
                 onMarkerClick={this.handleMarkerClick}
             />
@@ -50,4 +50,4 @@ class MyFancyComponent extends PureComponent {
     }
 }
 
-export default MyFancyComponent;
+export default GMap;

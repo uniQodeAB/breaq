@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import MyFancyComponent from './GMap';
+import GMap from './GMap';
 import firebase, {auth, provider} from './firebase.js';
 
 class App extends Component {
@@ -100,7 +100,7 @@ class App extends Component {
                     </div>
                 </header>
                 <section class="row content">
-                    <MyFancyComponent/>
+                    <GMap />
 
 
 
