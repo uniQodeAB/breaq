@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import GMap from './GMap';
 import firebase, {auth, provider} from './firebase.js';
+import MapComponent from './components/MapComponent';
 
 class App extends Component {
 
@@ -100,13 +100,24 @@ class App extends Component {
                     </div>
                 </header>
                 <section class="row content">
-                    <GMap />
-
-
+                    {this.state.user ?
+                        <MapComponent />
+                        :
+                        <div className='wrapper'>
+                            <p>You must be logged in to see the potluck list and submit to it.</p>
+                        </div>
+                    }
 
                 </section>
                 <footer class="row footer">
                     <p><b>footer</b> (fixed height)</p>
+                        <div className='user-profile'>
+                            {this.state.user ?
+                                <img src={this.state.user.photoURL} alt={''}/>
+                                :
+                                <p>&nbsp;</p>
+                            }
+                        </div>
                 </footer>
             </div>
 

@@ -32,7 +32,7 @@ body {
 }
 
 .box .row.footer {
-  flex: 0 1 40px;
+  flex: 0 1 5em;
 }
 
 header {
@@ -61,11 +61,6 @@ header h1 {
 
 }
 
-.fa {
-  font-size: 22px;
-  transform: translateY(50deg);
-}
-
 header i {
   vertical-align: middle;
   margin-left: 12px;
@@ -87,4 +82,18 @@ footer {
   color: #fff;
   background-color: #103D5D;
   padding-left: 0.67em;
+}
+
+
+.user-profile {
+  position: fixed;
+  bottom: 20px;
+  right: 40px;
+  width: 100px;
+  height: 100px;
+}
+
+.user-profile img {
+  border-radius: 50%;
+  max-width: 100%;
 }
