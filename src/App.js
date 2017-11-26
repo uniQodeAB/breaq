@@ -1,76 +1,30 @@
 import React, { Component } from 'react';
 import './App.css';
-import firebase, {auth, provider} from './firebase.js';
 import MapComponent from './components/MapComponent';
 import SignUpComponent from './components/SignUpComponent';
 import RegisterComponent from './components/RegisterComponent';
-
+import _ from 'lodash';
 
 class App extends Component {
 
     constructor() {
         super();
-        this.state = {
-            currentItem: '',
-            username: '',
-            items: [],
-            user: null,
-            userData: null
-        }
+        this.state = { }
     }
 
     login = () => {
-
-        provider.setCustomParameters({
-            prompt: 'select_account'
-        });
-        auth.signInWithPopup(provider)
-            .then((result) => {
-                const user = result.user;
-                this.setState({
-                    user
-                });
-
-                const usersRef = firebase.database().ref('users');
-                usersRef.orderByChild('uid').equalTo(this.state.user.uid).once('value', snapshot => {
-                    const userData = snapshot.val();
-                    if (userData) {
-                        /* const newUser = {
-                            user: this.state.user.displayName || this.state.user.email,
-                            uid: this.state.user.uid
-                        };
-                        usersRef.push(newUser); */
-                        this.setState({
-                            userData
-                        })
-                    }
-                });
-            });
-    }
+        this.props.onLogin();
+    };
 
     logout = () => {
-        auth.signOut()
-            .then(() => {
-                this.setState({
-                    user: null
-                });
-            });
+        this.props.onLogout();
     }
 
-    handleChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
-    }
 
     componentDidMount() {
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                this.setState({ user });
-            }
-        });
+        this.props.onAuthStateChanged();
 
-        const itemsRef = firebase.database().ref('items');
+        /*const itemsRef = firebase.database().ref('items');
         itemsRef.on('value', (snapshot) => {
             let items = snapshot.val();
             let newState = [];
@@ -84,7 +38,7 @@ class App extends Component {
             this.setState({
                 items: newState
             });
-        });
+        }); */
     }
 
     render() {
@@ -93,31 +47,32 @@ class App extends Component {
                 <header className={'row header'}>
                     <div className="wrapper">
                         <h1>Fun Food Friends</h1>
-                        {this.state.user ?
-                            <button onClick={this.logout}>Logout</button>
-                            :
+                        {_.isEmpty(this.props.user.user) ?
                             <button onClick={this.login}>Log In</button>
+                            :
+                            <button onClick={this.logout}>Logout</button>
                         }
                     </div>
                 </header>
                 <section className={'row content'}>
-                    {this.state.user ?
+                    {_.isEmpty(this.props.user.user) ?
+                        <SignUpComponent/>
+                        :
                         this.state.userData ?
                             <MapComponent />
                             :
                             <RegisterComponent/>
-                        :
-                        <SignUpComponent/>
+
                     }
 
                 </section>
                 <footer className={'row footer'}>
                     <p><b>footer</b> (fixed height)</p>
                         <div className='user-profile'>
-                            {this.state.user ?
-                                <img src={this.state.user.photoURL} alt={''}/>
-                                :
+                            {_.isEmpty(this.props.user.user) ?
                                 <p>&nbsp;</p>
+                                :
+                                <img src={this.props.user.user.photoURL} alt={''}/>
                             }
                         </div>
                 </footer>
