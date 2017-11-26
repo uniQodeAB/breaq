@@ -16,7 +16,7 @@ const MapWithASearchBox = compose(
         googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyDDOx2Hm6_dN9-REq9R7kbrc1CfM5hS-Fg&v=3.exp&libraries=geometry,drawing,places",
         loadingElement: <div style={{ height: `100%`, width: `100%` }} />,
         containerElement: <div style={{ height: `100%`, width: `100%` }} />,
-        mapElement: <div style={{ height: `100%` }} />,
+        mapElement: <div style={{ height: `100%`, width: `100%`  }} />,
     }),
     lifecycle({
         componentWillMount() {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './RegisterComponent.css';
-import GSearchBox from "./GSearchBox";
-import './RegisterComponent.css';
+import MySearchBox from './MySearchBox';
 
 class RegisterComponent extends Component {
 
@@ -16,7 +15,10 @@ class RegisterComponent extends Component {
     render() {
         return (
             <div className={'RegisterComponent'}>
-                <GSearchBox />
+                <div>
+                    Hello
+                </div>
+                <MySearchBox/>
             </div>
         );
     }
