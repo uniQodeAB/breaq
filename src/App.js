@@ -3,7 +3,9 @@ import './App.css';
 import MapComponent from './components/MapComponent';
 import SignUpComponent from './components/SignUpComponent';
 import RegisterComponent from './components/RegisterComponent';
+import Header from './components/Header';
 import _ from 'lodash';
+import Footer from './components/Footer';
 
 class App extends Component {
 
@@ -44,16 +46,8 @@ class App extends Component {
     render() {
         return (
             <div className={'box'}>
-                <header className={'row header'}>
-                    <div className="wrapper">
-                        <h1>Fun Food Friends</h1>
-                        {_.isEmpty(this.props.user.user) ?
-                            <button onClick={this.login}>Log In</button>
-                            :
-                            <button onClick={this.logout}>Logout</button>
-                        }
-                    </div>
-                </header>
+                <Header loggedIn={this.props.user.loggedIn} login={this.login} logout={this.logout} />
+
                 <section className={'row content'}>
                     {_.isEmpty(this.props.user.user) ?
                         <SignUpComponent/>
@@ -66,16 +60,7 @@ class App extends Component {
                     }
 
                 </section>
-                <footer className={'row footer'}>
-                    <p><b>footer</b> (fixed height)</p>
-                        <div className='user-profile'>
-                            {_.isEmpty(this.props.user.user) ?
-                                <p>&nbsp;</p>
-                                :
-                                <img src={this.props.user.user.photoURL} alt={''}/>
-                            }
-                        </div>
-                </footer>
+                <Footer loggedIn={this.props.user.loggedIn} photoURL={this.props.user.user.photoURL}/>
             </div>
 
         );
