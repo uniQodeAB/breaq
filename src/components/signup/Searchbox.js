@@ -21,6 +21,7 @@ const PlacesWithStandaloneSearchBox = compose(
                 onPlacesChanged: () => {
                     const places = refs.searchBox.getPlaces();
 
+                    this.props.onChangePlace(places);
                     this.setState({
                         places,
                     });
@@ -53,24 +54,21 @@ const PlacesWithStandaloneSearchBox = compose(
                 }}
             />
         </StandaloneSearchBox>
-        <ol>
-            {props.places.map(({ place_id, formatted_address, geometry: { location } }) =>
-                <li key={place_id}>
-                    {formatted_address}
-                    {" at "}
-                    ({location.lat()}, {location.lng()})
-                </li>
-            )}
-        </ol>
     </div>
 );
 
-class MySearchBox extends PureComponent {
+class Searchbox extends PureComponent {
+
+    onChangePlace = (places) => {
+        console.log('hello');
+        this.props.onChangePlace(places);
+    };
+
     render() {
         return (
-            <PlacesWithStandaloneSearchBox/>
+            <PlacesWithStandaloneSearchBox onChangePlace={this.onChangePlace}/>
         )
     }
 }
 
-export default MySearchBox;
+export default Searchbox;

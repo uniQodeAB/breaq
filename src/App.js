@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import MapComponent from './components/MapComponent';
-import SignUpComponent from './components/SignUpComponent';
-import RegisterComponent from './components/RegisterComponent';
 import Header from './components/Header';
 import _ from 'lodash';
 import Footer from './components/Footer';
+import SignUpPage from './components/signup/SignupPage';
 
 class App extends Component {
 
@@ -49,13 +47,10 @@ class App extends Component {
                 <Header loggedIn={this.props.user.loggedIn} login={this.login} logout={this.logout} />
 
                 <section className={'row content'}>
-                    {_.isEmpty(this.props.user.user) ?
-                        <SignUpComponent/>
+                    {!_.isEmpty(this.props.user.user) ?
+                        <SignUpPage/>
                         :
-                        this.state.userData ?
-                            <MapComponent />
-                            :
-                            <RegisterComponent/>
+                        <p>Hello</p>
 
                     }
 
