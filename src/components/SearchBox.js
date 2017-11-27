@@ -33,12 +33,10 @@ const PlacesWithStandaloneSearchBox = compose(
     <div data-standalone-searchbox="">
         <StandaloneSearchBox
             ref={props.onSearchBoxMounted}
-            bounds={props.bounds}
-            onPlacesChanged={props.onPlacesChanged}
-        >
+            onPlacesChanged={props.onPlacesChanged} >
             <input
                 type="text"
-                placeholder="Customized your placeholder"
+                placeholder="Where is your home base?"
                 style={{
                     boxSizing: `border-box`,
                     border: `1px solid transparent`,
