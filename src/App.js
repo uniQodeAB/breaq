@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/Header';
 import _ from 'lodash';
 import Footer from './components/Footer';
-import SignUpPage from './components/signup/SignupPage';
+import RegisterPage from './components/signup/RegisterPage';
 
 class App extends Component {
 
@@ -48,7 +48,7 @@ class App extends Component {
 
                 <section className={'row content'}>
                     {!_.isEmpty(this.props.user.user) ?
-                        <SignUpPage/>
+                        <RegisterPage/>
                         :
                         <p>Hello</p>
 

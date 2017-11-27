@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MapComponentContainer from '../../containers/mapComponentContainer';
 import SearchBoxContainer from '../../containers/searchBoxContainer';
-import './SignupPage.css';
+import './RegisterPage.css';
 
 class SignupPage extends Component {
     render() {
