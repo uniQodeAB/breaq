@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { compose, withProps, lifecycle } from 'recompose';
-import { withScriptjs } from 'react-google-maps';
 import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/StandaloneSearchBox';
 
 const PlacesWithStandaloneSearchBox = compose(
@@ -22,6 +21,7 @@ const PlacesWithStandaloneSearchBox = compose(
                     const places = refs.searchBox.getPlaces();
 
                     this.props.onChangePlace(places);
+
                     this.setState({
                         places,
                     });
@@ -29,7 +29,6 @@ const PlacesWithStandaloneSearchBox = compose(
             })
         },
     }),
-    withScriptjs
 )(props =>
     <div data-standalone-searchbox="">
         <StandaloneSearchBox
@@ -57,10 +56,9 @@ const PlacesWithStandaloneSearchBox = compose(
     </div>
 );
 
-class Searchbox extends PureComponent {
+class SearchBox extends PureComponent {
 
     onChangePlace = (places) => {
-        console.log('hello');
         this.props.onChangePlace(places);
     };
 
@@ -71,4 +69,4 @@ class Searchbox extends PureComponent {
     }
 }
 
-export default Searchbox;
+export default SearchBox;

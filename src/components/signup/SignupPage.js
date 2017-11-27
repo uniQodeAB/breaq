@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import StandaloneSearchboxContainer from '../../containers/searchboxContainer';
-import StupidMapComponentContainer from '../../containers/stupidMapComponentContainer';
+import MapComponentContainer from '../../containers/mapComponentContainer';
+import SearchBoxContainer from '../../containers/searchBoxContainer';
+import './SignupPage.css';
 
 class SignupPage extends Component {
     render() {
         return (
-            <div>
-                <div>
-                    <StandaloneSearchboxContainer/>
+
+            <div className={'SignupPage'}>
+                <div className={'search-box'}>
+                    <SearchBoxContainer/>
                 </div>
-                <div>
-                    <StupidMapComponentContainer/>
+                <div className={'map'}>
+                    <MapComponentContainer/>
                 </div>
             </div>
         );

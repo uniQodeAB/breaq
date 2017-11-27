@@ -1,0 +1,19 @@
+.SignupPage {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.SignupPage .search-box {
+    width: 20%;
+    height: 100%;
+    background: #EFF6FC;
+    border-right: 1px solid #103D5D;
+}
+
+.SignupPage .map {
+    width: 80%;
+    height: 100%;
+}
+

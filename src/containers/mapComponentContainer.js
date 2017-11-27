@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
-import Searchbox from '../components/signup/Searchbox';
+import MapComponent from '../components/MapComponent';
 import { placesChanged } from '../actions/locationActions';
 
 function mapStateToProps(state) {
-    return { };
+    return {
+        places: state.location.places
+    };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -12,4 +14,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Searchbox);
+export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);

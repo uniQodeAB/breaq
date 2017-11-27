@@ -17,10 +17,6 @@ body {
   width: 100%;
 }
 
-.box .row {
-  border: 1px dotted grey;
-}
-
 .box .row.header {
   flex: 0 1 auto;
 }
