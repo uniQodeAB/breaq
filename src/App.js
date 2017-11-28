@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './components/Header';
-import _ from 'lodash';
-import Footer from './components/Footer';
 import RegisterPage from './components/signup/RegisterPage';
 
 class App extends Component {
@@ -20,25 +17,8 @@ class App extends Component {
         this.props.onLogout();
     }
 
-
     componentDidMount() {
         this.props.onAuthStateChanged();
-
-        /*const itemsRef = firebase.database().ref('items');
-        itemsRef.on('value', (snapshot) => {
-            let items = snapshot.val();
-            let newState = [];
-            for (let item in items) {
-                newState.push({
-                    id: item,
-                    title: items[item].title,
-                    user: items[item].user
-                });
-            }
-            this.setState({
-                items: newState
-            });
-        }); */
     }
 
     render() {
@@ -47,7 +27,7 @@ class App extends Component {
                 <Header loggedIn={this.props.user.loggedIn} login={this.login} logout={this.logout} />
 
                 <section className={'row content'}>
-                    {!_.isEmpty(this.props.user.user) ?
+                    {this.props.user.loggedIn ?
                         <RegisterPage/>
                         :
                         <p>Hello</p>
@@ -59,7 +39,37 @@ class App extends Component {
             </div>
 
         );
-  }
+    }
 }
+
+const Header = (props) => {
+    return (
+        <header className={'row header'}>
+            <div className="wrapper">
+                <h1>Fun Food Friends</h1>
+                {props.loggedIn ?
+                    <button onClick={props.logout}>Logout</button>
+                    :
+                    <button onClick={props.login}>Log In</button>
+                }
+            </div>
+        </header>
+    );
+};
+
+
+const Footer = (props) => {
+    return (
+        <footer className={'row footer'}>
+            <div className='user-profile'>
+                {props.loggedIn ?
+                    <img src={props.photoURL} alt={''}/>
+                    :
+                    <p>&nbsp;</p>
+                }
+            </div>
+        </footer>
+    );
+};
 
 export default App;
