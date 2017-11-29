@@ -1,19 +1,65 @@
-.SignupPage {
+.RegisterPage {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
 }
 
-.SignupPage .search-box {
-    width: 20%;
+.RegisterPage .search-box-pane {
+    width: 30%;
     height: 100%;
     background: #EFF6FC;
     border-right: 1px solid #103D5D;
 }
 
-.SignupPage .map {
-    width: 80%;
+.RegisterPage .search-box-pane .input-control {
+    margin: 0.5em;
+}
+
+.RegisterPage .Address {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.RegisterPage .map-pane {
+    width: 70%;
     height: 100%;
 }
 
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+}
+.one {
+    grid-column: 1 / 2;
+    grid-row: 1;
+    background: lightblue;
+}
+.two {
+    grid-column: 2 / 4;
+    grid-row: 1 / 3;
+    background: lightcoral;
+}
+.three {
+    grid-column: 1;
+    grid-row: 2 / 5;
+    background: lightseagreen;
+}
+.four {
+    grid-column: 3;
+    grid-row: 3;
+    background: lightgoldenrodyellow;
+}
+.five {
+    grid-column: 2;
+    grid-row: 4;
+    background: lightsteelblue;
+}
+.six {
+    grid-column: 3;
+    grid-row: 4;
+    background: lightsalmon;
+}

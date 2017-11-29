@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import RegisterPage from './components/signup/RegisterPage';
+import RegisterPageContainer from './containers/registerPageContainer';
 
 class App extends Component {
 
@@ -28,7 +29,7 @@ class App extends Component {
 
                 <section className={'row content'}>
                     {this.props.user.loggedIn ?
-                        <RegisterPage/>
+                        <RegisterPageContainer />
                         :
                         <p>Hello</p>
 
@@ -62,11 +63,7 @@ const Footer = (props) => {
     return (
         <footer className={'row footer'}>
             <div className='user-profile'>
-                {props.loggedIn ?
-                    <img src={props.photoURL} alt={''}/>
-                    :
-                    <p>&nbsp;</p>
-                }
+                {props.loggedIn && <img src={props.photoURL} alt={''}/>}
             </div>
         </footer>
     );

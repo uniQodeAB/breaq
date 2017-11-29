@@ -4,9 +4,8 @@ import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/Sta
 
 const PlacesWithStandaloneSearchBox = compose(
     withProps({
-        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places",
         loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div style={{ height: `400px` }} />,
+        containerElement: <div style={{ height: `100%` }} />,
     }),
     lifecycle({
         componentWillMount() {
@@ -17,6 +16,9 @@ const PlacesWithStandaloneSearchBox = compose(
                 onSearchBoxMounted: ref => {
                     refs.searchBox = ref;
                 },
+                onInputMounted: ref => {
+                    refs.input = ref;
+                },
                 onPlacesChanged: () => {
                     const places = refs.searchBox.getPlaces();
 
@@ -25,6 +27,9 @@ const PlacesWithStandaloneSearchBox = compose(
                     this.setState({
                         places,
                     });
+
+                    // Reset input
+                    refs.input.value = '';
                 },
             })
         },
@@ -35,6 +40,7 @@ const PlacesWithStandaloneSearchBox = compose(
             ref={props.onSearchBoxMounted}
             onPlacesChanged={props.onPlacesChanged} >
             <input
+                ref={props.onInputMounted}
                 type="text"
                 placeholder="Where is your home base?"
                 style={{

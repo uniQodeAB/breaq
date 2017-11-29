@@ -21,8 +21,6 @@ const MapWithASearchBox = compose(
                 center: {
                     lat: 60.09726, lng: 19.93481
                 },
-                markers: [],
-                places: [],
                 onMapMounted: ref => {
                     refs.map = ref;
                 },
@@ -36,25 +34,8 @@ const MapWithASearchBox = compose(
         },
         componentWillReceiveProps(nextProps) {
 
-            const places = nextProps.places;
-            const bounds = new google.maps.LatLngBounds();
-
-            places.forEach(place => {
-                if (place.geometry.viewport) {
-                    bounds.union(place.geometry.viewport)
-                } else {
-                    bounds.extend(place.geometry.location)
-                }
-            });
-            const nextMarkers = places.map(place => ({
-                position: place.geometry.location,
-            }));
-
-            const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
-
             this.setState({
-                center: nextCenter,
-                markers: nextMarkers,
+                center: nextProps.center
             });
         }
     }),
@@ -66,24 +47,18 @@ const MapWithASearchBox = compose(
         center={props.center}
         onBoundsChanged={props.onBoundsChanged}>
 
-        {props.markers.map((marker, index) =>
-            <Marker key={index} position={marker.position}/>
-        )}
+        {props.children}
+
     </GoogleMap>
 );
 
 class MapComponent extends PureComponent {
 
-    constructor() {
-        super();
-        this.state = {
-            pokemon: 'pokemon'
-        };
-    }
-
     render() {
         return (
-            <MapWithASearchBox places={this.props.places}/>
+            <MapWithASearchBox center={this.props.center}>
+                {this.props.children}
+            </MapWithASearchBox>
         );
     }
 }

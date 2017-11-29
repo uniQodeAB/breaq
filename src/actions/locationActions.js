@@ -1,7 +1,8 @@
 import actionTypes from '../constants/locationActionTypes';
 
-export function placesChanged(places) {
+export function setHomeBase(base) {
     return dispatch => {
-        dispatch({type: actionTypes.STATE_CHANGE, payload: places});
+        const b = {...base[0], locationType: 'home_base'};
+        dispatch({type: actionTypes.SET_HOME_BASE, payload: b});
     }
 }

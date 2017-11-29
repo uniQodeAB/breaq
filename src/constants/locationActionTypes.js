@@ -1,5 +1,5 @@
 const actionTypes = {
-    STATE_CHANGE: 'STATE_CHANGE'
+    SET_HOME_BASE: 'SET_HOME_BASE'
 };
 
 export default actionTypes;

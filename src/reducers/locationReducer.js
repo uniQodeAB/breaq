@@ -1,13 +1,17 @@
 import actionTypes from '../constants/locationActionTypes';
 
 const initialState = {
-    places: []
+    places: [],
+    base: {
+        geometry: {}
+    }
 }
 export default function locationReducer(state=initialState, action) {
 
     switch (action.type) {
-        case actionTypes.STATE_CHANGE: {
-            return {...state, places: action.payload};
+        case actionTypes.SET_HOME_BASE: {
+            return {...state, base: action.payload, places: [...state.places.filter(
+                place => place.locationType !== 'home_base'), action.payload]};
         }
         default: return state
     }
