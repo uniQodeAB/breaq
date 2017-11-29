@@ -18,10 +18,8 @@ class RegisterPage extends Component {
         return (
             <div className={'RegisterPage'}>
                 <div className={'search-box-pane'}>
-                    <div className={'input-control'}>
-                        <SearchBox onChangePlace={this.props.setHomeBase}/>
-                        <Address address={this.props.base}/>
-                    </div>
+                    <SearchBox onChangePlace={this.props.setHomeBase}/>
+                    <Address address={this.props.base}/>
                 </div>
                 <div className={'map-pane'}>
                     <MapComponent center={this.getLocation()}>
@@ -35,27 +33,20 @@ class RegisterPage extends Component {
 
 const Address = (props) => {
     return (
-        <div class="wrapper">
-            <div class="one">One</div>
-            <div class="two">Two</div>
-            <div class="three">Three</div>
-            <div class="four">Four</div>
-            <div class="five">Five</div>
-            <div class="six">Six</div>
-        </div>
-        /*
         <div className={'Address'}>
             {props.address.name &&
-                <div>
-                    <div>
-                        <i className={'fa fa-home'} aria-hidden={'true'} />
-                    </div>
-                    <div>
-                        <span>{props.address.formatted_address}</span>
-                    </div>
+            <div className={'wrapper'}>
+                <div className={'side'}>
+                    <i className={'fa fa-home'} aria-hidden={'true'}/>
                 </div>
+                <div className={'content'}>
+                    <div className={'container'}
+                         dangerouslySetInnerHTML={{__html: props.address.adr_address.split(',').join('')}}/>
+                </div>
+            </div>
             }
-        </div>*/
+
+        </div>
     )
 };
 
