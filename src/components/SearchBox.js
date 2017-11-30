@@ -16,9 +16,6 @@ const PlacesWithStandaloneSearchBox = compose(
                 onSearchBoxMounted: ref => {
                     refs.searchBox = ref;
                 },
-                onInputMounted: ref => {
-                    refs.input = ref;
-                },
                 onPlacesChanged: () => {
                     const places = refs.searchBox.getPlaces();
 
@@ -27,9 +24,6 @@ const PlacesWithStandaloneSearchBox = compose(
                     this.setState({
                         places,
                     });
-
-                    // Reset input
-                    refs.input.value = '';
                 },
             })
         },
@@ -40,7 +34,6 @@ const PlacesWithStandaloneSearchBox = compose(
             ref={props.onSearchBoxMounted}
             onPlacesChanged={props.onPlacesChanged} >
             <input
-                ref={props.onInputMounted}
                 type="text"
                 placeholder="Where is your home base?"
                 style={{

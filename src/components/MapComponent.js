@@ -3,6 +3,12 @@ import {compose, lifecycle, withProps} from 'recompose';
 import {GoogleMap, withGoogleMap} from 'react-google-maps';
 import './MapComponent.css';
 
+const defaultMapOptions = {
+    fullscreenControl: false,
+    clickableIcons: false,
+    streetViewControl: false
+};
+
 const MapWithASearchBox = compose(
     withProps({
         loadingElement: <div className={'loading-element'} />,
@@ -42,7 +48,8 @@ const MapWithASearchBox = compose(
         ref={props.onMapMounted}
         defaultZoom={15}
         center={props.center}
-        onBoundsChanged={props.onBoundsChanged}>
+        onBoundsChanged={props.onBoundsChanged}
+        defaultOptions={defaultMapOptions}>
 
         {props.children}
 
