@@ -3,7 +3,6 @@
     height: 100%;
     display: flex;
     flex-direction: row;
-    overflow: hidden;
 }
 
 .RegisterPage .search-box-pane {
@@ -14,7 +13,23 @@
 }
 
 .RegisterPage .search-box-pane {
-    padding: 0.5em;
+    padding: 0 0.5em 0 0.5em;
+}
+
+.RegisterPage .search-box-pane .search {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.RegisterPage .search-box-pane .search button {
+    align-self: flex-end;
+    margin-top: auto;
+    margin-bottom: 0.5em;
+}
+
+.RegisterPage .search-box-pane .search .search-box {
+    margin-top: 0.5em;
 }
 
 .RegisterPage .map-pane {

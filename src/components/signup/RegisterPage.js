@@ -18,8 +18,13 @@ class RegisterPage extends Component {
         return (
             <div className={'RegisterPage'}>
                 <div className={'search-box-pane'}>
-                    <SearchBox onChangePlace={this.props.setHomeBase}/>
-                    <Address address={this.props.base}/>
+                    <div className={'search'}>
+                        <div className={'search-box'}>
+                            <SearchBox onChangePlace={this.props.setHomeBase}/>
+                        </div>
+                        <Address address={this.props.base}/>
+                        <button>Hello</button>
+                    </div>
                 </div>
                 <div className={'map-pane'}>
                     <MapComponent center={this.getLocation()}>
