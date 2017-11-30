@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import RegisterPage from './components/signup/RegisterPage';
 import RegisterPageContainer from './containers/registerPageContainer';
 
 class App extends Component {

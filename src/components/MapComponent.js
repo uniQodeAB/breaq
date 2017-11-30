@@ -1,9 +1,6 @@
-/*global google*/
-
 import React, {PureComponent} from 'react';
-import _ from 'lodash';
 import {compose, lifecycle, withProps} from 'recompose';
-import {GoogleMap, Marker, withGoogleMap} from 'react-google-maps';
+import {GoogleMap, withGoogleMap} from 'react-google-maps';
 import './MapComponent.css';
 
 const MapWithASearchBox = compose(
