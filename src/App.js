@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import RegisterPageContainer from './containers/registerPageContainer';
+import { Route, Redirect, BrowserRouter } from 'react-router-dom';
 
 class App extends Component {
 
@@ -23,21 +24,25 @@ class App extends Component {
 
     render() {
         return (
-            <div className={'box'}>
-                <Header loggedIn={this.props.user.loggedIn} login={this.login} logout={this.logout} />
+            <BrowserRouter>
+                <div className={'box'}>
+                    <Header loggedIn={this.props.user.loggedIn} login={this.login} logout={this.logout} />
+                    <section className={'row content'}>
 
-                <section className={'row content'}>
-                    {this.props.user.loggedIn ?
-                        <RegisterPageContainer />
-                        :
-                        <p>Hello</p>
+                        <Route exact path="/" render={() => (
+                            this.props.user.loggedIn ? (
+                                <Redirect to={'/dashboard'}/>
+                            ) : (
+                                <RegisterPageContainer />
+                            )
+                        )}/>
 
-                    }
+                        <Route exact path={'/dashboard'} component={RegisterPageContainer}/>
 
-                </section>
-                <Footer loggedIn={this.props.user.loggedIn} photoURL={this.props.user.user.photoURL}/>
-            </div>
-
+                    </section>
+                    <Footer loggedIn={this.props.user.loggedIn} photoURL={this.props.user.user.photoURL}/>
+                </div>
+            </BrowserRouter>
         );
     }
 }
