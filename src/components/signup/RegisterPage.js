@@ -7,12 +7,16 @@ import './RegisterPage.css';
 
 class RegisterPage extends Component {
     renderMarker = (base) => {
-        return !_.isEmpty(base.geometry) && <Marker position={this.getLocation()}/>;
+        return !_.isEmpty(base.location) && <Marker position={base.location}/>;
     };
 
     getLocation = () => {
-        return this.props.base.geometry.location;
+        return this.props.base.location;
     };
+
+    saveHomeBase = () => {
+        console.log('save');
+    }
 
     render() {
         return (
@@ -23,7 +27,7 @@ class RegisterPage extends Component {
                             <SearchBox onChangePlace={this.props.setHomeBase}/>
                         </div>
                         <Address address={this.props.base}/>
-                        <button>Hello</button>
+                        <button onClick={this.saveHomeBase}>Save</button>
                     </div>
                 </div>
                 <div className={'map-pane'}>
@@ -46,7 +50,7 @@ const Address = (props) => {
                 </div>
                 <div className={'content'}>
                     <div className={'container'}
-                         dangerouslySetInnerHTML={{__html: props.address.adr_address.split(',').join('')}}/>
+                         dangerouslySetInnerHTML={{__html: props.address.htmlAddress.split(',').join('')}}/>
                 </div>
             </div>
             }
