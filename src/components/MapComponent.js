@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {compose, lifecycle, withProps} from 'recompose';
-import {GoogleMap, withGoogleMap} from 'react-google-maps';
+import {GoogleMap, withGoogleMap, withScriptjs} from 'react-google-maps';
 import './MapComponent.css';
 
 const defaultMapOptions = {
@@ -11,6 +11,7 @@ const defaultMapOptions = {
 
 const MapWithASearchBox = compose(
     withProps({
+        googleMapURL: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places',
         loadingElement: <div className={'loading-element'} />,
         containerElement: <div className={'MapComponent'} />,
         mapElement: <div className={'map-element'} />,
@@ -42,6 +43,7 @@ const MapWithASearchBox = compose(
             });
         }
     }),
+    withScriptjs,
     withGoogleMap
 )(props =>
     <GoogleMap
