@@ -7,7 +7,7 @@ import './RegisterPage.css';
 
 class RegisterPage extends Component {
     renderMarker = (base) => {
-        return !_.isEmpty(base.location) && <Marker position={base.location}/>;
+        return !_.isEmpty(base.location) && <Marker position={base.location} icon={'https://vignette.wikia.nocookie.net/pkmnshuffle/images/b/b1/Pikachu_%28Winking%29.png/revision/latest?cb=20170410234514'}/>;
     };
 
     getLocation = () => {

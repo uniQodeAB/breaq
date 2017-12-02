@@ -8,6 +8,12 @@ export default function routerReducer(state=initialState, action) {
         case 'ROUTE': {
             return {...state, path: action.payload};
         }
+        case '@@reactReduxFirebase/LOGIN': {
+            return {...state, path: '/dashboard'}
+        }
+        case '@@reactReduxFirebase/LOGOUT' : {
+            return {...state, path: '/'}
+        }
         default: return state
     }
 }
