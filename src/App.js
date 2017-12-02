@@ -5,6 +5,8 @@ import { Route, Redirect, BrowserRouter, Switch } from 'react-router-dom';
 import Header from './containers/Header';
 import Footer from './containers/Footer';
 import PrivateRoute from './containers/PrivateRoute';
+import Login from './containers/Login';
+import Home from './containers/Home';
 
 class App extends Component {
 
@@ -30,16 +32,10 @@ class App extends Component {
     }
 }
 
-const Login = () => (
-    <div>Gotta login</div>
-);
 
 const NotFound = () => (
     <div>Where are you going?</div>
 );
 
-const Home = () => (
-    <div>home</div>
-)
 
 export default App;
