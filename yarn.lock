@@ -5254,6 +5254,17 @@ react-google-maps@^9.2.2:
     scriptjs "^2.5.8"
     warning "^3.0.0"
 
+react-redux-firebase@^2.0.0-beta.17:
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/react-redux-firebase/-/react-redux-firebase-2.0.0-beta.17.tgz#4fc7e80c2fa08b65cdf6b2d50e91e97fccfeb05f"
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
+    lodash "^4.17.4"
+    prop-types "^15.5.10"
+    recompose "^0.26.0"
+  optionalDependencies:
+    redux-firestore latest
+
 react-redux@^5.0.6:
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.6.tgz#23ed3a4f986359d68b5212eaaa681e60d6574946"
@@ -5442,6 +5453,13 @@ reduce-function-call@^1.0.1:
   resolved "https://registry.yarnpkg.com/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
   dependencies:
     balanced-match "^0.4.2"
+
+redux-firestore@latest:
+  version "0.1.0-beta.6"
+  resolved "https://registry.yarnpkg.com/redux-firestore/-/redux-firestore-0.1.0-beta.6.tgz#a79340e351d8b632787162570d692cd25987d79b"
+  dependencies:
+    lodash "^4.17.4"
+    prop-types "^15.6.0"
 
 redux-logger@^3.0.6:
   version "3.0.6"

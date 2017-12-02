@@ -1,10 +1,34 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 
 import { createLogger } from "redux-logger";
 import thunk from 'redux-thunk';
 import promise from 'redux-promise-middleware';
 
 import reducer from './reducers';
+import firebase from './firebase';
 
-const middleware = applyMiddleware(promise(), thunk, createLogger());
-export default createStore(reducer, middleware);
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
+
+
+// react-redux-firebase config
+const rrfConfig = {
+    userProfile: 'users', // firebase root where user profiles are stored
+    attachAuthIsReady: true, // attaches auth is ready promise to store
+    firebaseStateName: 'firebase' // should match the reducer name ('firebase' is default),
+};
+
+const createStoreWithFirebase = compose(
+    reactReduxFirebase(firebase, rrfConfig),
+    applyMiddleware(promise(), thunk.withExtraArgument(getFirebase), createLogger())
+)(createStore);
+
+
+const initialState = {};
+const store = createStoreWithFirebase(reducer, initialState);
+
+// Listen for auth ready (promise available on store thanks to attachAuthIsReady: true config option)
+store.firebaseAuthIsReady.then(() => {
+    console.log('Auth has loaded') // eslint-disable-line no-console
+});
+
+export default store;
