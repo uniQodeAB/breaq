@@ -1,14 +1,14 @@
 import { applyMiddleware, createStore, compose } from 'redux';
+import { routerMiddleware } from 'react-router-redux'
 
 import { createLogger } from "redux-logger";
 import thunk from 'redux-thunk';
 import promise from 'redux-promise-middleware';
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
 
 import reducer from './reducers';
 import firebase from './firebase';
-
-import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
-
+import history from './history';
 
 // react-redux-firebase config
 const rrfConfig = {
@@ -19,7 +19,11 @@ const rrfConfig = {
 
 const createStoreWithFirebase = compose(
     reactReduxFirebase(firebase, rrfConfig),
-    applyMiddleware(promise(), thunk.withExtraArgument(getFirebase), createLogger())
+    applyMiddleware(
+        promise(),
+        thunk.withExtraArgument(getFirebase),
+        createLogger(),
+        routerMiddleware(history))
 )(createStore);
 
 
