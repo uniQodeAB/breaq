@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import Register from '../components/signup/RegisterPage';
-import { setHomeBase } from '../actions/locationActions';
+import { setHomeBase } from '../actions/settingsActions';
 
 function mapStateToProps(state) {
     return {
-        base: state.location.base
+        base: state.settings.base
     };
 }
 
