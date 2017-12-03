@@ -10,29 +10,26 @@ class RegisterPage extends Component {
         return !_.isEmpty(base.location) && <Marker position={base.location} icon={'https://vignette.wikia.nocookie.net/pkmnshuffle/images/b/b1/Pikachu_%28Winking%29.png/revision/latest?cb=20170410234514'}/>;
     };
 
-    getLocation = () => {
-        return this.props.base.location;
-    };
-
-    saveHomeBase = () => {
-        console.log('save');
-    }
-
     render() {
+        const {base, setHomeBase, saveHomeBase} = this.props;
+
         return (
             <div className={'RegisterPage'}>
                 <div className={'search-box-pane'}>
                     <div className={'search'}>
                         <div className={'search-box'}>
-                            <SearchBox onChangePlace={this.props.setHomeBase}/>
+                            <SearchBox onChangePlace={setHomeBase}/>
                         </div>
-                        <Address address={this.props.base}/>
-                        <button onClick={this.saveHomeBase}>Save</button>
+                        <Address address={base}/>
+
+                        <button onClick={saveHomeBase}>Save</button>
                     </div>
+
+
                 </div>
                 <div className={'map-pane'}>
-                    <MapComponent center={this.getLocation()}>
-                        {this.renderMarker(this.props.base)}
+                    <MapComponent center={base.location}>
+                        {this.renderMarker(base)}
                     </MapComponent>
                 </div>
             </div>
