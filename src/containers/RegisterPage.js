@@ -47,17 +47,17 @@ const RegisterPage = ({base, setBase, firebase, auth, changeRoute}) => {
     );
 };
 
-const Address = (props) => {
+const Address = ({address}) => {
     return (
         <div className={'Address'}>
-            {props.address.name &&
+            {address.name &&
             <div className={'wrapper'}>
                 <div className={'side'}>
                     <i className={'fa fa-home'} aria-hidden={'true'}/>
                 </div>
                 <div className={'content'}>
                     <div className={'container'}
-                         dangerouslySetInnerHTML={{__html: props.address.htmlAddress.split(',').join('')}}/>
+                         dangerouslySetInnerHTML={{__html: address.htmlAddress.split(',').join('')}}/>
                 </div>
             </div>
             }
