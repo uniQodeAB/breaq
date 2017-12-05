@@ -1,10 +1,8 @@
-import actionTypes from '../constants/locationActionTypes';
+import actionTypes from '../constants/settingsActionTypes';
 
 const initialState = {
     places: [],
-    base: {
-        geometry: {}
-    }
+    base: {}
 }
 export default function locationReducer(state=initialState, action) {
 

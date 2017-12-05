@@ -1,4 +1,4 @@
-import actionTypes from '../constants/locationActionTypes';
+import actionTypes from '../constants/settingsActionTypes';
 
 export function setHomeBase(base) {
     return dispatch => {
@@ -7,7 +7,7 @@ export function setHomeBase(base) {
             formattedAddress: base[0].formatted_address,
             location: base[0].geometry.location,
             name: base[0].name
-        }
+        };
         dispatch({type: actionTypes.SET_HOME_BASE, payload: b});
     }
 }

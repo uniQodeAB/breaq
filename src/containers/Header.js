@@ -4,7 +4,7 @@ import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 
-const Header = ({ firebase, auth }) => {
+const Header = ({ firebase, auth, dispatch }) => {
     return (
         <header className={'row header'}>
             <div className="wrapper">
@@ -33,5 +33,6 @@ Header.propTypes = {
 export default compose(
     firebaseConnect(), // withFirebase can also be used
     connect(
-        ({ firebase: { auth } }) => ({ auth }))
+        ({ firebase: { auth } }) => ({ auth })
+    )
 )(Header)
