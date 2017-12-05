@@ -13,7 +13,6 @@ class App extends Component {
 
     render() {
         return (
-            <BrowserRouter>
                 <div className={'box'}>
                     <Header />
                     <section className={'row content'}>
@@ -32,7 +31,6 @@ class App extends Component {
                     </section>
                     <Footer />
                 </div>
-            </BrowserRouter>
         );
     }
 }

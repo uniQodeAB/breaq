@@ -10,7 +10,7 @@ const Dashboard = ({firebase, user}) => {
             ?
             <p>Loading...</p>
             :
-            isEmpty(user)
+            isEmpty(user) || isEmpty(user.settings)
                 ?
                 <Redirect to={'/register'}/>
                 :

@@ -13,7 +13,7 @@ import { push } from 'react-router-redux'
 const RegisterPage = ({base, setBase, firebase, auth, changeRoute}) => {
     const renderMarker = (base) => {
         return !_.isEmpty(base) &&
-            <Marker position={base.location} icon={'https://vignette.wikia.nocookie.net/pkmnshuffle/images/b/b1/Pikachu_%28Winking%29.png/revision/latest?cb=20170410234514'}/>;
+            <Marker position={base.location} />;
     };
 
     return (
