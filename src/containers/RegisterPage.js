@@ -5,7 +5,7 @@ import SearchBox from '../components/SearchBox';
 import MapComponent from '../components/MapComponent';
 import { Marker } from 'react-google-maps';
 import _ from 'lodash';
-import '../components/signup/RegisterPage.css';
+import './RegisterPage.css';
 import { firebaseConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { push } from 'react-router-redux'
