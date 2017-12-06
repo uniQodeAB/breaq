@@ -8,8 +8,8 @@
 .RegisterPage .search-box-pane {
   width: 30%;
   height: 100%;
-  background: #eff6fc;
-  border-right: 1px solid #103d5d;
+  background: #EFF6FC;
+  border-right: 1px solid #103D5D;
 }
 
 .RegisterPage .search-box-pane {
@@ -44,10 +44,9 @@
 .RegisterPage .Address .wrapper {
   display: grid;
   grid-template-columns: 1fr 5fr;
-  background: #fa6900;
-  color: #eff6fc;
+  background: #FA6900;
+  color: #EFF6FC;
 }
-
 .RegisterPage .Address .side {
   grid-column: 1;
   grid-row: 1;
@@ -62,7 +61,7 @@
 .RegisterPage .Address .content {
   grid-column: 2;
   grid-row: 1;
-  background: #103d5d;
+  background: #103D5D;;
 }
 
 .RegisterPage .Address .content .container {

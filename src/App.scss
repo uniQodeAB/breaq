@@ -2,7 +2,7 @@ html,
 body {
   height: 100%;
   width: 100%;
-  margin: 0;
+  margin: 0
 }
 
 body {
@@ -36,7 +36,7 @@ body {
 
 header {
   color: #fff;
-  background-color: #103d5d;
+  background-color: #103D5D;
   padding: 33px 0 25px 15px;
 }
 
@@ -44,7 +44,6 @@ header p {
   width: 400px;
   margin: 0 auto;
 }
-
 header .wrapper {
   display: flex;
   justify-content: space-between;
@@ -58,6 +57,7 @@ header h1 {
   display: inline-block;
   margin: 0;
   vertical-align: middle;
+
 }
 
 header i {
@@ -68,20 +68,21 @@ header i {
 button {
   border-radius: 2px;
   min-width: 88px;
-  background-color: #fa6900;
+  background-color: #FA6900;
   cursor: pointer;
   border: 0;
   color: #fff;
   font-size: 14px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
   padding: 10px 6px;
 }
 
 footer {
   color: #fff;
-  background-color: #103d5d;
+  background-color: #103D5D;
   padding-left: 0.67em;
 }
+
 
 .user-profile {
   position: fixed;
