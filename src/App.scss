@@ -9,62 +9,36 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-color: #fff;
 }
-
-.box {
-  display: flex;
-  flex-flow: column;
-  height: 100%;
-  width: 100%;
-}
-
-.box .row.header {
-  flex: 0 1 auto;
-}
-
-.box .row.content {
-  display: flex;
-  flex-flow: column;
-  flex: 1 1 auto;
-  overflow-y: auto;
-  height: 100%;
-  width: 100%;
-}
-
-.box .row.footer {
-  flex: 0 1 5em;
-}
-
 header {
   color: #fff;
   background-color: #103D5D;
   padding: 33px 0 25px 15px;
-}
 
-header p {
-  width: 400px;
-  margin: 0 auto;
-}
-header .wrapper {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 0.67em;
-}
+  p {
+    width: 400px;
+    margin: 0 auto;
+  }
 
-header h1 {
-  font-size: 25px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  display: inline-block;
-  margin: 0;
-  vertical-align: middle;
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 0.67em;
+  }
 
+  h1 {
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: inline-block;
+    margin: 0;
+    vertical-align: middle;
+  }
+
+  i {
+    vertical-align: middle;
+    margin-left: 12px;
+  }
 }
-
-header i {
-  vertical-align: middle;
-  margin-left: 12px;
-}
-
 button {
   border-radius: 2px;
   min-width: 88px;
@@ -83,6 +57,29 @@ footer {
   padding-left: 0.67em;
 }
 
+.box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  width: 100%;
+
+  .row.header {
+    flex: 0 1 auto;
+  }
+
+  .row.content {
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+  }
+
+  .row.footer {
+    flex: 0 1 5em;
+  }
+}
 
 .user-profile {
   position: fixed;
@@ -90,9 +87,9 @@ footer {
   right: 40px;
   width: 100px;
   height: 100px;
-}
 
-.user-profile img {
-  border-radius: 50%;
-  max-width: 100%;
+  img {
+    border-radius: 50%;
+    max-width: 100%;
+  }
 }
