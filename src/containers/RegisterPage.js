@@ -19,23 +19,14 @@ const RegisterPage = ({base, setBase, firebase, auth, changeRoute}) => {
     return (
         <div className={'RegisterPage'}>
             <div className={'search-box-pane'}>
-                <div className={'search'}>
-                    <div className={'search-box'}>
-                        <SearchBox onChangePlace={setBase}/>
-                    </div>
-                    <Address address={base}/>
+                <div className={'search-container'}>
+                    <HomeBaseSetter setBase={setBase} base={base} />
 
-                    {!_.isEmpty(base) &&
-                    <button onClick={() => {
-                        firebase.set(`/users/${auth.uid}/settings`, {
-                            ...base, location: {
-                                lat: base.location.lat(),
-                                lng: base.location.lng()
-                            }
-                        }).then(() => {
-                            changeRoute('/dashboard')
-                        });
-                    }}>Save</button>}
+                    <ConditionalButton
+                        firebase={firebase}
+                        auth={auth}
+                        onSuccess={changeRoute}
+                        base={base} />
                 </div>
             </div>
             <div className={'map-pane'}>
@@ -46,6 +37,15 @@ const RegisterPage = ({base, setBase, firebase, auth, changeRoute}) => {
         </div>
     );
 };
+
+const HomeBaseSetter = ({setBase, base}) => (
+    <div>
+        <div className={'search-box'}>
+            <SearchBox onChangePlace={setBase}/>
+        </div>
+        <Address address={base}/>
+    </div>
+);
 
 const Address = ({address}) => {
     return (
@@ -65,6 +65,20 @@ const Address = ({address}) => {
         </div>
     )
 };
+
+const ConditionalButton = ({firebase, onSuccess, auth, base}) => (
+    !_.isEmpty(base) &&
+    <button onClick={() => {
+        firebase.set(`/users/${auth.uid}/settings`, {
+            ...base, location: {
+                lat: base.location.lat(),
+                lng: base.location.lng()
+            }
+        }).then(() => {
+            onSuccess('/dashboard')
+        });
+    }}>Save</button>
+);
 
 function mapStateToProps(state) {
     return {

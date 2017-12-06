@@ -16,19 +16,19 @@
     padding: 0 0.5em 0 0.5em;
 }
 
-.RegisterPage .search-box-pane .search {
+.RegisterPage .search-box-pane .search-container {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
-.RegisterPage .search-box-pane .search button {
+.RegisterPage .search-box-pane .search-container button {
     align-self: flex-end;
     margin-top: auto;
     margin-bottom: 0.5em;
 }
 
-.RegisterPage .search-box-pane .search .search-box {
+.RegisterPage .search-box-pane .search-container .search-box {
     margin-top: 0.5em;
 }
 

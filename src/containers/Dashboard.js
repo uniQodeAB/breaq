@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {compose} from 'redux'
 import {firebaseConnect, isEmpty, isLoaded} from 'react-redux-firebase'
 import {Redirect} from 'react-router-dom';
+import MapComponent from '../components/MapComponent';
 
 const Dashboard = ({firebase, user}) => {
     return (
@@ -14,26 +15,7 @@ const Dashboard = ({firebase, user}) => {
                 ?
                 <Redirect to={'/register'}/>
                 :
-                <div>
-                    <h1>Todos</h1>
-                    <ul>
-
-                    </ul>
-                    <button onClick={() => {
-                        firebase.set('users', {
-                            alanisawesome: {
-                                date_of_birth: "June 23, 1912",
-                                full_name: "Alan Turing"
-                            },
-                            gracehop: {
-                                date_of_birth: "December 9, 1906",
-                                full_name: "Grace Hopper"
-                            }
-                        });
-                    }}>
-                        Add
-                    </button>
-                </div>
+                <MapComponent />
     );
 };
 
