@@ -1,32 +1,35 @@
-import { connect } from 'react-redux';
-import { setHomeBase } from '../actions/settingsActions';
 import React from 'react';
+
+import _ from 'lodash';
+import {connect} from 'react-redux';
+import {Marker} from 'react-google-maps';
+import {push} from 'react-router-redux';
+import {firebaseConnect} from 'react-redux-firebase';
+import {compose} from 'redux';
+
 import SearchBox from '../components/SearchBox';
 import MapComponent from '../components/MapComponent';
-import { Marker } from 'react-google-maps';
-import _ from 'lodash';
+import {setHomeBase} from '../actions/settingsActions';
+
 import './RegisterPage.css';
-import { firebaseConnect } from 'react-redux-firebase'
-import { compose } from 'redux'
-import { push } from 'react-router-redux'
 
 const RegisterPage = ({base, setBase, firebase, auth, changeRoute}) => {
     const renderMarker = (base) => {
         return !_.isEmpty(base) &&
-            <Marker position={base.location} />;
+            <Marker position={base.location}/>;
     };
 
     return (
         <div className={'RegisterPage'}>
             <div className={'search-box-pane'}>
                 <div className={'search-container'}>
-                    <HomeBaseSetter setBase={setBase} base={base} />
+                    <HomeBaseSetter setBase={setBase} base={base}/>
 
                     <ConditionalButton
                         firebase={firebase}
                         auth={auth}
                         onSuccess={changeRoute}
-                        base={base} />
+                        base={base}/>
                 </div>
             </div>
             <div className={'map-pane'}>
