@@ -20,6 +20,17 @@
         align-self: flex-end;
         margin-top: auto;
         margin-bottom: 0.5em;
+        outline: none;
+      }
+
+      button.active {
+        background-color: #FA6900;
+        box-shadow: none;
+        cursor: default;
+      }
+
+      button.inactive {
+        background-color: #DDDDDD;
       }
 
       .search-box {
@@ -29,6 +40,7 @@
 
     .Address {
       padding-top: 1em;
+      padding-bottom: 1em;
 
       .wrapper {
         display: grid;
