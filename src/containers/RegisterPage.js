@@ -30,8 +30,8 @@ const RegisterPage = ({
 }) => {
   const { base } = settings;
 
-  const renderMarker = base => {
-    return !_.isEmpty(base) && <Marker position={base.location} />;
+  const renderMarker = position => {
+    return !_.isEmpty(position) && <Marker position={position.location} />;
   };
 
   return (
@@ -138,7 +138,7 @@ const Address = ({ address, icon }) => {
         address.name && (
           <div className={'wrapper'}>
             <div className={'side'}>
-              <i className={`fa ${iconClass}`} aria-hidden={'true'} />
+              <i className={`fas ${iconClass}`} aria-hidden={'true'} />
             </div>
             <div className={'content'}>
               <div
