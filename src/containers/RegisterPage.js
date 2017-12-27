@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Marker } from 'react-google-maps';
 import { push } from 'react-router-redux';
-import { firebaseConnect } from 'react-redux-firebase';
+import { firebaseConnect, isEmpty, isLoaded } from 'react-redux-firebase';
 import { compose } from 'redux';
 
 import SearchBox from '../components/SearchBox';
@@ -18,107 +18,59 @@ import {
 
 import './RegisterPage.css';
 
-const RegisterPage = ({
-  settings,
-  setBase,
-  firebase,
-  auth,
-  changeRoute,
-  setUsrAtBase,
-  setUsrAddress,
-  showUsrAddress
-}) => {
-  const { base } = settings;
+const RegisterPage = ({ user, firebase, auth }) => {
+  console.log({ firebase });
 
   const renderMarker = position => {
     return !_.isEmpty(position) && <Marker position={position.location} />;
+  };
+
+  const onSetBase = position => {
+    const base = createBase(position);
+
+    firebase.set(`/users/${auth.uid}/settings`, {
+      ...base,
+      location: {
+        lat: base.location.lat(),
+        lng: base.location.lng()
+      }
+    });
+  };
+
+  const createBase = position => {
+    return {
+      htmlAddress: position.adr_address,
+      formattedAddress: position.formatted_address,
+      location: position.geometry.location,
+      name: position.name
+    };
   };
 
   return (
     <div className={'RegisterPage'}>
       <div className={'search-box-pane'}>
         <div className={'search-container'}>
-          <SearchAndAddress onChangePlace={setBase} address={base} />
-
-          <UserBase
-            setUserAtBase={setUsrAtBase}
-            setUserAddress={setUsrAddress}
-            showUserAddress={showUsrAddress}
-            settings={settings}
-          />
-
-          <ConditionalButton
-            firebase={firebase}
-            auth={auth}
-            onSuccess={changeRoute}
-            base={base}
-          />
+          <div>
+            {!isLoaded(user) ? (
+              'Loading...'
+            ) : user && user.settings ? (
+              <AddressBox address={user.settings} />
+            ) : (
+              <SearchBox onChangePlace={onSetBase} />
+            )}
+          </div>
         </div>
       </div>
       <div className={'map-pane'}>
-        <MapComponent center={base.location}>{renderMarker(base)}</MapComponent>
+        <MapComponent center={!isEmpty(user) && user.settings.location}>
+          {!isEmpty(user) && renderMarker(user.settings)}
+        </MapComponent>
       </div>
     </div>
   );
 };
 
-const SearchAndAddress = ({ onChangePlace, address, icon }) => (
-  <div>
-    <div className={'search-box'}>
-      <SearchBox onChangePlace={onChangePlace} />
-    </div>
-    <Address address={address} icon={icon} />
-  </div>
-);
-
-const UserBase = ({
-  settings,
-  setUserAtBase,
-  showUserAddress,
-  setUserAddress
-}) => {
-  const isSelected = typeof settings.isUserAtBase !== 'undefined';
-
-  return (
-    <div>
-      {!_.isEmpty(settings.base) && (
-        <div>
-          <button
-            className={
-              isSelected && settings.isUserAtBase ? 'active' : 'inactive'
-            }
-            onClick={() => {
-              setUserAtBase();
-            }}
-          >
-            Base
-          </button>
-          <button
-            className={
-              isSelected && !settings.isUserAtBase ? 'active' : 'inactive'
-            }
-            onClick={() => {
-              showUserAddress();
-            }}
-          >
-            Other
-          </button>
-
-          {isSelected &&
-            !settings.isUserAtBase && (
-              <SearchAndAddress
-                onChangePlace={setUserAddress}
-                address={settings.userAddress}
-                icon={'USER'}
-              />
-            )}
-        </div>
-      )}
-    </div>
-  );
-};
-
-const Address = ({ address, icon }) => {
+const AddressBox = ({ address, icon }) => {
   let iconClass;
 
   switch (icon) {
@@ -134,22 +86,19 @@ const Address = ({ address, icon }) => {
 
   return (
     <div className={'Address'}>
-      {address &&
-        address.name && (
-          <div className={'wrapper'}>
-            <div className={'side'}>
-              <i className={`fas ${iconClass}`} aria-hidden={'true'} />
-            </div>
-            <div className={'content'}>
-              <div
-                className={'container'}
-                dangerouslySetInnerHTML={{
-                  __html: address.htmlAddress.split(',').join('')
-                }}
-              />
-            </div>
-          </div>
-        )}
+      <div className={'wrapper'}>
+        <div className={'side'}>
+          <i className={`fas ${iconClass}`} aria-hidden={'true'} />
+        </div>
+        <div className={'content'}>
+          <div
+            className={'container'}
+            dangerouslySetInnerHTML={{
+              __html: address.htmlAddress.split(',').join('')
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 };
@@ -193,6 +142,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
-  firebaseConnect(),
-  connect(mapStateToProps, mapDispatchToProps)
+  firebaseConnect((props, store) => {
+    const { auth } = store.getState().firebase;
+
+    return auth ? [`users/${auth.uid}/settings`] : [];
+  }),
+  connect(({ firebase: { data, auth } }) => ({
+    user: data.users && data.users[auth.uid],
+    auth: auth
+  }))
 )(RegisterPage);
