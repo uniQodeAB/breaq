@@ -19,8 +19,6 @@ import {
 import './RegisterPage.css';
 
 const RegisterPage = ({ user, firebase, auth }) => {
-  console.log({ firebase });
-
   const renderMarker = position => {
     return !_.isEmpty(position) && <Marker position={position.location} />;
   };
