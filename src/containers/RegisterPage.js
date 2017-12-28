@@ -49,7 +49,10 @@ const RegisterPage = ({ user, firebase, auth, onEdit, editMode, onCancel }) => {
   };
 
   const onDeleteBase = () => {
-    firebase.ref(`/users/${auth.uid}/settings`).remove();
+    firebase
+      .ref(`/users/${auth.uid}/settings`)
+      .remove()
+      .then(() => onCancel());
   };
 
   return (
@@ -61,7 +64,10 @@ const RegisterPage = ({ user, firebase, auth, onEdit, editMode, onCancel }) => {
               'Loading...'
             ) : (
               <div>
-                {(isEmpty(user.settings) || editMode) && (
+                {// Enable edit mode if settings are empty
+                isEmpty(user.settings) && onEdit()}
+
+                {editMode && (
                   <div>
                     <SearchBox onChangePlace={onSetBase} />
                     {editMode && (
