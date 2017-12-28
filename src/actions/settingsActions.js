@@ -26,6 +26,20 @@ export function setUserAddress(address) {
   };
 }
 
+export const EDIT_HOME_BASE = 'EDIT_HOME_BASE';
+export function editHomeBase() {
+  return dispatch => {
+    dispatch({ type: EDIT_HOME_BASE });
+  };
+}
+
+export const CANCEL_EDIT_HOME_BASE = 'CANCEL_EDIT_HOME_BASE';
+export function cancelEditHomeBase() {
+  return dispatch => {
+    dispatch({ type: CANCEL_EDIT_HOME_BASE });
+  };
+}
+
 const createBase = base => {
   return {
     htmlAddress: base[0].adr_address,

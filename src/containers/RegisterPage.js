@@ -13,12 +13,14 @@ import {
   setHomeBase,
   setUserAddress,
   showUserAddress,
-  setUserAtBase
+  setUserAtBase,
+  editHomeBase,
+  cancelEditHomeBase
 } from '../actions/settingsActions';
 
 import './RegisterPage.css';
 
-const RegisterPage = ({ user, firebase, auth }) => {
+const RegisterPage = ({ user, firebase, auth, onEdit, editMode, onCancel }) => {
   const renderMarker = position => {
     return !_.isEmpty(position) && <Marker position={position.location} />;
   };
@@ -26,13 +28,15 @@ const RegisterPage = ({ user, firebase, auth }) => {
   const onSetBase = position => {
     const base = createBase(position);
 
-    firebase.set(`/users/${auth.uid}/settings`, {
-      ...base,
-      location: {
-        lat: base.location.lat(),
-        lng: base.location.lng()
-      }
-    });
+    firebase
+      .set(`/users/${auth.uid}/settings`, {
+        ...base,
+        location: {
+          lat: base.location.lat(),
+          lng: base.location.lng()
+        }
+      })
+      .then(() => onCancel());
   };
 
   const createBase = position => {
@@ -44,6 +48,10 @@ const RegisterPage = ({ user, firebase, auth }) => {
     };
   };
 
+  const onDeleteBase = () => {
+    firebase.ref(`/users/${auth.uid}/settings`).remove();
+  };
+
   return (
     <div className={'RegisterPage'}>
       <div className={'search-box-pane'}>
@@ -51,16 +59,43 @@ const RegisterPage = ({ user, firebase, auth }) => {
           <div>
             {!isLoaded(user) ? (
               'Loading...'
-            ) : user && user.settings ? (
-              <AddressBox address={user.settings} />
             ) : (
-              <SearchBox onChangePlace={onSetBase} />
+              <div>
+                {(isEmpty(user.settings) || editMode) && (
+                  <div>
+                    <SearchBox onChangePlace={onSetBase} />
+                    {editMode && (
+                      <button
+                        onClick={() => {
+                          onCancel();
+                        }}
+                      >
+                        Cancel
+                      </button>
+                    )}
+                  </div>
+                )}
+
+                {!isEmpty(user.settings) && (
+                  <AddressBox
+                    address={user.settings}
+                    onEdit={onEdit}
+                    onDelete={onDeleteBase}
+                  />
+                )}
+              </div>
             )}
           </div>
         </div>
       </div>
       <div className={'map-pane'}>
-        <MapComponent center={!isEmpty(user) && user.settings.location}>
+        <MapComponent
+          center={
+            isLoaded(user) && !isEmpty(user.settings)
+              ? user.settings.location
+              : undefined
+          }
+        >
           {!isEmpty(user) && renderMarker(user.settings)}
         </MapComponent>
       </div>
@@ -68,7 +103,7 @@ const RegisterPage = ({ user, firebase, auth }) => {
   );
 };
 
-const AddressBox = ({ address, icon }) => {
+const AddressBox = ({ address, icon, onEdit, onDelete }) => {
   let iconClass;
 
   switch (icon) {
@@ -86,7 +121,25 @@ const AddressBox = ({ address, icon }) => {
     <div className={'Address'}>
       <div className={'wrapper'}>
         <div className={'side'}>
-          <i className={`fas ${iconClass}`} aria-hidden={'true'} />
+          <div>
+            <i className={`fas ${iconClass}`} aria-hidden={'true'} />
+          </div>
+          <div>
+            <button
+              onClick={() => {
+                onEdit();
+              }}
+            >
+              <i className={'fas fa-edit'} />
+            </button>
+            <button
+              onClick={() => {
+                onDelete(address);
+              }}
+            >
+              <i className={'fas fa-trash-alt'} />
+            </button>
+          </div>
         </div>
         <div className={'content'}>
           <div
@@ -101,41 +154,15 @@ const AddressBox = ({ address, icon }) => {
   );
 };
 
-const ConditionalButton = ({ firebase, onSuccess, auth, base }) =>
-  !_.isEmpty(base) && (
-    <button
-      onClick={() => {
-        firebase
-          .set(`/users/${auth.uid}/settings`, {
-            ...base,
-            location: {
-              lat: base.location.lat(),
-              lng: base.location.lng()
-            }
-          })
-          .then(() => {
-            onSuccess('/dashboard');
-          });
-      }}
-    >
-      Save
-    </button>
-  );
-
-function mapStateToProps(state) {
-  return {
-    settings: state.settings,
-    auth: state.firebase.auth
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     setBase: location => dispatch(setHomeBase(location)),
     changeRoute: path => dispatch(push(path)),
     setUsrAtBase: () => dispatch(setUserAtBase()),
     setUsrAddress: location => dispatch(setUserAddress(location)),
-    showUsrAddress: () => dispatch(showUserAddress())
+    showUsrAddress: () => dispatch(showUserAddress()),
+    onEdit: () => dispatch(editHomeBase()),
+    onCancel: () => dispatch(cancelEditHomeBase())
   };
 }
 
@@ -145,8 +172,14 @@ export default compose(
 
     return auth ? [`users/${auth.uid}/settings`] : [];
   }),
-  connect(({ firebase: { data, auth } }) => ({
-    user: data.users && data.users[auth.uid],
-    auth: auth
+  connect(
+    ({ firebase: { data, auth } }) => ({
+      user: data.users && data.users[auth.uid],
+      auth: auth
+    }),
+    mapDispatchToProps
+  ),
+  connect(state => ({
+    editMode: state.settings.editingHomeBase
   }))
 )(RegisterPage);

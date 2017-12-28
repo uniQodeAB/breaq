@@ -2,12 +2,15 @@ import {
   SET_HOME_BASE,
   SET_USER_AT_BASE,
   SHOW_USER_ADDRESS,
-  SET_USER_ADDRESS
+  SET_USER_ADDRESS,
+  EDIT_HOME_BASE,
+  CANCEL_EDIT_HOME_BASE
 } from '../actions/settingsActions';
 
 const initialState = {
   places: [],
-  base: {}
+  base: {},
+  editingHomeBase: false
 };
 export default function locationReducer(state = initialState, action) {
   switch (action.type) {
@@ -30,6 +33,12 @@ export default function locationReducer(state = initialState, action) {
     }
     case SET_USER_ADDRESS: {
       return { ...state, isUserAtBase: false, userAddress: action.payload };
+    }
+    case EDIT_HOME_BASE: {
+      return { ...state, editingHomeBase: true };
+    }
+    case CANCEL_EDIT_HOME_BASE: {
+      return { ...state, editingHomeBase: false };
     }
     default:
       return state;
