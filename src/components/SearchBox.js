@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { compose, withProps, lifecycle } from 'recompose';
 import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/StandaloneSearchBox';
 import { withScriptjs } from 'react-google-maps';
+import PropTypes from 'prop-types';
 
 const PlacesWithStandaloneSearchBox = compose(
   withProps({
@@ -71,5 +72,9 @@ class SearchBox extends PureComponent {
     );
   }
 }
+
+SearchBox.propTypes = {
+  onChangePlace: PropTypes.func.isRequired
+};
 
 export default SearchBox;

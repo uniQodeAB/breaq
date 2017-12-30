@@ -37,44 +37,6 @@
         margin-top: 0.5em;
       }
     }
-
-    .Address {
-      padding-top: 1em;
-      padding-bottom: 1em;
-
-      .wrapper {
-        display: grid;
-        grid-template-columns: 1fr 5fr;
-        background: #FA6900;
-        color: #EFF6FC;
-
-        .side {
-          grid-column: 1;
-          grid-row: 1;
-          justify-self: center;
-          align-self: center;
-
-          i {
-            font-size: xx-large;
-          }
-        }
-      }
-
-      .content {
-        grid-column: 2;
-        grid-row: 1;
-        background: #103D5D;
-
-        .container {
-          padding: 0.5em;
-
-          span {
-            display: block;
-            text-align: right;
-          }
-        }
-      }
-    }
   }
 
   .map-pane {

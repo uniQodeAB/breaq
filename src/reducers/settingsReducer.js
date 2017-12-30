@@ -7,12 +7,7 @@ import {
   CANCEL_EDIT_HOME_BASE
 } from '../actions/settingsActions';
 
-const initialState = {
-  places: [],
-  base: {},
-  editingHomeBase: false
-};
-export default function locationReducer(state = initialState, action) {
+export default function locationReducer(state = {}, action) {
   switch (action.type) {
     case SET_HOME_BASE: {
       return {

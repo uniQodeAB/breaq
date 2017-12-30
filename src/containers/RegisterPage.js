@@ -6,8 +6,8 @@ import { Marker } from 'react-google-maps';
 import { push } from 'react-router-redux';
 import { firebaseConnect, isEmpty, isLoaded } from 'react-redux-firebase';
 import { compose } from 'redux';
+import PositionBox from './PositionBox';
 
-import SearchBox from '../components/SearchBox';
 import MapComponent from '../components/MapComponent';
 import {
   setHomeBase,
@@ -20,7 +20,7 @@ import {
 
 import './RegisterPage.css';
 
-const RegisterPage = ({ user, firebase, auth, onEdit, editMode, onCancel }) => {
+const RegisterPage = ({ user, firebase, auth, onCancel }) => {
   const renderMarker = position => {
     return !_.isEmpty(position) && <Marker position={position.location} />;
   };
@@ -28,23 +28,34 @@ const RegisterPage = ({ user, firebase, auth, onEdit, editMode, onCancel }) => {
   const onSetBase = position => {
     const base = createBase(position);
 
-    firebase
-      .set(`/users/${auth.uid}/settings`, {
-        ...base,
-        location: {
-          lat: base.location.lat(),
-          lng: base.location.lng()
-        }
-      })
-      .then(() => onCancel());
+    firebase.set(`/users/${auth.uid}/settings`, base).then(() => onCancel());
   };
 
   const createBase = position => {
+    const address = position['address_components']
+      .map(address => ({
+        types: address.types,
+        longName: address['long_name'],
+        shortName: address['short_name']
+      }))
+      .reduce((acc, elem) => {
+        elem.types.forEach(type => {
+          acc[type] = {
+            longName: elem.longName,
+            shortName: elem.shortName
+          };
+        });
+
+        return acc;
+      }, {});
+
     return {
-      htmlAddress: position.adr_address,
-      formattedAddress: position.formatted_address,
-      location: position.geometry.location,
-      name: position.name
+      name: position.name,
+      address: address,
+      location: {
+        lat: position['geometry'].location.lat(),
+        lng: position['geometry'].location.lng()
+      }
     };
   };
 
@@ -64,31 +75,7 @@ const RegisterPage = ({ user, firebase, auth, onEdit, editMode, onCancel }) => {
               'Loading...'
             ) : (
               <div>
-                {// Enable edit mode if settings are empty
-                isEmpty(user.settings) && onEdit()}
-
-                {editMode && (
-                  <div>
-                    <SearchBox onChangePlace={onSetBase} />
-                    {editMode && (
-                      <button
-                        onClick={() => {
-                          onCancel();
-                        }}
-                      >
-                        Cancel
-                      </button>
-                    )}
-                  </div>
-                )}
-
-                {!isEmpty(user.settings) && (
-                  <AddressBox
-                    address={user.settings}
-                    onEdit={onEdit}
-                    onDelete={onDeleteBase}
-                  />
-                )}
+                <PositionBox onChangePlace={onSetBase} />
               </div>
             )}
           </div>
@@ -104,57 +91,6 @@ const RegisterPage = ({ user, firebase, auth, onEdit, editMode, onCancel }) => {
         >
           {!isEmpty(user) && renderMarker(user.settings)}
         </MapComponent>
-      </div>
-    </div>
-  );
-};
-
-const AddressBox = ({ address, icon, onEdit, onDelete }) => {
-  let iconClass;
-
-  switch (icon) {
-    case 'BASE':
-      iconClass = 'fa-home';
-      break;
-    case 'USER':
-      iconClass = 'fa-user';
-      break;
-    default:
-      iconClass = 'fa-home';
-  }
-
-  return (
-    <div className={'Address'}>
-      <div className={'wrapper'}>
-        <div className={'side'}>
-          <div>
-            <i className={`fas ${iconClass}`} aria-hidden={'true'} />
-          </div>
-          <div>
-            <button
-              onClick={() => {
-                onEdit();
-              }}
-            >
-              <i className={'fas fa-edit'} />
-            </button>
-            <button
-              onClick={() => {
-                onDelete(address);
-              }}
-            >
-              <i className={'fas fa-trash-alt'} />
-            </button>
-          </div>
-        </div>
-        <div className={'content'}>
-          <div
-            className={'container'}
-            dangerouslySetInnerHTML={{
-              __html: address.htmlAddress.split(',').join('')
-            }}
-          />
-        </div>
       </div>
     </div>
   );
