@@ -1,35 +1,7 @@
-export const SET_HOME_BASE = 'SET_HOME_BASE';
-export function setHomeBase(base) {
+export const INIT_EDIT_HOME_BASE = 'INIT_EDIT_HOME_BASE';
+export function initEditHomeBase() {
   return dispatch => {
-    dispatch({ type: SET_HOME_BASE, payload: createBase(base) });
-  };
-}
-
-export const SET_USER_AT_BASE = 'SET_USER_AT_BASE';
-export function setUserAtBase() {
-  return dispatch => {
-    dispatch({ type: SET_USER_AT_BASE });
-  };
-}
-
-export const SHOW_USER_ADDRESS = 'SHOW_USER_ADDRESS';
-export function showUserAddress() {
-  return dispatch => {
-    dispatch({ type: SHOW_USER_ADDRESS });
-  };
-}
-
-export const SET_USER_ADDRESS = 'SET_USER_ADDRESS';
-export function setUserAddress(address) {
-  return dispatch => {
-    dispatch({ type: SET_USER_ADDRESS, payload: createBase(address) });
-  };
-}
-
-export const EDIT_HOME_BASE = 'EDIT_HOME_BASE';
-export function editHomeBase() {
-  return dispatch => {
-    dispatch({ type: EDIT_HOME_BASE });
+    dispatch({ type: INIT_EDIT_HOME_BASE });
   };
 }
 
@@ -40,11 +12,16 @@ export function cancelEditHomeBase() {
   };
 }
 
-const createBase = base => {
-  return {
-    htmlAddress: base[0].adr_address,
-    formattedAddress: base[0].formatted_address,
-    location: base[0].geometry.location,
-    name: base[0].name
+export const INIT_ADD = 'INIT_ADD';
+export function initAdd() {
+  return dispatch => {
+    dispatch({ type: INIT_ADD });
   };
-};
+}
+
+export const CANCEL_ADD = 'CANCEL_ADD';
+export function cancelAdd() {
+  return dispatch => {
+    dispatch({ type: CANCEL_ADD });
+  };
+}

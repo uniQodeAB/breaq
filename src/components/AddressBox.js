@@ -1,17 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import './AddressBox.css';
 
-const AddressBox = ({
-  location,
-  icon,
-  initEdit,
-  cancelEdit,
-  firebase,
-  auth
-}) => {
+const AddressBox = ({ location, icon, initEdit, onDelete }) => {
   // Do not render if address does not exist
-  if (!location) return null;
+  if (_.isEmpty(location)) return null;
 
   let iconClass;
 
@@ -26,12 +20,7 @@ const AddressBox = ({
       iconClass = 'fa-home';
   }
 
-  const onDeleteBase = () => {
-    firebase
-      .ref(`/users/${auth.uid}/settings`)
-      .remove()
-      .then(() => cancelEdit());
-  };
+  console.log(location);
 
   const name = location.name;
   const address = Object.entries(location.address).reduce((a, [k, v]) => {
@@ -47,12 +36,17 @@ const AddressBox = ({
             <i className={`fas ${iconClass}`} aria-hidden={'true'} />
           </div>
           <div>
-            <button onClick={initEdit}>
-              <i className={'fas fa-edit'} />
-            </button>
-            <button onClick={() => onDeleteBase()}>
-              <i className={'fas fa-trash-alt'} />
-            </button>
+            {initEdit && ( //Allow edit if initEdit method exists
+              <button onClick={initEdit}>
+                <i className={'fas fa-edit'} />
+              </button>
+            )}
+
+            {onDelete && ( //Allow delete if onDelete method exists
+              <button onClick={() => onDelete()}>
+                <i className={'fas fa-trash-alt'} />
+              </button>
+            )}
           </div>
         </div>
         <div className={'content'}>
@@ -64,6 +58,7 @@ const AddressBox = ({
             <p>
               {address['postal_code']} {address['postal_town']}
             </p>
+            <p>{address['administrative_area_level_1']}</p>
             <p>{address['country']}</p>
           </div>
         </div>
@@ -75,8 +70,8 @@ const AddressBox = ({
 AddressBox.propTypes = {
   location: PropTypes.object,
   icon: PropTypes.string,
-  initEdit: PropTypes.func.isRequired,
-  cancelEdit: PropTypes.func.isRequired
+  initEdit: PropTypes.func,
+  onDelete: PropTypes.func
 };
 
 export default AddressBox;

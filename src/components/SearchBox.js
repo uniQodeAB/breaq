@@ -41,7 +41,7 @@ const PlacesWithStandaloneSearchBox = compose(
     >
       <input
         type="text"
-        placeholder="Where is your home base?"
+        placeholder={props.placeholder}
         style={{
           boxSizing: `border-box`,
           border: `1px solid transparent`,
@@ -52,7 +52,7 @@ const PlacesWithStandaloneSearchBox = compose(
           boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
           fontSize: `14px`,
           outline: `none`,
-          textOverflow: `ellipses`
+          textOverflow: `ellipsis`
         }}
       />
     </StandaloneSearchBox>
@@ -60,21 +60,21 @@ const PlacesWithStandaloneSearchBox = compose(
 ));
 
 class SearchBox extends PureComponent {
-  onChangePlace = places => {
-    this.props.onChangePlace(places);
-  };
-
   render() {
     return (
       <div className={'search-box'}>
-        <PlacesWithStandaloneSearchBox onChangePlace={this.onChangePlace} />
+        <PlacesWithStandaloneSearchBox
+          onChangePlace={places => this.props.onChangePlace(places)}
+          placeholder={this.props.placeholder}
+        />
       </div>
     );
   }
 }
 
 SearchBox.propTypes = {
-  onChangePlace: PropTypes.func.isRequired
+  onChangePlace: PropTypes.func.isRequired,
+  placeholder: PropTypes.string
 };
 
 export default SearchBox;

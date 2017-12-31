@@ -6,13 +6,17 @@ const SearchBoxControls = ({
   cancelEditMode,
   onChangePlace,
   address,
-  editMode
+  editMode,
+  searchBoxPlaceholder
 }) => {
   return (
     <div>
       {(isEmpty(address) || editMode) && (
         <div>
-          <SearchBox onChangePlace={onChangePlace} />
+          <SearchBox
+            onChangePlace={onChangePlace}
+            placeholder={searchBoxPlaceholder}
+          />
 
           {editMode && <button onClick={cancelEditMode}>Cancel</button>}
         </div>

@@ -6,7 +6,7 @@ import {
   cancelEditHomeBase
 } from '../actions/settingsActions';
 
-import AddressBox from '../components/AddressBox';
+import BaseAddressBox from '../components/BaseAddressBox';
 
 const mapStateToProps = () => {
   return {};
@@ -24,14 +24,9 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
-  firebaseConnect((props, store) => {
-    const { auth } = store.getState().firebase;
-
-    return auth ? [`users/${auth.uid}/base`] : [];
-  }),
-  connect(({ firebase: { data, auth } }) => ({
-    location: data.users && data.users[auth.uid] && data.users[auth.uid].base,
+  firebaseConnect(),
+  connect(({ firebase: { auth } }) => ({
     auth: auth
   })),
   connect(mapStateToProps, mapDispatchToProps)
-)(AddressBox);
+)(BaseAddressBox);

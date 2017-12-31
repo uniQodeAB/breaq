@@ -12,7 +12,7 @@ export default compose(
     return auth ? [`users/${auth.uid}/settings`] : [];
   }),
   connect(({ firebase: { data, auth } }) => ({
-    address: data.users && data.users[auth.uid] && data.users[auth.uid].settings
+    address: data.users && data.users[auth.uid] && data.users[auth.uid].base
   })),
   connect(
     state => ({
