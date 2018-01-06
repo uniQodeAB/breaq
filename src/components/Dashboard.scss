@@ -5,11 +5,12 @@
   flex-direction: row;
 
   .search-box-pane {
-    width: 30%;
+    width: 40%;
     height: 100%;
     background: #EFF6FC;
     border-right: 1px solid #103D5D;
     padding: 0 0.5em 0 0.5em;
+    overflow-y: auto;
 
     .search-container {
       display: flex;
@@ -40,7 +41,7 @@
   }
 
   .map-pane {
-    width: 70%;
+    width: 60%;
     height: 100%;
   }
 }

@@ -13,7 +13,8 @@ class AddEmployee extends Component {
     this.state = {
       name: '',
       project: '',
-      address: {}
+      address: {},
+      location: {}
     };
   }
 
@@ -25,7 +26,8 @@ class AddEmployee extends Component {
       firebase.push(`/users/${auth.uid}/employees`, {
         name: state.name,
         project: state.project,
-        address: state.address
+        address: state.address,
+        location: state.location
       });
     };
 
@@ -59,6 +61,10 @@ class AddEmployee extends Component {
           onChangePlace={position => {
             this.setState({
               address: createAddress(position),
+              location: {
+                lat: position['geometry'].location.lat(),
+                lng: position['geometry'].location.lng()
+              },
               editMode: false
             });
           }}

@@ -1,28 +1,16 @@
 import React from 'react';
 
-import { Marker } from 'react-google-maps';
-import { isEmpty, isLoaded } from 'react-redux-firebase';
-import MapComponent from '../components/MapComponent';
+import { isLoaded } from 'react-redux-firebase';
+import MapContainer from '../containers/MapContainer';
 
 import './Dashboard.css';
 import HomeBaseBox from './HomeBaseBox';
 import AddEmployeeContainer from '../containers/AddEmployeeContainer';
 
 import createAddress from '../address';
+import EmployeeGridContainer from '../containers/EmployeeGridContainer';
 
-const DashBoard = ({
-  user,
-  firebase,
-  auth,
-  cancelEditHomeBase,
-  initAdd,
-  cancelAdd,
-  addMode
-}) => {
-  const renderMarker = position => {
-    return !isEmpty(position) && <Marker position={position.location} />;
-  };
-
+const DashBoard = ({ user, firebase, auth, cancelEditHomeBase }) => {
   const onSetBase = position => {
     const base = createBase(position);
 
@@ -55,21 +43,14 @@ const DashBoard = ({
               <div>
                 <HomeBaseBox onChangePlace={onSetBase} />
                 <AddEmployeeContainer />
+                <EmployeeGridContainer />
               </div>
             )}
           </div>
         </div>
       </div>
       <div className={'map-pane'}>
-        <MapComponent
-          center={
-            isLoaded(user) && !isEmpty(user.base)
-              ? user.base.location
-              : undefined
-          }
-        >
-          {!isEmpty(user) && renderMarker(user.base)}
-        </MapComponent>
+        <MapContainer />
       </div>
     </div>
   );

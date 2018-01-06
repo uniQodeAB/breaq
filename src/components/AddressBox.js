@@ -20,8 +20,6 @@ const AddressBox = ({ location, icon, initEdit, onDelete }) => {
       iconClass = 'fa-home';
   }
 
-  console.log(location);
-
   const name = location.name;
   const address = Object.entries(location.address).reduce((a, [k, v]) => {
     a[k] = v['longName'];
