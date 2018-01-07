@@ -19,10 +19,10 @@ export function initAddEmployee() {
   };
 }
 
-export const CANCEL_ADD_EMPLOYEE = 'CANCEL_ADD_EMPLOYEE';
-export function cancelAddEmployee() {
+export const CANCEL_ADD_EDIT_EMPLOYEE = 'CANCEL_ADD_EDIT_EMPLOYEE';
+export function cancelAddEditEmployee() {
   return dispatch => {
-    dispatch({ type: CANCEL_ADD_EMPLOYEE });
+    dispatch({ type: CANCEL_ADD_EDIT_EMPLOYEE });
   };
 }
 

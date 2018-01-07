@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import EmployeeGrid from '../components/EmployeeGrid';
 import {
-  cancelAddEmployee,
+  cancelAddEditEmployee,
   initEditEmployee
 } from '../actions/settingsActions';
 
@@ -13,7 +13,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(initEditEmployee(id));
     },
     cancelEdit: () => {
-      dispatch(cancelAddEmployee());
+      dispatch(cancelAddEditEmployee());
     }
   };
 };

@@ -1,5 +1,5 @@
 import {
-  cancelAddEmployee,
+  cancelAddEditEmployee,
   cancelEditHomeBase,
   initAddEmployee
 } from '../actions/settingsActions';
@@ -13,7 +13,7 @@ function mapDispatchToProps(dispatch) {
   return {
     cancelEditHomeBase: () => dispatch(cancelEditHomeBase()),
     initAddEmployee: () => dispatch(initAddEmployee()),
-    cancelAddEmployee: () => dispatch(cancelAddEmployee())
+    cancelAddEmployee: () => dispatch(cancelAddEditEmployee())
   };
 }
 

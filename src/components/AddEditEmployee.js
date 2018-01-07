@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchBox from './SearchBox';
 
-import './AddEmployee.css';
+import './AddEditEmployee.css';
 import AddressBox from './AddressBox';
 import createAddress from '../address';
 import _ from 'lodash';
@@ -86,14 +86,14 @@ class AddEmployee extends Component {
 
     if (!addMode && !editMode) {
       return (
-        <div className={'AddEmployee'}>
+        <div className={'AddEditEmployee'}>
           <button onClick={() => initAddEmployee()}>Add</button>
         </div>
       );
     }
 
     return (
-      <div className={'AddEmployee'}>
+      <div className={'AddEditEmployee'}>
         <input
           type={'text'}
           className={'form-input'}

@@ -1,0 +1,35 @@
+.Header {
+  h1 {
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: inline-block;
+    margin: 0;
+    vertical-align: middle;
+    align-self: center;
+  }
+
+  button.login {
+    border-radius: 2px;
+    min-width: 88px;
+    background-color: #FA6900;
+    cursor: pointer;
+    border: 0;
+    color: #fff;
+    font-size: 14px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    padding: 10px 6px;
+  }
+
+  button.user-profile {
+    padding: 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    img {
+      width: 5em;
+      height: 5em;
+    }
+  }
+}

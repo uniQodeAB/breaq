@@ -47,7 +47,7 @@ const MapWithASearchBox = compose(
                      * Called to fit bounds after mounting.
                      * State shouldUpdate ensures this is not done in an endless loop
                      * */
-          if (this.state.shouldUpdate) {
+          if (this.state.shouldUpdate && this.map) {
             this.setState({
               shouldUpdate: false
             });
@@ -60,6 +60,7 @@ const MapWithASearchBox = compose(
                 )
               );
             });
+
             this.map.fitBounds(bounds);
 
             if (this.map.getZoom() > 15) {
@@ -89,7 +90,7 @@ const MapWithASearchBox = compose(
     },
     componentDidUpdate() {
       /* Need to ensure that window.google is available before fitting bounds */
-      if (this.state.shouldUpdate && window.google) {
+      if (this.state.shouldUpdate && window.google && this.map) {
         this.setState({
           shouldUpdate: false
         });

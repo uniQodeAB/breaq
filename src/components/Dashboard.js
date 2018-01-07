@@ -5,7 +5,7 @@ import MapContainer from '../containers/MapContainer';
 
 import './Dashboard.css';
 import HomeBaseBox from './HomeBaseBox';
-import AddEmployeeContainer from '../containers/AddEmployeeContainer';
+import AddEmployeeContainer from '../containers/AddEditEmployeeContainer';
 
 import createAddress from '../address';
 import EmployeeGridContainer from '../containers/EmployeeGridContainer';

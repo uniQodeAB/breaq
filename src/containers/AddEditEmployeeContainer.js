@@ -1,5 +1,5 @@
 import {
-  cancelAddEmployee,
+  cancelAddEditEmployee,
   cancelEditHomeBase,
   initAddEmployee
 } from '../actions/settingsActions';
@@ -7,13 +7,13 @@ import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import AddEmployee from '../components/AddEmployee';
+import AddEditEmployee from '../components/AddEditEmployee.js';
 
 function mapDispatchToProps(dispatch) {
   return {
     cancelEditHomeBase: () => dispatch(cancelEditHomeBase()),
     initAddEmployee: () => dispatch(initAddEmployee()),
-    cancelAddEmployee: () => dispatch(cancelAddEmployee())
+    cancelAddEmployee: () => dispatch(cancelAddEditEmployee())
   };
 }
 
@@ -42,4 +42,4 @@ export default compose(
     addMode: state.settings.addMode,
     editMode: state.settings.editMode
   }))
-)(AddEmployee);
+)(AddEditEmployee);
