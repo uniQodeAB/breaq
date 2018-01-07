@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import Header from './containers/Header';
+import HeaderContainer from './containers/HeaderContainer';
 import Footer from './containers/Footer';
 import PrivateRoute from './containers/PrivateRoute';
 import Login from './containers/Login';
@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <div className={'box'}>
-        <Header />
+        <HeaderContainer />
         <section className={'row content'}>
           <Switch>
             <Route exact path={'/'} component={Home} />
