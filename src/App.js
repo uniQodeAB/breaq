@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import HeaderContainer from './containers/HeaderContainer';
-import Footer from './containers/Footer';
+import Footer from './components/Footer';
 import PrivateRoute from './containers/PrivateRoute';
 import Login from './containers/Login';
 import Home from './containers/Home';
