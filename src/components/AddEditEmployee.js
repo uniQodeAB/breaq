@@ -126,6 +126,7 @@ class AddEmployee extends Component {
 
         <AddressBox
           id={'temp'}
+          icon={'USER'}
           location={
             !_.isEmpty(this.state.address)
               ? { address: this.state.address }
