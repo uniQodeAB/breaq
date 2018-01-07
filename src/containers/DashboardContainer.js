@@ -1,7 +1,7 @@
 import {
-  cancelAdd,
+  cancelAddEmployee,
   cancelEditHomeBase,
-  initAdd
+  initAddEmployee
 } from '../actions/settingsActions';
 import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
@@ -12,8 +12,8 @@ import DashBoard from '../components/Dashboard';
 function mapDispatchToProps(dispatch) {
   return {
     cancelEditHomeBase: () => dispatch(cancelEditHomeBase()),
-    initAdd: () => dispatch(initAdd()),
-    cancelAdd: () => dispatch(cancelAdd())
+    initAddEmployee: () => dispatch(initAddEmployee()),
+    cancelAddEmployee: () => dispatch(cancelAddEmployee())
   };
 }
 

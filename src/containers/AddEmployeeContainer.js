@@ -1,7 +1,7 @@
 import {
-  cancelAdd,
+  cancelAddEmployee,
   cancelEditHomeBase,
-  initAdd
+  initAddEmployee
 } from '../actions/settingsActions';
 import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
@@ -12,20 +12,34 @@ import AddEmployee from '../components/AddEmployee';
 function mapDispatchToProps(dispatch) {
   return {
     cancelEditHomeBase: () => dispatch(cancelEditHomeBase()),
-    initAdd: () => dispatch(initAdd()),
-    cancelAdd: () => dispatch(cancelAdd())
+    initAddEmployee: () => dispatch(initAddEmployee()),
+    cancelAddEmployee: () => dispatch(cancelAddEmployee())
   };
 }
 
 export default compose(
-  firebaseConnect(),
+  firebaseConnect((props, store) => {
+    const { auth } = store.getState().firebase;
+    const { employeeId } = store.getState().settings;
+
+    return auth && employeeId
+      ? [`users/${auth.uid}/employees/${employeeId}`]
+      : [];
+  }),
   connect(
-    ({ firebase: { auth } }) => ({
+    ({ firebase: { data, auth }, settings: { employeeId } }) => ({
+      employeeId: employeeId,
+      employee:
+        auth &&
+        employeeId &&
+        data.users[auth.uid].employees &&
+        data.users[auth.uid].employees[employeeId],
       auth: auth
     }),
     mapDispatchToProps
   ),
   connect(state => ({
-    addMode: state.settings.addMode
+    addMode: state.settings.addMode,
+    editMode: state.settings.editMode
   }))
 )(AddEmployee);

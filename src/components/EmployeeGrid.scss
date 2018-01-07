@@ -1,10 +1,29 @@
 .EmployeeGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1em;
+  position: relative;
 
-  .Address {
-    margin: 0;
-    padding: 0;
+  .overlay.active {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color:#000;
+    opacity: .75;
+    z-index: 9999999;
+  }
+
+  .overlay.inactive {
+    display: none;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+
+    .Address {
+      margin: 0;
+      padding: 0;
+    }
   }
 }

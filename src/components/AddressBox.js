@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import './AddressBox.css';
 
-const AddressBox = ({ location, icon, initEdit, onDelete }) => {
+const AddressBox = ({ id, location, icon, onEdit, onDelete }) => {
   // Do not render if address does not exist
   if (_.isEmpty(location)) return null;
 
@@ -29,22 +29,24 @@ const AddressBox = ({ location, icon, initEdit, onDelete }) => {
   return (
     <div className={'Address'}>
       <div className={'wrapper'}>
-        <div className={'side'}>
-          <div>
-            <i className={`fas ${iconClass}`} aria-hidden={'true'} />
-          </div>
-          <div>
-            {initEdit && ( //Allow edit if initEdit method exists
-              <button onClick={initEdit}>
-                <i className={'fas fa-edit'} />
-              </button>
-            )}
+        <div className={'side-wrapper'}>
+          <div className={'side'}>
+            <div className={'icon'}>
+              <i className={`fas ${iconClass}`} aria-hidden={'true'} />
+            </div>
+            <div className={'controls'}>
+              {onEdit && (
+                <button onClick={() => onEdit(id)}>
+                  <i className={'fas fa-edit'} />
+                </button>
+              )}
 
-            {onDelete && ( //Allow delete if onDelete method exists
-              <button onClick={() => onDelete()}>
-                <i className={'fas fa-trash-alt'} />
-              </button>
-            )}
+              {onDelete && (
+                <button onClick={() => onDelete(id)}>
+                  <i className={'fas fa-trash-alt'} />
+                </button>
+              )}
+            </div>
           </div>
         </div>
         <div className={'content'}>
@@ -66,9 +68,10 @@ const AddressBox = ({ location, icon, initEdit, onDelete }) => {
 };
 
 AddressBox.propTypes = {
+  id: PropTypes.string.isRequired,
   location: PropTypes.object,
   icon: PropTypes.string,
-  initEdit: PropTypes.func,
+  onEdit: PropTypes.func,
   onDelete: PropTypes.func
 };
 

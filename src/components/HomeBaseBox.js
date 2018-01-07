@@ -7,7 +7,7 @@ import SearchBoxControlsContainer from '../containers/SearchBoxControlsContainer
 class HomeBaseBox extends Component {
   render() {
     return (
-      <div>
+      <div className={'HomeBaseBox'}>
         <SearchBoxControlsContainer
           onChangePlace={this.props.onChangePlace}
           searchBoxPlaceholder={'Where is your home base?'}

@@ -12,16 +12,23 @@ export function cancelEditHomeBase() {
   };
 }
 
-export const INIT_ADD = 'INIT_ADD';
-export function initAdd() {
+export const INIT_ADD_EMPLOYEE = 'INIT_ADD_EMPLOYEE';
+export function initAddEmployee() {
   return dispatch => {
-    dispatch({ type: INIT_ADD });
+    dispatch({ type: INIT_ADD_EMPLOYEE });
   };
 }
 
-export const CANCEL_ADD = 'CANCEL_ADD';
-export function cancelAdd() {
+export const CANCEL_ADD_EMPLOYEE = 'CANCEL_ADD_EMPLOYEE';
+export function cancelAddEmployee() {
   return dispatch => {
-    dispatch({ type: CANCEL_ADD });
+    dispatch({ type: CANCEL_ADD_EMPLOYEE });
+  };
+}
+
+export const INIT_EDIT_EMPLOYEE = 'INIT_EDIT_EMPLOYEE';
+export function initEditEmployee(id) {
+  return dispatch => {
+    dispatch({ type: INIT_EDIT_EMPLOYEE, payload: id });
   };
 }

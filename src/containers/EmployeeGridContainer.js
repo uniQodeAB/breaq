@@ -2,6 +2,21 @@ import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import EmployeeGrid from '../components/EmployeeGrid';
+import {
+  cancelAddEmployee,
+  initEditEmployee
+} from '../actions/settingsActions';
+
+const mapDispatchToProps = dispatch => {
+  return {
+    initEdit: id => {
+      dispatch(initEditEmployee(id));
+    },
+    cancelEdit: () => {
+      dispatch(cancelAddEmployee());
+    }
+  };
+};
 
 export default compose(
   firebaseConnect((props, store) => {
@@ -9,8 +24,13 @@ export default compose(
 
     return auth ? [`users/${auth.uid}/employees`] : [];
   }),
-  connect(({ firebase: { data, auth } }) => ({
-    employees:
-      data.users && data.users[auth.uid] && data.users[auth.uid].employees
-  }))
+  connect(
+    ({ firebase: { data, auth }, settings: { addMode, editMode } }) => ({
+      auth: auth,
+      active: addMode || editMode,
+      employees:
+        data.users && data.users[auth.uid] && data.users[auth.uid].employees
+    }),
+    mapDispatchToProps
+  )
 )(EmployeeGrid);

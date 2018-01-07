@@ -1,8 +1,8 @@
 import React from 'react';
 
-import AddressBoxContainer from '../containers/AddressBoxContainer';
+import AddressBox from './AddressBox';
 
-const BaseAddressBox = ({ firebase, auth, cancelEdit }) => {
+const BaseAddressBox = ({ firebase, auth, base, initEdit, cancelEdit }) => {
   const deleteBase = () => {
     firebase
       .ref(`/users/${auth.uid}/base`)
@@ -10,7 +10,7 @@ const BaseAddressBox = ({ firebase, auth, cancelEdit }) => {
       .then(() => cancelEdit());
   };
 
-  return <AddressBoxContainer onDelete={deleteBase} />;
+  return <AddressBox location={base} onDelete={deleteBase} onEdit={initEdit} />;
 };
 
 export default BaseAddressBox;

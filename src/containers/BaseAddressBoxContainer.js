@@ -24,8 +24,13 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
-  firebaseConnect(),
-  connect(({ firebase: { auth } }) => ({
+  firebaseConnect((props, store) => {
+    const { auth } = store.getState().firebase;
+
+    return auth ? [`users/${auth.uid}/base`] : [];
+  }),
+  connect(({ firebase: { data, auth } }) => ({
+    base: data.users && data.users[auth.uid] && data.users[auth.uid].base,
     auth: auth
   })),
   connect(mapStateToProps, mapDispatchToProps)
