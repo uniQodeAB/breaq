@@ -18,7 +18,7 @@ export default function locationReducer(state = {}, action) {
       return { ...state, addMode: true };
     }
     case CANCEL_ADD_EMPLOYEE: {
-      return { ...state, addMode: false, editMode: false };
+      return { ...state, addMode: false, editMode: false, employeeId: '' };
     }
     case INIT_EDIT_EMPLOYEE: {
       return { ...state, employeeId: action.payload, editMode: true };

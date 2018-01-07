@@ -49,7 +49,17 @@ class AddEmployee extends Component {
           address: this.state.address,
           location: this.state.location
         })
-        .then(() => this.props.cancelAddEmployee());
+        .then(() => {
+          this.setState({
+            editMode: true,
+            name: '',
+            project: '',
+            address: {},
+            location: {}
+          });
+
+          this.props.cancelAddEmployee();
+        });
     };
 
     const editEmployee = id => {
@@ -61,7 +71,17 @@ class AddEmployee extends Component {
           address: this.state.address,
           location: this.state.location
         })
-        .then(() => this.props.cancelAddEmployee());
+        .then(() => {
+          this.setState({
+            editMode: true,
+            name: '',
+            project: '',
+            address: {},
+            location: {}
+          });
+
+          this.props.cancelAddEmployee();
+        });
     };
 
     if (!addMode && !editMode) {
