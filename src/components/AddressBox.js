@@ -20,7 +20,8 @@ const AddressBox = ({ id, location, icon, onEdit, onDelete }) => {
       iconClass = 'fa-home';
   }
 
-  const name = location.name;
+  const { name, project } = location;
+
   const address = Object.entries(location.address).reduce((a, [k, v]) => {
     a[k] = v['longName'];
     return a;
@@ -52,6 +53,7 @@ const AddressBox = ({ id, location, icon, onEdit, onDelete }) => {
         <div className={'content'}>
           <div className={'container'}>
             <h1>{name}</h1>
+            <h2>{project}</h2>
             <p>
               {address['street_number']} {address['route']}
             </p>

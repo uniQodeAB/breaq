@@ -36,6 +36,7 @@
           flex-grow: 1;
 
           button {
+            cursor: pointer;
             padding: 0;
             margin: 0;
             border-radius: 0;
@@ -70,10 +71,20 @@
 
       h1 {
         font-size: 1em;
+        margin: 0;
+      }
+
+      h2 {
+        font-size: 0.75em;
+        margin-top: 0.1em;
+        margin-bottom: 0.1em;
+        font-weight: bold;
       }
 
       p {
         margin: 0;
+        font-size: 0.75em;
+        font-weight: lighter;
       }
 
     }
