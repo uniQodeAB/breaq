@@ -10,7 +10,14 @@ const BaseAddressBox = ({ firebase, auth, base, initEdit, cancelEdit }) => {
       .then(() => cancelEdit());
   };
 
-  return <AddressBox location={base} onDelete={deleteBase} onEdit={initEdit} />;
+  return (
+    <AddressBox
+      id={'base'}
+      location={base}
+      onDelete={deleteBase}
+      onEdit={initEdit}
+    />
+  );
 };
 
 export default BaseAddressBox;
