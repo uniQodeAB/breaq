@@ -4,34 +4,12 @@ import { isLoaded } from 'react-redux-firebase';
 import MapContainer from '../containers/MapContainer';
 
 import './Dashboard.css';
-import HomeBaseBox from './HomeBaseBox';
 import AddEmployeeContainer from '../containers/AddEditEmployeeContainer';
 
-import createAddress from '../address';
 import EmployeeGridContainer from '../containers/EmployeeGridContainer';
+import BaseAddressBoxContainer from '../containers/BaseAddressBoxContainer';
 
-const DashBoard = ({ user, firebase, auth, cancelEditHomeBase }) => {
-  const onSetBase = position => {
-    const base = createBase(position);
-
-    firebase
-      .set(`/users/${auth.uid}/base`, base)
-      .then(() => cancelEditHomeBase());
-  };
-
-  const createBase = position => {
-    const address = createAddress(position);
-
-    return {
-      name: position.name,
-      address: address,
-      location: {
-        lat: position['geometry'].location.lat(),
-        lng: position['geometry'].location.lng()
-      }
-    };
-  };
-
+const DashBoard = ({ user }) => {
   return (
     <div className={'Dashboard'}>
       <div className={'search-box-pane'}>
@@ -41,7 +19,7 @@ const DashBoard = ({ user, firebase, auth, cancelEditHomeBase }) => {
               'Loading...'
             ) : (
               <div>
-                <HomeBaseBox onChangePlace={onSetBase} />
+                <BaseAddressBoxContainer />
                 <AddEmployeeContainer />
                 <EmployeeGridContainer />
               </div>

@@ -10,6 +10,24 @@ const defaultMapOptions = {
   streetViewControl: false
 };
 
+const fitBounds = (markers, map) => {
+  const bounds = new window.google.maps.LatLngBounds();
+  markers.forEach(marker => {
+    bounds.extend(
+      new window.google.maps.LatLng(
+        marker.props.position.lat,
+        marker.props.position.lng
+      )
+    );
+  });
+
+  map.fitBounds(bounds);
+
+  if (map.getZoom() > 15) {
+    map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.setZoom(15);
+  }
+};
+
 const MapWithASearchBox = compose(
   withProps({
     googleMapURL:
@@ -41,6 +59,8 @@ const MapWithASearchBox = compose(
             bounds: refs.map.getBounds(),
             center: refs.map.getCenter()
           });
+
+          fitBounds(this.props.children, this.map);
         },
         onIdle: () => {
           /*
@@ -51,23 +71,7 @@ const MapWithASearchBox = compose(
             this.setState({
               shouldUpdate: false
             });
-            const bounds = new window.google.maps.LatLngBounds();
-            this.props.children.forEach(marker => {
-              bounds.extend(
-                new window.google.maps.LatLng(
-                  marker.props.position.lat,
-                  marker.props.position.lng
-                )
-              );
-            });
-
-            this.map.fitBounds(bounds);
-
-            if (this.map.getZoom() > 15) {
-              this.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.setZoom(
-                15
-              );
-            }
+            fitBounds(this.props.children, this.map);
           }
         }
       });
@@ -94,22 +98,7 @@ const MapWithASearchBox = compose(
         this.setState({
           shouldUpdate: false
         });
-        const bounds = new window.google.maps.LatLngBounds();
-        this.props.children.forEach(marker => {
-          bounds.extend(
-            new window.google.maps.LatLng(
-              marker.props.position.lat,
-              marker.props.position.lng
-            )
-          );
-        });
-        this.map.fitBounds(bounds);
-
-        if (this.map.getZoom() > 15) {
-          this.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.setZoom(
-            15
-          );
-        }
+        fitBounds(this.props.children, this.map);
       }
     }
   }),
@@ -128,7 +117,7 @@ const MapWithASearchBox = compose(
   </GoogleMap>
 ));
 
-class MapComponent extends PureComponent {
+class Map extends PureComponent {
   render() {
     return (
       <MapWithASearchBox center={this.props.center}>
@@ -138,4 +127,4 @@ class MapComponent extends PureComponent {
   }
 }
 
-export default MapComponent;
+export default Map;

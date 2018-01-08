@@ -9,10 +9,10 @@ import {
 export default function locationReducer(state = {}, action) {
   switch (action.type) {
     case INIT_EDIT_HOME_BASE: {
-      return { ...state, editingHomeBase: true };
+      return { ...state, editHomeBase: true };
     }
     case CANCEL_EDIT_HOME_BASE: {
-      return { ...state, editingHomeBase: false };
+      return { ...state, editHomeBase: false };
     }
     case INIT_ADD_EMPLOYEE: {
       return { ...state, addMode: true };
