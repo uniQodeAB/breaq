@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Map from '../components/Map';
 
-const test = () => {
-  console.log('this is a test');
-};
-
 export default compose(
   firebaseConnect((props, store) => {
     const { auth } = store.getState().firebase;
@@ -17,7 +13,6 @@ export default compose(
     user: data.users,
     base: data.users && data.users[auth.uid] && data.users[auth.uid].base,
     employees:
-      data.users && data.users[auth.uid] && data.users[auth.uid].employees,
-    test: test
+      data.users && data.users[auth.uid] && data.users[auth.uid].employees
   }))
 )(Map);
