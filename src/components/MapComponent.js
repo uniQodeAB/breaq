@@ -1,13 +1,15 @@
 import React, { PureComponent } from 'react';
 import { compose, lifecycle, withProps } from 'recompose';
 import { GoogleMap, withGoogleMap, withScriptjs } from 'react-google-maps';
+import mapStyles from '../mapStyles';
 
 import './MapComponent.css';
 
 const defaultMapOptions = {
   fullscreenControl: false,
   clickableIcons: false,
-  streetViewControl: false
+  streetViewControl: false,
+  styles: mapStyles
 };
 
 const fitBounds = (markers, map) => {
