@@ -58,14 +58,6 @@ const MapWithASearchBox = compose(
           this.map = ref;
         },
         onBoundsChanged: () => {
-          const currentBounds = this.state.bounds;
-          const newBounds = refs.map.getBounds();
-
-          // Fit bounds when map is resized
-          if (JSON.stringify(currentBounds) !== JSON.stringify(newBounds)) {
-            fitBounds(this.props.children, this.map);
-          }
-
           this.setState({
             bounds: refs.map.getBounds(),
             center: refs.map.getCenter()
