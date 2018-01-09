@@ -7,7 +7,7 @@ const renderMarkers = (base, employees) => {
   const markers = [];
 
   if (!isEmpty(base)) {
-    markers.push(<Marker key={'base'} position={base.location} />);
+    markers.push(<Marker key={'base'} position={base.location} label={'B'} />);
   }
 
   if (!isEmpty(employees)) {
