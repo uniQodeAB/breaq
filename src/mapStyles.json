@@ -76,7 +76,7 @@
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "visibility": "off"
+        "visibility": "on"
       }
     ]
   },
