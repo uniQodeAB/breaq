@@ -134,7 +134,7 @@ class AddEmployee extends Component {
           }
         />
 
-        <div>
+        <div className={'buttons'}>
           <button onClick={() => cancelAddEmployee()}>Cancel</button>
           {addMode ? (
             <button onClick={() => addEmployee()}>Save</button>
