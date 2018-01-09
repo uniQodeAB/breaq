@@ -1,7 +1,8 @@
 import React from 'react';
+import './Footer.css';
 
 const Footer = () => {
-  return <footer className={'row footer'} />;
+  return <footer className={'Footer'} />;
 };
 
 export default Footer;
