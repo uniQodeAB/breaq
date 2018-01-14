@@ -23,7 +23,7 @@ const renderMarkers = (base, employees) => {
 
 const Map = ({ user, base, employees }) => {
   if (!isLoaded(user)) {
-    return 'Loading...';
+    return <div>Loading...</div>;
   }
 
   return <MapComponent>{renderMarkers(base, employees)}</MapComponent>;

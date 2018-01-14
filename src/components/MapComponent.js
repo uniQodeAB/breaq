@@ -118,18 +118,18 @@ const MapWithASearchBox = compose(
   </GoogleMap>
 ));
 
-class Map extends PureComponent {
+class MapComponent extends PureComponent {
   render() {
     return <MapWithASearchBox>{this.props.children}</MapWithASearchBox>;
   }
 }
 
-Map.propTypes = {
+MapComponent.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element)
 };
 
-Map.defaultProps = {
+MapComponent.defaultProps = {
   children: []
 };
 
-export default Map;
+export default MapComponent;
