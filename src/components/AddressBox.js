@@ -73,8 +73,28 @@ const AddressBox = ({ id, location, icon, onEdit, onDelete }) => {
 AddressBox.propTypes = {
   id: PropTypes.string.isRequired,
   location: PropTypes.shape({
-    lat: PropTypes.number,
-    lng: PropTypes.number
+    name: PropTypes.string,
+    project: PropTypes.string,
+    address: PropTypes.shape({
+      street_number: PropTypes.shape({
+        longName: PropTypes.string
+      }),
+      route: PropTypes.shape({
+        longName: PropTypes.string
+      }),
+      postal_code: PropTypes.shape({
+        longName: PropTypes.string
+      }),
+      postal_town: PropTypes.shape({
+        longName: PropTypes.string
+      }),
+      administrative_area_level_1: PropTypes.shape({
+        longName: PropTypes.string
+      }),
+      country: PropTypes.shape({
+        longName: PropTypes.string
+      })
+    })
   }),
   icon: PropTypes.string,
   onEdit: PropTypes.func,
