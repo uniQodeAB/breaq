@@ -1,5 +1,5 @@
 import React from 'react';
-import { isEmpty, isLoaded } from 'react-redux-firebase';
+import { isEmpty } from 'react-redux-firebase';
 import { Marker } from 'react-google-maps';
 import PropTypes from 'prop-types';
 
@@ -21,26 +21,11 @@ const renderMarkers = (base, employees) => {
   return markers;
 };
 
-const Map = ({ user, base, employees }) => {
-  if (!isLoaded(user)) {
-    return <div>Loading...</div>;
-  }
-
-  return <MapComponent>{renderMarkers(base, employees)}</MapComponent>;
-};
+const Map = ({ base, employees }) => (
+  <MapComponent>{renderMarkers(base, employees)}</MapComponent>
+);
 
 Map.propTypes = {
-  user: PropTypes.shape({
-    base: PropTypes.shape({
-      name: PropTypes.string,
-      address: PropTypes.shape(),
-      location: PropTypes.shape({
-        lat: PropTypes.number,
-        lng: PropTypes.number
-      })
-    }),
-    employees: PropTypes.shape()
-  }),
   base: PropTypes.shape({
     name: PropTypes.string,
     address: PropTypes.shape(),

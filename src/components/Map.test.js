@@ -20,10 +20,6 @@ describe('Map', () => {
     map = shallow(<Map />);
   });
 
-  it('should render a loading text when loading', () => {
-    expect(map.get(0)).toEqual(<div>Loading...</div>);
-  });
-
   it('should render a `MapComponent` when loaded', () => {
     expect(map.find('MapComponent').length).toBe(1);
   });

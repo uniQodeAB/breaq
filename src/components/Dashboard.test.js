@@ -33,7 +33,7 @@ describe('Dashboard', () => {
       const dashboard = shallow(<Dashboard />);
       expect(
         dashboard
-          .find('div.search-container div')
+          .find('div.Dashboard')
           .first()
           .text()
       ).toBe('Loading...');

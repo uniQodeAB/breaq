@@ -9,28 +9,30 @@ import AddEmployeeContainer from '../containers/AddEditEmployeeContainer';
 import EmployeeGridContainer from '../containers/EmployeeGridContainer';
 import BaseAddressBoxContainer from '../containers/BaseAddressBoxContainer';
 
-const DashBoard = ({ user }) => (
-  <div className={'Dashboard'}>
-    <div className={'search-box-pane'}>
-      <div className={'search-container'}>
-        <div>
-          {!isLoaded(user) ? (
-            'Loading...'
-          ) : (
+const DashBoard = ({ user }) => {
+  if (!isLoaded(user)) {
+    return <div className={'Dashboard'}>Loading...</div>;
+  }
+
+  return (
+    <div className={'Dashboard'}>
+      <div className={'search-box-pane'}>
+        <div className={'search-container'}>
+          <div>
             <div>
               <BaseAddressBoxContainer />
               <AddEmployeeContainer />
               <EmployeeGridContainer />
             </div>
-          )}
+          </div>
         </div>
       </div>
+      <div className={'map-pane'}>
+        <MapContainer />
+      </div>
     </div>
-    <div className={'map-pane'}>
-      <MapContainer />
-    </div>
-  </div>
-);
+  );
+};
 
 DashBoard.propTypes = {
   user: PropTypes.shape({
