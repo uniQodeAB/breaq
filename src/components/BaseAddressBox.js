@@ -51,7 +51,7 @@ const BaseAddressBox = ({
             placeholder={'Where is your home base?'}
           />
 
-          {editMode && <button onClick={() => cancelEdit()}>Cancel</button>}
+          {editMode && <button onClick={cancelEdit}>Cancel</button>}
         </div>
       )}
 
@@ -82,7 +82,7 @@ BaseAddressBox.propTypes = {
 };
 
 BaseAddressBox.defaultProps = {
-  base: {},
+  base: undefined,
   editMode: false
 };
 

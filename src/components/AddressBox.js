@@ -75,7 +75,7 @@ AddressBox.propTypes = {
   location: PropTypes.shape({
     lat: PropTypes.number,
     lng: PropTypes.number
-  }).isRequired,
+  }),
   icon: PropTypes.string,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func
@@ -84,7 +84,8 @@ AddressBox.propTypes = {
 AddressBox.defaultProps = {
   icon: 'BASE',
   onEdit: undefined,
-  onDelete: undefined
+  onDelete: undefined,
+  location: {}
 };
 
 export default AddressBox;
