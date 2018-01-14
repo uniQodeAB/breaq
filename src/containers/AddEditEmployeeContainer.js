@@ -1,13 +1,13 @@
+import { firebaseConnect } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+
 import {
   cancelAddEditEmployee,
   cancelEditHomeBase,
   initAddEmployee
 } from '../actions/settingsActions';
-import { firebaseConnect } from 'react-redux-firebase';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-
-import AddEditEmployee from '../components/AddEditEmployee.js';
+import AddEditEmployee from '../components/AddEditEmployee';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -28,13 +28,13 @@ export default compose(
   }),
   connect(
     ({ firebase: { data, auth }, settings: { employeeId } }) => ({
-      employeeId: employeeId,
+      employeeId,
       employee:
         auth &&
         employeeId &&
         data.users[auth.uid].employees &&
         data.users[auth.uid].employees[employeeId],
-      auth: auth
+      auth
     }),
     mapDispatchToProps
   ),

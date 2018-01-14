@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 import { compose, lifecycle, withProps } from 'recompose';
 import { GoogleMap, withGoogleMap, withScriptjs } from 'react-google-maps';
-import mapStyles from '../mapStyles';
+import PropTypes from 'prop-types';
 
+import mapStyles from '../mapStyles.json';
 import './MapComponent.css';
 
+/* eslint-disable no-underscore-dangle */
 const defaultMapOptions = {
   fullscreenControl: false,
   clickableIcons: false,
@@ -60,7 +62,8 @@ const MapWithASearchBox = compose(
         onBoundsChanged: () => {
           this.setState({
             bounds: refs.map.getBounds(),
-            center: refs.map.getCenter()
+            center: refs.map.getCenter(),
+            shouldUpdate: false
           });
         },
         onIdle: () => {
@@ -96,9 +99,6 @@ const MapWithASearchBox = compose(
     componentDidUpdate() {
       /* Need to ensure that window.google is available before fitting bounds */
       if (this.state.shouldUpdate && window.google && this.map) {
-        this.setState({
-          shouldUpdate: false
-        });
         fitBounds(this.props.children, this.map);
       }
     }
@@ -120,12 +120,16 @@ const MapWithASearchBox = compose(
 
 class Map extends PureComponent {
   render() {
-    return (
-      <MapWithASearchBox center={this.props.center}>
-        {this.props.children}
-      </MapWithASearchBox>
-    );
+    return <MapWithASearchBox>{this.props.children}</MapWithASearchBox>;
   }
 }
+
+Map.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element)
+};
+
+Map.defaultProps = {
+  children: []
+};
 
 export default Map;

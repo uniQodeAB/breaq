@@ -1,9 +1,9 @@
 const createAddress = place =>
-  place['address_components']
+  place.address_components
     .map(address => ({
       types: address.types,
-      longName: address['long_name'],
-      shortName: address['short_name']
+      longName: address.long_name,
+      shortName: address.short_name
     }))
     .reduce((acc, elem) => {
       elem.types.forEach(type => {

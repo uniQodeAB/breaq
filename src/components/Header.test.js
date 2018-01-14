@@ -1,8 +1,9 @@
 import React from 'react';
-import Header from './Header';
-import Enzyme, { shallow, mount } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
+
+import Header from './Header';
 
 jest.mock('react-redux-firebase', () => ({
   isLoaded: jest.fn(),

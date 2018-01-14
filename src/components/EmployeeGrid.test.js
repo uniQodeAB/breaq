@@ -1,16 +1,23 @@
 import React from 'react';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
 import EmployeeGrid from './EmployeeGrid';
-import { shallow } from 'enzyme';
-import Enzyme from 'enzyme/build/index';
-import Adapter from 'enzyme-adapter-react-16/build/index';
 
 describe('EmployeeGrid', () => {
+  let props;
+
   beforeEach(() => {
     Enzyme.configure({ adapter: new Adapter() });
+
+    props = {
+      firebase: () => {},
+      auth: () => {}
+    };
   });
 
   it('should not render grid if no employees', () => {
-    const employeeGrid = shallow(<EmployeeGrid />);
+    const employeeGrid = shallow(<EmployeeGrid {...props} />);
 
     expect(employeeGrid.find('div.grid').children().length).toBe(0);
   });
@@ -18,7 +25,9 @@ describe('EmployeeGrid', () => {
   it('should render a single employee if only one exist', () => {
     const employees = { employee: {} };
 
-    const employeeGrid = shallow(<EmployeeGrid employees={employees} />);
+    const employeeGrid = shallow(
+      <EmployeeGrid employees={employees} {...props} />
+    );
 
     expect(employeeGrid.find('AddressBox').length).toBe(1);
   });
@@ -26,7 +35,9 @@ describe('EmployeeGrid', () => {
   it('should render all employees', () => {
     const employees = { employee1: {}, employee2: {}, employee3: {} };
 
-    const employeeGrid = shallow(<EmployeeGrid employees={employees} />);
+    const employeeGrid = shallow(
+      <EmployeeGrid employees={employees} {...props} />
+    );
 
     expect(employeeGrid.find('AddressBox').length).toBe(3);
   });
@@ -37,7 +48,7 @@ describe('EmployeeGrid', () => {
     const employees = { employee1: location };
 
     const employeeGrid = shallow(
-      <EmployeeGrid employees={employees} initEdit={() => {}} />
+      <EmployeeGrid employees={employees} initEdit={() => {}} {...props} />
     );
 
     const addressBox = employeeGrid.find('AddressBox').first();

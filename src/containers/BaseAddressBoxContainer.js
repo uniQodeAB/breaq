@@ -8,16 +8,14 @@ import {
 
 import BaseAddressBox from '../components/BaseAddressBox';
 
-const mapDispatchToProps = dispatch => {
-  return {
-    initEdit: () => {
-      dispatch(initEditHomeBase());
-    },
-    cancelEdit: () => {
-      dispatch(cancelEditHomeBase());
-    }
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  initEdit: () => {
+    dispatch(initEditHomeBase());
+  },
+  cancelEdit: () => {
+    dispatch(cancelEditHomeBase());
+  }
+});
 
 export default compose(
   firebaseConnect((props, store) => {
@@ -28,7 +26,7 @@ export default compose(
   connect(
     ({ firebase: { data, auth }, settings: { editHomeBase } }) => ({
       base: data.users && data.users[auth.uid] && data.users[auth.uid].base,
-      auth: auth,
+      auth,
       editMode: editHomeBase
     }),
     mapDispatchToProps

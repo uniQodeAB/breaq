@@ -1,11 +1,11 @@
+import { firebaseConnect } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import {
   cancelAddEditEmployee,
   cancelEditHomeBase,
   initAddEmployee
 } from '../actions/settingsActions';
-import { firebaseConnect } from 'react-redux-firebase';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import DashBoard from '../components/Dashboard';
 
@@ -26,7 +26,7 @@ export default compose(
   connect(
     ({ firebase: { data, auth } }) => ({
       user: data.users && data.users[auth.uid],
-      auth: auth
+      auth
     }),
     mapDispatchToProps
   ),

@@ -1,7 +1,9 @@
 import React from 'react';
 import { isEmpty, isLoaded } from 'react-redux-firebase';
-import MapComponent from './MapComponent';
 import { Marker } from 'react-google-maps';
+import PropTypes from 'prop-types';
+
+import MapComponent from './MapComponent';
 
 const renderMarkers = (base, employees) => {
   const markers = [];
@@ -24,9 +26,18 @@ const Map = ({ user, base, employees }) => {
     return 'Loading...';
   }
 
-  return (
-    <MapComponent center={base}>{renderMarkers(base, employees)}</MapComponent>
-  );
+  return <MapComponent>{renderMarkers(base, employees)}</MapComponent>;
+};
+
+Map.propTypes = {
+  user: PropTypes.shape.isRequired,
+  base: PropTypes.shape,
+  employees: PropTypes.arrayOf(PropTypes.shape)
+};
+
+Map.defaultProps = {
+  base: {},
+  employees: []
 };
 
 export default Map;

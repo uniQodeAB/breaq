@@ -1,12 +1,12 @@
 import firebase from 'firebase';
 // Initialize Firebase
-var config = {
-    apiKey: "AIzaSyAqtI5Is5e83rbmKOGHqeSU4sJwOvHIrDg",
-    authDomain: "fmaps-ax.firebaseapp.com",
-    databaseURL: "https://fmaps-ax.firebaseio.com",
-    projectId: "fmaps-ax",
-    storageBucket: "fmaps-ax.appspot.com",
-    messagingSenderId: "777480926020"
+const config = {
+  apiKey: 'AIzaSyAqtI5Is5e83rbmKOGHqeSU4sJwOvHIrDg',
+  authDomain: 'fmaps-ax.firebaseapp.com',
+  databaseURL: 'https://fmaps-ax.firebaseio.com',
+  projectId: 'fmaps-ax',
+  storageBucket: 'fmaps-ax.appspot.com',
+  messagingSenderId: '777480926020'
 };
 firebase.initializeApp(config);
 

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import SearchBox from './SearchBox';
 
+import _ from 'lodash';
+import PropTypes from 'prop-types';
+
+import SearchBox from './SearchBox';
 import './AddEditEmployee.css';
 import AddressBox from './AddressBox';
 import createAddress from '../address';
-import _ from 'lodash';
 
 class AddEmployee extends Component {
   constructor(props) {
@@ -115,8 +117,8 @@ class AddEmployee extends Component {
             this.setState({
               address: createAddress(position),
               location: {
-                lat: position['geometry'].location.lat(),
-                lng: position['geometry'].location.lng()
+                lat: position.geometry.location.lat(),
+                lng: position.geometry.location.lng()
               },
               editMode: false
             });
@@ -146,5 +148,28 @@ class AddEmployee extends Component {
     );
   }
 }
+
+AddEmployee.propTypes = {
+  editMode: PropTypes.bool,
+  employee: PropTypes.shape({
+    name: PropTypes.string,
+    project: PropTypes.string,
+    address: PropTypes.shape,
+    location: PropTypes.shape
+  }),
+  firebase: PropTypes.shape.isRequired,
+  auth: PropTypes.shape.isRequired,
+  employeeId: PropTypes.string,
+  addMode: PropTypes.bool,
+  initAddEmployee: PropTypes.func.isRequired,
+  cancelAddEmployee: PropTypes.func.isRequired
+};
+
+AddEmployee.defaultProps = {
+  editMode: false,
+  employee: {},
+  employeeId: '',
+  addMode: false
+};
 
 export default AddEmployee;

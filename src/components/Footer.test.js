@@ -1,7 +1,8 @@
 import React from 'react';
-import Footer from './Footer';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
+import Footer from './Footer';
 
 describe('Footer', () => {
   let footer;

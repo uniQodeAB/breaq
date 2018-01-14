@@ -1,8 +1,9 @@
 import React from 'react';
+import { isEmpty } from 'react-redux-firebase';
+import PropTypes from 'prop-types';
 
 import './EmployeeGrid.css';
 import AddressBox from './AddressBox';
-import { isEmpty } from 'react-redux-firebase';
 
 const EmployeeGrid = ({
   firebase,
@@ -37,6 +38,19 @@ const EmployeeGrid = ({
       </div>
     </div>
   );
+};
+
+EmployeeGrid.propTypes = {
+  firebase: PropTypes.shape.isRequired,
+  auth: PropTypes.shape.isRequired,
+  employees: PropTypes.arrayOf(PropTypes.element),
+  initEdit: PropTypes.func.isRequired,
+  cancelEdit: PropTypes.func.isRequired,
+  active: PropTypes.bool.isRequired
+};
+
+EmployeeGrid.defaultProps = {
+  employees: []
 };
 
 export default EmployeeGrid;

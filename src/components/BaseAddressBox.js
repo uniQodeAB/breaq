@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import AddressBox from './AddressBox';
 import SearchBox from './SearchBox';
 import createAddress from '../address';
@@ -12,23 +14,25 @@ const BaseAddressBox = ({
   cancelEdit,
   editMode
 }) => {
-  const setBase = position => {
-    const base = createBase(position);
-
-    firebase.set(`/users/${auth.uid}/base`, base).then(() => cancelEdit());
-  };
-
   const createBase = position => {
     const address = createAddress(position);
 
     return {
       name: position.name,
-      address: address,
+      address,
       location: {
-        lat: position['geometry'].location.lat(),
-        lng: position['geometry'].location.lng()
+        lat: position.geometry.location.lat(),
+        lng: position.geometry.location.lng()
       }
     };
+  };
+
+  const setBase = position => {
+    const formatedBase = createBase(position);
+
+    firebase
+      .set(`/users/${auth.uid}/base`, formatedBase)
+      .then(() => cancelEdit());
   };
 
   const deleteBase = () => {
@@ -59,6 +63,20 @@ const BaseAddressBox = ({
       />
     </div>
   );
+};
+
+BaseAddressBox.propTypes = {
+  firebase: PropTypes.shape.isRequired,
+  auth: PropTypes.shape.isRequired,
+  base: PropTypes.shape,
+  initEdit: PropTypes.func.isRequired,
+  cancelEdit: PropTypes.func.isRequired,
+  editMode: PropTypes.bool
+};
+
+BaseAddressBox.defaultProps = {
+  base: {},
+  editMode: false
 };
 
 export default BaseAddressBox;

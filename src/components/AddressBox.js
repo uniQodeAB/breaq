@@ -23,8 +23,9 @@ const AddressBox = ({ id, location, icon, onEdit, onDelete }) => {
   const { name, project } = location;
 
   const address = Object.entries(location.address).reduce((a, [k, v]) => {
-    a[k] = v['longName'];
-    return a;
+    const addr = { ...a };
+    addr[k] = v.longName;
+    return addr;
   }, {});
 
   return (
@@ -55,13 +56,13 @@ const AddressBox = ({ id, location, icon, onEdit, onDelete }) => {
             <h1>{name}</h1>
             <h2>{project}</h2>
             <p>
-              {address['street_number']} {address['route']}
+              {address.street_number} {address.route}
             </p>
             <p>
-              {address['postal_code']} {address['postal_town']}
+              {address.postal_code} {address.postal_town}
             </p>
-            <p>{address['administrative_area_level_1']}</p>
-            <p>{address['country']}</p>
+            <p>{address.administrative_area_level_1}</p>
+            <p>{address.country}</p>
           </div>
         </div>
       </div>
@@ -71,10 +72,19 @@ const AddressBox = ({ id, location, icon, onEdit, onDelete }) => {
 
 AddressBox.propTypes = {
   id: PropTypes.string.isRequired,
-  location: PropTypes.object,
+  location: PropTypes.shape({
+    lat: PropTypes.number,
+    lng: PropTypes.number
+  }).isRequired,
   icon: PropTypes.string,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func
+};
+
+AddressBox.defaultProps = {
+  icon: 'BASE',
+  onEdit: undefined,
+  onDelete: undefined
 };
 
 export default AddressBox;
