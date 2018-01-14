@@ -9,8 +9,7 @@ jest.mock('react-redux-firebase', () => ({
   isEmpty: jest.fn()
 }));
 
-isLoaded.mockReturnValueOnce(true).mockReturnValueOnce(false);
-isEmpty.mockReturnValueOnce(true);
+isLoaded.mockReturnValueOnce(true);
 
 describe('App', () => {
   beforeEach(() => {
@@ -41,6 +40,10 @@ describe('App', () => {
 
   describe('when loaded', () => {
     describe('when not logged in', () => {
+      beforeEach(() => {
+        isEmpty.mockReturnValueOnce(true);
+      });
+
       it('should render a login button if not logged in', () => {
         const header = shallow(
           <Header
