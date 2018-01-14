@@ -14,7 +14,7 @@ const Login = ({ auth }) =>
   );
 
 Login.propTypes = {
-  auth: PropTypes.shape.isRequired
+  auth: PropTypes.shape().isRequired
 };
 
 export default compose(
