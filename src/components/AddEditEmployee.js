@@ -89,7 +89,7 @@ class AddEmployee extends Component {
     if (!addMode && !editMode) {
       return (
         <div className={'AddEditEmployee'}>
-          <button onClick={() => initAddEmployee()}>Add</button>
+          <button onClick={initAddEmployee}>Add</button>
         </div>
       );
     }
@@ -137,11 +137,18 @@ class AddEmployee extends Component {
         />
 
         <div className={'buttons'}>
-          <button onClick={() => cancelAddEmployee()}>Cancel</button>
+          <button onClick={cancelAddEmployee}>Cancel</button>
           {addMode ? (
-            <button onClick={() => addEmployee()}>Save</button>
+            <button className={'add'} onClick={addEmployee}>
+              Save
+            </button>
           ) : (
-            <button onClick={() => editEmployee(employeeId)}>Update</button>
+            <button
+              className={'update'}
+              onClick={() => editEmployee(employeeId)}
+            >
+              Update
+            </button>
           )}
         </div>
       </div>
