@@ -30,14 +30,32 @@ const Map = ({ user, base, employees }) => {
 };
 
 Map.propTypes = {
-  user: PropTypes.shape.isRequired,
-  base: PropTypes.shape,
-  employees: PropTypes.arrayOf(PropTypes.shape)
+  user: PropTypes.shape({
+    base: PropTypes.shape({
+      name: PropTypes.string,
+      address: PropTypes.shape(),
+      location: PropTypes.shape({
+        lat: PropTypes.number,
+        lng: PropTypes.number
+      })
+    }),
+    employees: PropTypes.shape()
+  }),
+  base: PropTypes.shape({
+    name: PropTypes.string,
+    address: PropTypes.shape(),
+    location: PropTypes.shape({
+      lat: PropTypes.number,
+      lng: PropTypes.number
+    })
+  }),
+  employees: PropTypes.shape()
 };
 
 Map.defaultProps = {
+  user: {},
   base: {},
-  employees: []
+  employees: {}
 };
 
 export default Map;

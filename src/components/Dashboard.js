@@ -33,7 +33,17 @@ const DashBoard = ({ user }) => (
 );
 
 DashBoard.propTypes = {
-  user: PropTypes.shape
+  user: PropTypes.shape({
+    base: PropTypes.shape({
+      name: PropTypes.string,
+      address: PropTypes.shape(),
+      location: PropTypes.shape({
+        lat: PropTypes.number,
+        lng: PropTypes.number
+      })
+    }),
+    employees: PropTypes.shape()
+  })
 };
 
 DashBoard.defaultProps = {

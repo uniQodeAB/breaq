@@ -66,9 +66,16 @@ const BaseAddressBox = ({
 };
 
 BaseAddressBox.propTypes = {
-  firebase: PropTypes.shape.isRequired,
-  auth: PropTypes.shape.isRequired,
-  base: PropTypes.shape,
+  firebase: PropTypes.shape().isRequired,
+  auth: PropTypes.shape().isRequired,
+  base: PropTypes.shape({
+    name: PropTypes.string,
+    address: PropTypes.shape(),
+    location: PropTypes.shape({
+      lat: PropTypes.number,
+      lng: PropTypes.number
+    })
+  }),
   initEdit: PropTypes.func.isRequired,
   cancelEdit: PropTypes.func.isRequired,
   editMode: PropTypes.bool

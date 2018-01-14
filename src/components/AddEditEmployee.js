@@ -154,11 +154,14 @@ AddEmployee.propTypes = {
   employee: PropTypes.shape({
     name: PropTypes.string,
     project: PropTypes.string,
-    address: PropTypes.shape,
-    location: PropTypes.shape
+    address: PropTypes.shape(),
+    location: PropTypes.shape({
+      lat: PropTypes.number,
+      lng: PropTypes.number
+    })
   }),
-  firebase: PropTypes.shape.isRequired,
-  auth: PropTypes.shape.isRequired,
+  firebase: PropTypes.shape().isRequired,
+  auth: PropTypes.shape().isRequired,
   employeeId: PropTypes.string,
   addMode: PropTypes.bool,
   initAddEmployee: PropTypes.func.isRequired,

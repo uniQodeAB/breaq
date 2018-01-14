@@ -51,7 +51,7 @@ EmployeeGrid.propTypes = {
 
 EmployeeGrid.defaultProps = {
   employees: {},
-  active: true
+  active: false
 };
 
 export default EmployeeGrid;

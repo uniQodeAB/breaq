@@ -17,6 +17,13 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+const employeeHelper = (auth, data, employeeId) => {
+  if (auth && employeeId && data.users[auth.uid].employees) {
+    return data.users[auth.uid].employees[employeeId];
+  }
+  return {};
+};
+
 export default compose(
   firebaseConnect((props, store) => {
     const { auth } = store.getState().firebase;
@@ -29,11 +36,7 @@ export default compose(
   connect(
     ({ firebase: { data, auth }, settings: { employeeId } }) => ({
       employeeId,
-      employee:
-        auth &&
-        employeeId &&
-        data.users[auth.uid].employees &&
-        data.users[auth.uid].employees[employeeId],
+      employee: employeeHelper(auth, data, employeeId),
       auth
     }),
     mapDispatchToProps
