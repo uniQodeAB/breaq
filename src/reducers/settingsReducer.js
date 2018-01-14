@@ -6,7 +6,13 @@ import {
   INIT_EDIT_EMPLOYEE
 } from '../actions/settingsActions';
 
-export default function locationReducer(state = {}, action) {
+const initialState = {
+  editHomeBase: false,
+  addMode: false,
+  editMode: false,
+  employeeId: ''
+};
+export default function locationReducer(state = initialState, action) {
   switch (action.type) {
     case INIT_EDIT_HOME_BASE: {
       return { ...state, editHomeBase: true };
