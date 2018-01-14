@@ -33,7 +33,7 @@ Header.propTypes = {
     login: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired
   }).isRequired,
-  auth: PropTypes.shape
+  auth: PropTypes.shape()
 };
 
 Header.defaultProps = {

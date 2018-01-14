@@ -41,16 +41,17 @@ const EmployeeGrid = ({
 };
 
 EmployeeGrid.propTypes = {
-  firebase: PropTypes.shape.isRequired,
-  auth: PropTypes.shape.isRequired,
-  employees: PropTypes.arrayOf(PropTypes.element),
+  firebase: PropTypes.shape().isRequired,
+  auth: PropTypes.shape().isRequired,
+  employees: PropTypes.shape(),
   initEdit: PropTypes.func.isRequired,
   cancelEdit: PropTypes.func.isRequired,
-  active: PropTypes.bool.isRequired
+  active: PropTypes.bool
 };
 
 EmployeeGrid.defaultProps = {
-  employees: []
+  employees: {},
+  active: true
 };
 
 export default EmployeeGrid;

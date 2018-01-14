@@ -11,8 +11,10 @@ describe('EmployeeGrid', () => {
     Enzyme.configure({ adapter: new Adapter() });
 
     props = {
-      firebase: () => {},
-      auth: () => {}
+      firebase: {},
+      auth: {},
+      initEdit: () => {},
+      cancelEdit: () => {}
     };
   });
 

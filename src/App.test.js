@@ -21,14 +21,6 @@ describe('App', () => {
   });
 
   describe('the rendered div', () => {
-    it('contains everyting else that gets rendered', () => {
-      const divs = app.find('div');
-
-      const wrappingDiv = divs.first();
-
-      expect(wrappingDiv.children()).toEqual(shallow(<App />).children());
-    });
-
     it('always renders a `HeaderContainer`', () => {
       expect(app.contains(<HeaderContainer />)).toBe(true);
     });
