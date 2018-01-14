@@ -3,7 +3,7 @@ import Footer from './Footer';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-describe('App', () => {
+describe('Footer', () => {
   let footer;
 
   beforeEach(() => {

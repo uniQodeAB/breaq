@@ -11,7 +11,7 @@ jest.mock('react-redux-firebase', () => ({
 
 isLoaded.mockReturnValueOnce(true);
 
-describe('App', () => {
+describe('Header', () => {
   beforeEach(() => {
     Enzyme.configure({ adapter: new Adapter() });
   });
