@@ -17,6 +17,8 @@
         .icon {
           margin-top: 0.5em;
           margin-bottom: 0.5em;
+          flex-grow: 1;
+          min-height: 1em;
         }
 
         i {
@@ -26,14 +28,12 @@
         svg {
           display: block;
           margin: auto;
-          flex-grow: 1;
         }
 
         .controls {
           display: flex;
           flex-direction: column;
-          width: 3em;
-          flex-grow: 1;
+          width: 3em;          
 
           button {
             cursor: pointer;
@@ -49,6 +49,7 @@
             box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.26);
             color: #fff;
             font-size: 1rem;
+            min-height: 2em;
           }
         }
       }
