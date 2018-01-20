@@ -50,7 +50,6 @@ const MapWithASearchBox = compose(
 
       this.setState({
         bounds: null,
-        once: true,
         center: {
           lat: 60.09726,
           lng: 19.93481
@@ -71,7 +70,11 @@ const MapWithASearchBox = compose(
                      * Called to fit bounds after mounting.
                      * State shouldUpdate ensures this is not done in an endless loop
                      * */
-          if (this.state.shouldUpdate && this.map) {
+          if (
+            this.state.shouldUpdate &&
+            this.map &&
+            !!this.props.children.length
+          ) {
             this.setState({
               shouldUpdate: false
             });
@@ -89,7 +92,6 @@ const MapWithASearchBox = compose(
           shouldUpdate: true
         });
       }
-
       if (center && center.location) {
         this.setState({
           center: nextProps.center.location
@@ -98,7 +100,12 @@ const MapWithASearchBox = compose(
     },
     componentDidUpdate() {
       /* Need to ensure that window.google is available before fitting bounds */
-      if (this.state.shouldUpdate && window.google && this.map) {
+      if (
+        this.state.shouldUpdate &&
+        window.google &&
+        this.map &&
+        !!this.props.children.length
+      ) {
         fitBounds(this.props.children, this.map);
       }
     }
@@ -109,7 +116,8 @@ const MapWithASearchBox = compose(
   <GoogleMap
     ref={props.onMapMounted}
     defaultZoom={15}
-    zoom={1}
+    defaultCenter={props.center}
+    zoom={2}
     onBoundsChanged={props.onBoundsChanged}
     defaultOptions={defaultMapOptions}
     onIdle={props.onIdle}
