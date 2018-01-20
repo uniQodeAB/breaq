@@ -7,15 +7,7 @@ export const icons = {
   company: 'fa-home'
 };
 
-const InfoBox = ({ id, title, subTitle, address, icon, onEdit, onDelete }) => (
-  /* const { name, project } = location;
-
-  const address = Object.entries(location.address).reduce((a, [k, v]) => {
-    const addr = { ...a };
-    addr[k] = v.longName;
-    return addr;
-  }, {}); */
-
+const InfoBox = ({ title, subTitle, address, icon, onEdit, onDelete }) => (
   <div className={'InfoBox'}>
     <div className={'wrapper'}>
       <div className={'side-wrapper'}>
@@ -53,7 +45,6 @@ const InfoBox = ({ id, title, subTitle, address, icon, onEdit, onDelete }) => (
 );
 
 InfoBox.propTypes = {
-  id: PropTypes.string.isRequired,
   title: PropTypes.string,
   subTitle: PropTypes.string,
   address: PropTypes.shape({
