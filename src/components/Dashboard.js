@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { isLoaded } from 'react-redux-firebase';
 import PropTypes from 'prop-types';
@@ -35,20 +35,14 @@ const DashBoard = ({ user, addCompany, initAddCompany }) => {
 };
 
 DashBoard.propTypes = {
-  user: PropTypes.shape({
-    base: PropTypes.shape({
-      name: PropTypes.string,
-      address: PropTypes.shape(),
-      location: PropTypes.shape({
-        lat: PropTypes.number,
-        lng: PropTypes.number
-      })
-    })
-  })
+  user: PropTypes.shape(),
+  addCompany: PropTypes.bool,
+  initAddCompany: PropTypes.func.isRequired
 };
 
 DashBoard.defaultProps = {
-  user: {}
+  user: {},
+  addCompany: false
 };
 
 export default DashBoard;
