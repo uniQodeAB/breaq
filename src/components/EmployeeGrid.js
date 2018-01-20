@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './EmployeeGrid.css';
+import '../styles/EmployeeGrid.css';
 import EmployeeInfoBox from '../containers/EmployeeInfoBoxContainer';
 
 const EmployeeGrid = ({ companyId, employees, active }) => (

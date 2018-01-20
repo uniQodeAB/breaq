@@ -3,10 +3,11 @@ import React from 'react';
 import { isLoaded } from 'react-redux-firebase';
 import PropTypes from 'prop-types';
 import MapContainer from '../containers/MapContainer';
-import './Dashboard.css';
 import CompanyList from '../containers/CompanyListContainer';
 import CompanyCreator from '../containers/CompanyCreatorContainer';
 import Button from './Button';
+
+import '../styles/Dashboard.css';
 
 const DashBoard = ({ user, addCompany, initAddCompany }) => {
   if (!isLoaded(user)) {

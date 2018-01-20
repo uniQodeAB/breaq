@@ -4,7 +4,7 @@ import { GoogleMap, withGoogleMap, withScriptjs } from 'react-google-maps';
 import PropTypes from 'prop-types';
 
 import mapStyles from '../mapStyles.json';
-import './MapComponent.css';
+import '../styles/MapComponent.css';
 
 /* eslint-disable no-underscore-dangle */
 const defaultMapOptions = {

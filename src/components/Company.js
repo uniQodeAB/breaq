@@ -6,7 +6,7 @@ import EmployeeCreator from '../containers/EmployeeCreatorContainer';
 import Button from './Button';
 import CompanyCreator from '../containers/CompanyCreatorContainer';
 
-import './Company.css';
+import '../styles/Company.css';
 
 const Company = ({
   company: { id, name, address, employees },

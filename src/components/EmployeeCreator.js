@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import SearchBox from './SearchBox';
-import './CompanyCreator.css';
 import InfoBox, { icons } from './InfoBox';
+
+import '../styles/CompanyCreator.css';
 
 const initialState = {
   employee: {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './InfoBox.css';
+import '../styles/InfoBox.css';
 
 export const icons = {
   employee: 'fa-user',

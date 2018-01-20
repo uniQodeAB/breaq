@@ -1,7 +1,7 @@
 import React from 'react';
 import { isEmpty, isLoaded } from 'react-redux-firebase';
 import PropTypes from 'prop-types';
-import '../components/Header.css';
+import '../styles/Header.css';
 
 const Header = ({ firebase, auth }) => {
   const renderButtons = () =>
