@@ -11,12 +11,7 @@ import {
 
 const initialState = {
   addCompany: false,
-  companies: {},
-  addEmployee: false,
-  editHomeBase: false,
-  addMode: false,
-  editMode: false,
-  employeeId: ''
+  companies: {}
 };
 export default function appReducer(state = initialState, action) {
   switch (action.type) {

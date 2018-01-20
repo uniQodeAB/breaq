@@ -18,11 +18,9 @@ class EmployeeCreator extends Component {
 
     const { employee, employeeId } = props;
 
-    console.log(employee);
-
     if (employeeId) {
       this.state = {
-        employee
+        ...employee
       };
     } else {
       this.state = {

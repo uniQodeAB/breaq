@@ -7,12 +7,11 @@ export default compose(
   firebaseConnect((props, store) => {
     const { auth } = store.getState().firebase;
 
-    return auth ? [`users/${auth.uid}/`] : [];
+    return auth ? [`users/${auth.uid}/companies`] : [];
   }),
   connect(({ firebase: { data, auth } }) => ({
     user: data.users,
-    base: data.users && data.users[auth.uid] && data.users[auth.uid].base,
-    employees:
-      data.users && data.users[auth.uid] && data.users[auth.uid].employees
+    companies:
+      data.users && data.users[auth.uid] && data.users[auth.uid].companies
   }))
 )(Map);

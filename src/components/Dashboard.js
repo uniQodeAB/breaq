@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { isLoaded } from 'react-redux-firebase';
 import PropTypes from 'prop-types';
-
 import MapContainer from '../containers/MapContainer';
 import './Dashboard.css';
 import CompanyList from '../containers/CompanyListContainer';
@@ -28,7 +27,9 @@ const DashBoard = ({ user, addCompany, initAddCompany }) => {
           </div>
         </div>
       </div>
-      <div className={'map-pane'} />
+      <div className={'map-pane'}>
+        <MapContainer />
+      </div>
     </div>
   );
 };
