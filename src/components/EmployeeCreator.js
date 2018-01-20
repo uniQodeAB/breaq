@@ -36,7 +36,9 @@ class EmployeeCreator extends Component {
       firebase,
       auth,
       companyId,
-      endAddEmployee
+      employeeId,
+      endAddEmployee,
+      endEditEmployee
     } = this.props;
 
     const { employee } = this.state;
@@ -57,18 +59,17 @@ class EmployeeCreator extends Component {
     const updateEmployee = () => {
       firebase
         .ref(
-          `/users/${auth.uid}/companies/${companyId}/employees/${
-            employee.employeeId
-          }`
+          `/users/${auth.uid}/companies/${companyId}/employees/${employeeId}`
         )
-        .update(`/users/${auth.uid}/companies/`, {
+        .update({
           ...employee
         })
         .then(() => {
           this.setState({
             ...initialState
           });
-        });
+        })
+        .then(() => endEditEmployee(companyId, employeeId));
     };
 
     return (
@@ -140,17 +141,29 @@ class EmployeeCreator extends Component {
           <InfoBox
             title={employee.name}
             subTitle={employee.project}
-            id={'temp'}
             icon={icons.employee}
             address={employee.address}
           />
         )}
 
         <div className={'buttons'}>
-          <button onClick={() => endAddEmployee(companyId)}>Cancel</button>
-          <button className={'add'} onClick={createEmployee}>
-            Save
-          </button>
+          {employeeId ? (
+            <div>
+              <button onClick={() => endEditEmployee(companyId, employeeId)}>
+                Cancel
+              </button>
+              <button className={'update'} onClick={updateEmployee}>
+                Update
+              </button>
+            </div>
+          ) : (
+            <div>
+              <button onClick={() => endAddEmployee(companyId)}>Cancel</button>
+              <button className={'add'} onClick={createEmployee}>
+                Save
+              </button>
+            </div>
+          )}
         </div>
       </div>
     );

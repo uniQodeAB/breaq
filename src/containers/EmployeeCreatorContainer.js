@@ -2,12 +2,14 @@ import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { endAddEmployee } from '../actions/appActions';
+import { endAddEmployee, endEditEmployee } from '../actions/appActions';
 import EmployeeCreator from '../components/EmployeeCreator';
 
 function mapDispatchToProps(dispatch) {
   return {
-    endAddEmployee: companyId => dispatch(endAddEmployee(companyId))
+    endAddEmployee: companyId => dispatch(endAddEmployee(companyId)),
+    endEditEmployee: (companyId, employeeId) =>
+      dispatch(endEditEmployee(companyId, employeeId))
   };
 }
 
