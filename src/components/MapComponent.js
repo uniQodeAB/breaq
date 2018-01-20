@@ -3,7 +3,7 @@ import { compose, lifecycle, withProps } from 'recompose';
 import { GoogleMap, withGoogleMap, withScriptjs } from 'react-google-maps';
 import PropTypes from 'prop-types';
 
-import mapStyles from '../mapStyles.json';
+import mapStyles from '../styles/mapStyles.json';
 import '../styles/MapComponent.css';
 
 /* eslint-disable no-underscore-dangle */
