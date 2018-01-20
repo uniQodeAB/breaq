@@ -1,12 +1,12 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import * as actions from './settingsActions';
+import * as actions from './appActions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('settingsActions', () => {
+describe('appActions', () => {
   it('should create an action to edit home base', () => {
     const expectedAction = [
       {

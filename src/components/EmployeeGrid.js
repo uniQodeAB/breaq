@@ -1,9 +1,8 @@
 import React from 'react';
-import { isEmpty } from 'react-redux-firebase';
 import PropTypes from 'prop-types';
 
 import './EmployeeGrid.css';
-import AddressBox from './AddressBox';
+import InfoBox, { icons } from './InfoBox';
 
 const EmployeeGrid = ({
   firebase,
@@ -24,17 +23,36 @@ const EmployeeGrid = ({
     <div className={'EmployeeGrid'}>
       <div className={`overlay ${active ? 'active' : 'inactive'}`} />
       <div className={'grid'}>
-        {!isEmpty(employees) &&
-          Object.entries(employees).map(([k, v]) => (
-            <AddressBox
-              id={k}
-              key={k}
-              location={v}
-              icon={'USER'}
-              onDelete={deleteEmployee}
-              onEdit={initEdit}
-            />
-          ))}
+        {employees.map(employee => (
+          <InfoBox
+            key={employee.id}
+            id={employee.id}
+            title={employee.name}
+            subTitle={employee.project}
+            address={employee.address}
+            icon={icons.employee}
+            onDelete={deleteEmployee}
+            onEdit={initEdit}
+            addressFields={[
+              {
+                id: 'street-address',
+                name: employee.streetAddress
+              },
+              {
+                id: 'postal-address',
+                name: employee.postalAddress
+              },
+              {
+                id: 'prefecture',
+                name: employee.prefecture
+              },
+              {
+                id: 'country',
+                name: employee.country
+              }
+            ]}
+          />
+        ))}
       </div>
     </div>
   );
@@ -43,14 +61,26 @@ const EmployeeGrid = ({
 EmployeeGrid.propTypes = {
   firebase: PropTypes.shape().isRequired,
   auth: PropTypes.shape().isRequired,
-  employees: PropTypes.shape(),
+  employees: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      project: PropTypes.string,
+      address: PropTypes.shape({
+        streetAddress: PropTypes.string,
+        postalAddress: PropTypes.string,
+        prefecture: PropTypes.string,
+        country: PropTypes.string
+      })
+    })
+  ),
   initEdit: PropTypes.func.isRequired,
   cancelEdit: PropTypes.func.isRequired,
   active: PropTypes.bool
 };
 
 EmployeeGrid.defaultProps = {
-  employees: {},
+  employees: [],
   active: false
 };
 

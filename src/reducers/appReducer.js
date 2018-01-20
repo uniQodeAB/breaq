@@ -1,21 +1,34 @@
 import {
-  INIT_EDIT_HOME_BASE,
-  CANCEL_EDIT_HOME_BASE,
+  INIT_ADD_COMPANY,
+  END_ADD_COMPANY,
   INIT_ADD_EMPLOYEE,
+  END_ADD_EMPLOYEE,
+  CANCEL_EDIT_HOME_BASE,
   CANCEL_ADD_EDIT_EMPLOYEE,
   INIT_EDIT_EMPLOYEE
-} from '../actions/settingsActions';
+} from '../actions/appActions';
 
 const initialState = {
+  addCompany: false,
+  addEmployee: false,
   editHomeBase: false,
   addMode: false,
   editMode: false,
   employeeId: ''
 };
-export default function locationReducer(state = initialState, action) {
+export default function appReducer(state = initialState, action) {
   switch (action.type) {
-    case INIT_EDIT_HOME_BASE: {
-      return { ...state, editHomeBase: true };
+    case INIT_ADD_COMPANY: {
+      return { ...state, addCompany: true };
+    }
+    case END_ADD_COMPANY: {
+      return { ...state, addCompany: false };
+    }
+    case INIT_ADD_EMPLOYEE: {
+      return { ...state, addEmployee: true };
+    }
+    case END_ADD_EMPLOYEE: {
+      return { ...state, addEmployee: false };
     }
     case CANCEL_EDIT_HOME_BASE: {
       return { ...state, editHomeBase: false };

@@ -15,7 +15,6 @@ jest.mock(
   '../containers/AddEditEmployeeContainer',
   () => 'AddEditEmployeeContainer'
 );
-jest.mock('../containers/EmployeeGridContainer', () => 'EmployeeGridContainer');
 jest.mock(
   '../containers/BaseAddressBoxContainer',
   () => 'BaseAddressBoxContainer'
@@ -71,15 +70,6 @@ describe('Dashboard', () => {
 
     it('should not provide `AddEditEmployeeContainer` with props', () => {
       const mapContainer = dashboard.find('AddEditEmployeeContainer').first();
-      expect(mapContainer.props()).toEqual({});
-    });
-
-    it('should always render a EmployeeGridContainer', () => {
-      expect(dashboard.find('EmployeeGridContainer').length).toBe(1);
-    });
-
-    it('should not provide `EmployeeGridContainer` with props', () => {
-      const mapContainer = dashboard.find('EmployeeGridContainer').first();
       expect(mapContainer.props()).toEqual({});
     });
   });

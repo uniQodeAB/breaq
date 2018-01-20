@@ -1,12 +1,9 @@
 import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {
-  cancelEditHomeBase,
-  initEditHomeBase
-} from '../actions/settingsActions';
+import { cancelEditHomeBase, initEditHomeBase } from '../actions/appActions';
 
-import BaseAddressBox from '../components/BaseAddressBox';
+import InfoBox from '../components/InfoBox';
 
 const mapDispatchToProps = dispatch => ({
   initEdit: () => {
@@ -31,4 +28,4 @@ export default compose(
     }),
     mapDispatchToProps
   )
-)(BaseAddressBox);
+)(InfoBox);

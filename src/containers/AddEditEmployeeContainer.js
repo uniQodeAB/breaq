@@ -6,10 +6,10 @@ import {
   cancelAddEditEmployee,
   cancelEditHomeBase,
   initAddEmployee
-} from '../actions/settingsActions';
-import AddEditEmployee from '../components/AddEditEmployee';
+} from '../actions/appActions';
+// import AddEditEmployee from '../components/AddEditEmployee';
 
-function mapDispatchToProps(dispatch) {
+/* function mapDispatchToProps(dispatch) {
   return {
     cancelEditHomeBase: () => dispatch(cancelEditHomeBase()),
     initAddEmployee: () => dispatch(initAddEmployee()),
@@ -45,4 +45,4 @@ export default compose(
     addMode: state.settings.addMode,
     editMode: state.settings.editMode
   }))
-)(AddEditEmployee);
+)(AddEditEmployee); */

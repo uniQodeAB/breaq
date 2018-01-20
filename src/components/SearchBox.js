@@ -59,13 +59,38 @@ const PlacesWithStandaloneSearchBox = compose(
   </div>
 ));
 
+const createAddress = place =>
+  place.address_components
+    .map(address => ({
+      types: address.types,
+      longName: address.long_name,
+      shortName: address.short_name
+    }))
+    .reduce((acc, elem) => {
+      elem.types.forEach(type => {
+        acc[type] = {
+          longName: elem.longName,
+          shortName: elem.shortName
+        };
+      });
+
+      return acc;
+    }, {});
+
 class SearchBox extends PureComponent {
   render() {
+    const { onChangePlace, placeholder } = this.props;
+
     return (
       <div className={'search-box'}>
         <PlacesWithStandaloneSearchBox
-          onChangePlace={places => this.props.onChangePlace(places)}
-          placeholder={this.props.placeholder}
+          placeholder={placeholder}
+          onChangePlace={(
+            place = {
+              address_components: [],
+              geometry: {}
+            }
+          ) => onChangePlace(createAddress(place), place.geometry)}
         />
       </div>
     );

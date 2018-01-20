@@ -2,21 +2,21 @@ import React from 'react';
 
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import AddressBox from './AddressBox';
+import InfoBox from './InfoBox';
 
-describe('AddressBox', () => {
+describe('InfoBox', () => {
   beforeEach(() => {
     Enzyme.configure({ adapter: new Adapter() });
   });
 
   it('should not render if prop location is empty', () => {
-    const addressBox = shallow(<AddressBox location={undefined} id={'id'} />);
-    expect(addressBox.children().length).toBe(0);
+    const infoBox = shallow(<InfoBox location={undefined} id={'id'} />);
+    expect(infoBox.children().length).toBe(0);
   });
 
   describe('when location exists', () => {
     let props;
-    let addressBox;
+    let infoBox;
 
     beforeEach(() => {
       props = {
@@ -47,16 +47,16 @@ describe('AddressBox', () => {
         }
       };
 
-      addressBox = shallow(<AddressBox {...props} />);
+      InfoBox = shallow(<InfoBox {...props} />);
     });
 
     it('should render address content', () => {
-      expect(addressBox.find('div.content div.container').length).toBe(1);
+      expect(InfoBox.find('div.content div.container').length).toBe(1);
     });
 
     describe('when no icon provided', () => {
       it('should render the home icon', () => {
-        expect(addressBox.find('div.icon i.fa-home').length).toBe(1);
+        expect(InfoBox.find('div.icon i.fa-home').length).toBe(1);
       });
     });
 
@@ -68,7 +68,7 @@ describe('AddressBox', () => {
         };
 
         expect(
-          shallow(<AddressBox {...newProps} />).find('div.icon i.fas.fa-user')
+          shallow(<InfoBox {...newProps} />).find('div.icon i.fas.fa-user')
             .length
         ).toBe(1);
       });
@@ -80,7 +80,7 @@ describe('AddressBox', () => {
         };
 
         expect(
-          shallow(<AddressBox {...newProps} />).find('div.icon i.fas.fa-home')
+          shallow(<infoBox {...newProps} />).find('div.icon i.fas.fa-home')
             .length
         ).toBe(1);
       });
@@ -92,7 +92,7 @@ describe('AddressBox', () => {
         };
 
         expect(
-          shallow(<AddressBox {...newProps} />).find('div.icon i.fas.fa-home')
+          shallow(<InfoBox {...newProps} />).find('div.icon i.fas.fa-home')
             .length
         ).toBe(1);
       });
@@ -102,7 +102,7 @@ describe('AddressBox', () => {
       let addressContent;
 
       beforeEach(() => {
-        addressContent = addressBox.find('div.content div.container').first();
+        addressContent = infoBox.find('div.content div.container').first();
       });
 
       it('should render a h1', () => {

@@ -1,0 +1,16 @@
+button.Button {
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    border: 0;
+    min-width: 0;
+    width: 100%;
+    flex-grow: 1;
+    background: #ffbb30;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.26);
+    color: #fff;
+    font-size: 1rem;
+    min-height: 2em;
+}

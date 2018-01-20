@@ -1,7 +1,7 @@
-import reducer from './settingsReducer';
-import * as types from '../actions/settingsActions';
+import reducer from './appReducer';
+import * as types from '../actions/appActions';
 
-describe('settingsReducer', () => {
+describe('appReducer', () => {
   const initialState = {
     editHomeBase: false,
     addMode: false,

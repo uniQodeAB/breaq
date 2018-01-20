@@ -1,35 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import { isLoaded } from 'react-redux-firebase';
 import PropTypes from 'prop-types';
 
 import MapContainer from '../containers/MapContainer';
 import './Dashboard.css';
-import AddEmployeeContainer from '../containers/AddEditEmployeeContainer';
-import EmployeeGridContainer from '../containers/EmployeeGridContainer';
-import BaseAddressBoxContainer from '../containers/BaseAddressBoxContainer';
+import CompanyList from '../containers/CompanyListContainer';
+import CompanyCreator from '../containers/CompanyCreatorContainer';
+import Button from './Button';
 
-const DashBoard = ({ user }) => {
+const DashBoard = ({ user, addCompany, initAddCompany }) => {
   if (!isLoaded(user)) {
     return <div className={'Dashboard'}>Loading...</div>;
   }
+
+  console.log(addCompany);
 
   return (
     <div className={'Dashboard'}>
       <div className={'search-box-pane'}>
         <div className={'search-container'}>
           <div>
-            <div>
-              <BaseAddressBoxContainer />
-              <AddEmployeeContainer />
-              <EmployeeGridContainer />
-            </div>
+            {addCompany ? (
+              <div>
+                <CompanyCreator />
+              </div>
+            ) : (
+              <div>
+                <Button onClick={initAddCompany}>Add company</Button>
+                <CompanyList />
+              </div>
+            )}
           </div>
         </div>
       </div>
-      <div className={'map-pane'}>
-        <MapContainer />
-      </div>
+      <div className={'map-pane'} />
     </div>
   );
 };
@@ -43,8 +48,7 @@ DashBoard.propTypes = {
         lat: PropTypes.number,
         lng: PropTypes.number
       })
-    }),
-    employees: PropTypes.shape()
+    })
   })
 };
 

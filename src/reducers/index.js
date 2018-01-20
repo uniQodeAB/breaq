@@ -2,10 +2,10 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { firebaseStateReducer } from 'react-redux-firebase';
 
-import settings from './settingsReducer';
+import app from './appReducer';
 
 export default combineReducers({
-  settings,
+  app,
   router: routerReducer,
   firebase: firebaseStateReducer
 });

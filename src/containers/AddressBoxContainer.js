@@ -1,12 +1,9 @@
 import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {
-  initEditHomeBase,
-  cancelEditHomeBase
-} from '../actions/settingsActions';
+import { initEditHomeBase, cancelEditHomeBase } from '../actions/appActions';
 
-import AddressBox from '../components/AddressBox';
+import InfoBox from '../components/InfoBox';
 
 const mapStateToProps = () => ({});
 

@@ -1,19 +1,13 @@
 import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {
-  cancelAddEditEmployee,
-  cancelEditHomeBase,
-  initAddEmployee
-} from '../actions/settingsActions';
+import { initAddCompany } from '../actions/appActions';
 
 import DashBoard from '../components/Dashboard';
 
 function mapDispatchToProps(dispatch) {
   return {
-    cancelEditHomeBase: () => dispatch(cancelEditHomeBase()),
-    initAddEmployee: () => dispatch(initAddEmployee()),
-    cancelAddEmployee: () => dispatch(cancelAddEditEmployee())
+    initAddCompany: () => dispatch(initAddCompany())
   };
 }
 
@@ -24,14 +18,11 @@ export default compose(
     return auth ? [`users/${auth.uid}/base`] : [];
   }),
   connect(
-    ({ firebase: { data, auth } }) => ({
+    ({ firebase: { data, auth }, app: { addCompany } }) => ({
       user: data.users && data.users[auth.uid],
-      auth
+      auth,
+      addCompany
     }),
     mapDispatchToProps
-  ),
-  connect(state => ({
-    editMode: state.settings.editingHomeBase,
-    addMode: state.settings.addMode
-  }))
+  )
 )(DashBoard);
