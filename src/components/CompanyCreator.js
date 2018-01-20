@@ -54,8 +54,8 @@ class CompanyCreator extends Component {
 
     const updateCompany = () => {
       firebase
-        .ref(`/users/${auth.uid}/companies/${company.companyId}`)
-        .update(`/users/${auth.uid}/companies/`, {
+        .ref(`/users/${auth.uid}/companies/${companyId}`)
+        .update({
           ...company
         })
         .then(() => {
@@ -65,7 +65,7 @@ class CompanyCreator extends Component {
             }
           });
         })
-        .then(endEditCompany);
+        .then(() => endEditCompany(companyId));
     };
 
     return (
@@ -130,7 +130,7 @@ class CompanyCreator extends Component {
         <div className={'buttons'}>
           {companyId ? (
             <div>
-              <button onClick={endEditCompany}>Cancel</button>
+              <button onClick={() => endEditCompany(companyId)}>Cancel</button>
               <button className={'update'} onClick={updateCompany}>
                 Update
               </button>

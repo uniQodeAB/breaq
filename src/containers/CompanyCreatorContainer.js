@@ -2,12 +2,13 @@ import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { endAddCompany } from '../actions/appActions';
+import { endAddCompany, endEditCompany } from '../actions/appActions';
 import CompanyCreator from '../components/CompanyCreator';
 
 function mapDispatchToProps(dispatch) {
   return {
-    endAddCompany: () => dispatch(endAddCompany())
+    endAddCompany: () => dispatch(endAddCompany()),
+    endEditCompany: id => dispatch(endEditCompany(id))
   };
 }
 
