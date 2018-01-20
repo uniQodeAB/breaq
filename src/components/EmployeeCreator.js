@@ -18,9 +18,9 @@ class EmployeeCreator extends Component {
 
     const { employee, employeeId } = props;
 
-    if (employeeId) {
+    if (employee && employeeId) {
       this.state = {
-        ...employee
+        employee
       };
     } else {
       this.state = {
@@ -158,17 +158,30 @@ class EmployeeCreator extends Component {
 
 EmployeeCreator.propTypes = {
   companyId: PropTypes.string.isRequired,
+  employeeId: PropTypes.string,
+  employee: PropTypes.shape({
+    name: PropTypes.string,
+    project: PropTypes.string,
+    address: PropTypes.shape({
+      streetAddress: PropTypes.string,
+      postalAddress: PropTypes.string,
+      prefecture: PropTypes.string,
+      country: PropTypes.string
+    })
+  }),
   placeholders: PropTypes.shape({
     name: PropTypes.string,
     address: PropTypes.string,
     project: PropTypes.string
   }),
   firebase: PropTypes.shape().isRequired,
-  auth: PropTypes.shape().isRequired
+  auth: PropTypes.shape().isRequired,
+  endAddEmployee: PropTypes.func.isRequired
 };
 
 EmployeeCreator.defaultProps = {
-  company: {},
+  employeeId: undefined,
+  employee: undefined,
   placeholders: {
     name: 'Name',
     address: 'Address',
