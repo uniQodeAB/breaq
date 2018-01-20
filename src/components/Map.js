@@ -7,37 +7,38 @@ import MapComponent from './MapComponent';
 
 const Map = ({ companies }) => (
   <MapComponent>
-    {isEmpty(companies) ||
-      Object.entries(companies)
-        .reduce((a, [id, company]) => {
-          a.push({
-            id,
-            location: company.location,
-            label: 'B'
-          });
+    {isEmpty(companies)
+      ? []
+      : Object.entries(companies)
+          .reduce((a, [id, company]) => {
+            a.push({
+              id,
+              location: company.location,
+              label: 'B'
+            });
 
-          if (company.employees) {
-            Object.entries(company.employees).forEach(
-              ([employeeId, employee]) => {
-                if (employee) {
-                  a.push({
-                    id: employeeId,
-                    location: employee.location
-                  });
+            if (company.employees) {
+              Object.entries(company.employees).forEach(
+                ([employeeId, employee]) => {
+                  if (employee) {
+                    a.push({
+                      id: employeeId,
+                      location: employee.location
+                    });
+                  }
                 }
-              }
-            );
-          }
+              );
+            }
 
-          return a;
-        }, [])
-        .map(location => (
-          <Marker
-            key={location.id}
-            position={location.location}
-            label={location.label}
-          />
-        ))}
+            return a;
+          }, [])
+          .map(location => (
+            <Marker
+              key={location.id}
+              position={location.location}
+              label={location.label}
+            />
+          ))}
   </MapComponent>
 );
 

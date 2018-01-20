@@ -34,17 +34,18 @@ const Company = ({
             <EmployeeGrid
               companyId={id}
               employees={
-                employees &&
-                Object.entries(employees).reduce(
-                  (a, [employeeId, employee]) => {
-                    a.push({
-                      id: employeeId,
-                      ...employee
-                    });
-                    return a;
-                  },
-                  []
-                )
+                employees
+                  ? Object.entries(employees).reduce(
+                      (a, [employeeId, employee]) => {
+                        a.push({
+                          id: employeeId,
+                          ...employee
+                        });
+                        return a;
+                      },
+                      []
+                    )
+                  : []
               }
             />
           </div>

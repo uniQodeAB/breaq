@@ -3,7 +3,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
 
-import Header from './Header';
+import Header from '../../components/Header';
 
 jest.mock('react-redux-firebase', () => ({
   isLoaded: jest.fn(),
@@ -61,6 +61,26 @@ describe('Header', () => {
         const button = header.find('button');
         expect(button.text()).toBe('Log In');
       });
+
+      it('should call firebase login when clicking login button', () => {
+        const loginMock = jest.fn();
+
+        const header = shallow(
+          <Header
+            firebase={{
+              profile: jest.fn(),
+              login: loginMock,
+              logout: jest.fn()
+            }}
+          />
+        );
+
+        header
+          .find('button')
+          .first()
+          .simulate('click');
+        expect(loginMock.mock.calls.length).toEqual(1);
+      });
     });
 
     describe('when logged in', () => {
@@ -81,6 +101,25 @@ describe('Header', () => {
         const button = header.find('button');
         expect(button.find('img').length).toBe(1);
       });
+    });
+
+    it('should call firebase logout on button click', () => {
+      const logoutMock = jest.fn();
+      const header = shallow(
+        <Header
+          firebase={{
+            profile: jest.fn(),
+            login: jest.fn(),
+            logout: logoutMock
+          }}
+          auth={{}}
+        />
+      );
+      header
+        .find('button')
+        .first()
+        .simulate('click');
+      expect(logoutMock.mock.calls.length).toEqual(1);
     });
   });
 });

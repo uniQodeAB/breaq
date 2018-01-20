@@ -2,14 +2,18 @@ import React from 'react';
 
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Company from './Company';
+import Company from '../../components/Company';
 
 describe('Company', () => {
   beforeEach(() => {
     Enzyme.configure({ adapter: new Adapter() });
   });
 
-  describe('when a company does not yet exist', () => {
+  it('should remember to update these tests', () => {
+    expect(true).toBe(false);
+  });
+
+  /* describe('when a company does not yet exist', () => {
     const props = {
       company: ''
     };
@@ -128,5 +132,5 @@ describe('Company', () => {
         ).toEqual(props.employees);
       });
     });
-  });
+  }); */
 });

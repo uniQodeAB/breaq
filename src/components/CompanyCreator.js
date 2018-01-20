@@ -27,8 +27,14 @@ class CompanyCreator extends Component {
   }
 
   render() {
-    const { placeholders, firebase, auth, endAddCompany } = this.props;
-
+    const {
+      placeholders,
+      firebase,
+      auth,
+      endAddCompany,
+      endEditCompany,
+      companyId
+    } = this.props;
     const { company } = this.state;
 
     const createCompany = () => {
@@ -58,7 +64,8 @@ class CompanyCreator extends Component {
               name: ''
             }
           });
-        });
+        })
+        .then(endEditCompany);
     };
 
     return (
@@ -121,15 +128,20 @@ class CompanyCreator extends Component {
         )}
 
         <div className={'buttons'}>
-          <button onClick={endAddCompany}>Cancel</button>
-          {company.companyId ? (
-            <button className={'update'} onClick={updateCompany}>
-              Update
-            </button>
+          {companyId ? (
+            <div>
+              <button onClick={endEditCompany}>Cancel</button>
+              <button className={'update'} onClick={updateCompany}>
+                Update
+              </button>
+            </div>
           ) : (
-            <button className={'add'} onClick={createCompany}>
-              Save
-            </button>
+            <div>
+              <button onClick={endAddCompany}>Cancel</button>
+              <button className={'add'} onClick={createCompany}>
+                Save
+              </button>
+            </div>
           )}
         </div>
       </div>
@@ -155,7 +167,8 @@ CompanyCreator.propTypes = {
   }),
   firebase: PropTypes.shape().isRequired,
   auth: PropTypes.shape().isRequired,
-  endAddCompany: PropTypes.func.isRequired
+  endAddCompany: PropTypes.func.isRequired,
+  endEditCompany: PropTypes.func.isRequired
 };
 
 CompanyCreator.defaultProps = {

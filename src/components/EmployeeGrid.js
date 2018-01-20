@@ -16,24 +16,6 @@ const EmployeeGrid = ({ companyId, employees, active }) => (
           title={employee.name}
           subTitle={employee.project}
           address={employee.address}
-          addressFields={[
-            {
-              id: 'street-address',
-              name: employee.streetAddress
-            },
-            {
-              id: 'postal-address',
-              name: employee.postalAddress
-            },
-            {
-              id: 'prefecture',
-              name: employee.prefecture
-            },
-            {
-              id: 'country',
-              name: employee.country
-            }
-          ]}
         />
       ))}
     </div>
@@ -54,12 +36,11 @@ EmployeeGrid.propTypes = {
         country: PropTypes.string
       })
     })
-  ),
+  ).isRequired,
   active: PropTypes.bool
 };
 
 EmployeeGrid.defaultProps = {
-  employees: [],
   active: false
 };
 
