@@ -5,22 +5,6 @@ import PropTypes from 'prop-types';
 
 import MapComponent from './MapComponent';
 
-const renderMarkers = (base, employees) => {
-  const markers = [];
-
-  if (!isEmpty(base)) {
-    markers.push(<Marker key={'base'} position={base.location} label={'B'} />);
-  }
-
-  if (!isEmpty(employees)) {
-    Object.entries(employees).forEach(([k, v]) => {
-      markers.push(<Marker key={k} position={v.location} />);
-    });
-  }
-
-  return markers;
-};
-
 const Map = ({ companies }) => (
   <MapComponent>
     {isEmpty(companies) ||
@@ -58,21 +42,11 @@ const Map = ({ companies }) => (
 );
 
 Map.propTypes = {
-  base: PropTypes.shape({
-    name: PropTypes.string,
-    address: PropTypes.shape(),
-    location: PropTypes.shape({
-      lat: PropTypes.number,
-      lng: PropTypes.number
-    })
-  }),
-  employees: PropTypes.shape()
+  companies: PropTypes.shape()
 };
 
 Map.defaultProps = {
-  user: {},
-  base: {},
-  employees: {}
+  companies: {}
 };
 
 export default Map;
