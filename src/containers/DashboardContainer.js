@@ -12,11 +12,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
-  firebaseConnect((props, store) => {
-    const { auth } = store.getState().firebase;
-
-    return auth ? [`users/${auth.uid}/base`] : [];
-  }),
+  firebaseConnect(),
   connect(
     ({ firebase: { data, auth }, app: { addCompany } }) => ({
       user: data.users && data.users[auth.uid],
