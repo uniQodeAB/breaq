@@ -4,15 +4,7 @@ import PropTypes from 'prop-types';
 import './EmployeeGrid.css';
 import EmployeeInfoBox from '../containers/EmployeeInfoBoxContainer';
 
-const EmployeeGrid = ({
-  firebase,
-  auth,
-  companyId,
-  employees,
-  initEdit,
-  cancelEdit,
-  active
-}) => (
+const EmployeeGrid = ({ companyId, employees, active }) => (
   <div className={'EmployeeGrid'}>
     <div className={`overlay ${active ? 'active' : 'inactive'}`} />
     <div className={'grid'}>
@@ -49,8 +41,7 @@ const EmployeeGrid = ({
 );
 
 EmployeeGrid.propTypes = {
-  firebase: PropTypes.shape().isRequired,
-  auth: PropTypes.shape().isRequired,
+  companyId: PropTypes.string.isRequired,
   employees: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -64,8 +55,6 @@ EmployeeGrid.propTypes = {
       })
     })
   ),
-  initEdit: PropTypes.func.isRequired,
-  cancelEdit: PropTypes.func.isRequired,
   active: PropTypes.bool
 };
 
