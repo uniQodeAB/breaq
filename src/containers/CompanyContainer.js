@@ -13,7 +13,9 @@ function mapDispatchToProps(dispatch) {
 export default compose(
   connect(
     ({ app: { companies } }, { company: { id } }) => ({
-      addEmployee: companies[id] && companies[id].addEmployee
+      addEmployee: companies[id] && companies[id].addEmployee,
+      editEmployee: companies[id] && companies[id].editEmployee,
+      editEmployeeId: companies[id] && companies[id].editEmployeeId
     }),
     mapDispatchToProps
   )

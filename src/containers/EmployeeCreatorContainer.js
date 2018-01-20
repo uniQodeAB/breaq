@@ -14,31 +14,21 @@ function mapDispatchToProps(dispatch) {
 export default compose(
   firebaseConnect((props, store) => {
     const { auth } = store.getState().firebase;
-    const { currentEmployeeId } = store.getState().app;
-    const { currentCompanyId } = props;
+    const { companyId, employeeId } = props;
 
     return auth
-      ? [
-          `users/${
-            auth.uid
-          }/companies/${currentCompanyId}/employees/${currentEmployeeId}`
-        ]
+      ? [`users/${auth.uid}/companies/${companyId}/employees/${employeeId}`]
       : [];
   }),
   connect(
-    (
-      { firebase: { data, auth }, app: { currentEmployeeId } },
-      { currentCompanyId }
-    ) => ({
+    ({ firebase, firebase: { data, auth } }, { companyId, employeeId }) => ({
       employee:
         data.users &&
         data.users[auth.uid] &&
         data.users[auth.uid].companies &&
-        data.users[auth.uid].companies[currentCompanyId] &&
-        data.users[auth.uid].companies[currentCompanyId].employees &&
-        data.users[auth.uid].companies[currentCompanyId].employees[
-          currentEmployeeId
-        ],
+        data.users[auth.uid].companies[companyId] &&
+        data.users[auth.uid].companies[companyId].employees &&
+        data.users[auth.uid].companies[companyId].employees[employeeId],
       auth
     }),
     mapDispatchToProps

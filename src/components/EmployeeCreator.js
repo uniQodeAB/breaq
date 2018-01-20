@@ -16,9 +16,19 @@ class EmployeeCreator extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      ...initialState
-    };
+    const { employee, employeeId } = props;
+
+    console.log(employee);
+
+    if (employeeId) {
+      this.state = {
+        employee
+      };
+    } else {
+      this.state = {
+        ...initialState
+      };
+    }
   }
 
   render() {
@@ -27,7 +37,6 @@ class EmployeeCreator extends Component {
       firebase,
       auth,
       companyId,
-      employeeId,
       endAddEmployee
     } = this.props;
 
@@ -49,7 +58,9 @@ class EmployeeCreator extends Component {
     const updateEmployee = () => {
       firebase
         .ref(
-          `/users/${auth.uid}/companies/${companyId}/employees/${employeeId}`
+          `/users/${auth.uid}/companies/${companyId}/employees/${
+            employee.employeeId
+          }`
         )
         .update(`/users/${auth.uid}/companies/`, {
           ...employee

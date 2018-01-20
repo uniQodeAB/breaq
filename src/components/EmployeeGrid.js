@@ -2,37 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './EmployeeGrid.css';
-import InfoBox, { icons } from './InfoBox';
+import EmployeeInfoBox from '../containers/EmployeeInfoBoxContainer';
 
 const EmployeeGrid = ({
   firebase,
   auth,
+  companyId,
   employees,
   initEdit,
   cancelEdit,
   active
 }) => {
-  const deleteEmployee = id => {
-    firebase
-      .ref(`/users/${auth.uid}/employees/${id}`)
-      .remove()
-      .then(() => cancelEdit());
-  };
-
   return (
     <div className={'EmployeeGrid'}>
       <div className={`overlay ${active ? 'active' : 'inactive'}`} />
       <div className={'grid'}>
         {employees.map(employee => (
-          <InfoBox
+          <EmployeeInfoBox
             key={employee.id}
-            id={employee.id}
+            companyId={companyId}
+            employeeId={employee.id}
             title={employee.name}
             subTitle={employee.project}
             address={employee.address}
-            icon={icons.employee}
-            onDelete={deleteEmployee}
-            onEdit={initEdit}
             addressFields={[
               {
                 id: 'street-address',

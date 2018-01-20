@@ -25,13 +25,13 @@ const InfoBox = ({ id, title, subTitle, address, icon, onEdit, onDelete }) => (
           </div>
           <div className={'controls'}>
             {onEdit && (
-              <button onClick={() => onEdit(id)}>
+              <button onClick={onEdit}>
                 <i className={'fas fa-edit'} />
               </button>
             )}
 
             {onDelete && (
-              <button onClick={() => onDelete(id)}>
+              <button onClick={onDelete}>
                 <i className={'fas fa-trash-alt'} />
               </button>
             )}

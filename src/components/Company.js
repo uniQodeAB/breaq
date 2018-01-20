@@ -8,7 +8,9 @@ import Button from './Button';
 const Company = ({
   company: { id, name, address, employees },
   addEmployee,
-  initAddEmployee
+  initAddEmployee,
+  editEmployee,
+  editEmployeeId
 }) => (
   <div className={'Company'}>
     <div className={'company'}>
@@ -16,12 +18,13 @@ const Company = ({
     </div>
     <div className={'employees'}>
       <div>
-        {addEmployee ? (
-          <EmployeeCreator companyId={id} />
+        {addEmployee || editEmployee ? (
+          <EmployeeCreator companyId={id} employeeId={editEmployeeId} />
         ) : (
           <div>
             <Button onClick={() => initAddEmployee(id)}>Add employee</Button>
             <EmployeeGrid
+              companyId={id}
               employees={
                 employees &&
                 Object.entries(employees).reduce(
