@@ -12,43 +12,41 @@ const EmployeeGrid = ({
   initEdit,
   cancelEdit,
   active
-}) => {
-  return (
-    <div className={'EmployeeGrid'}>
-      <div className={`overlay ${active ? 'active' : 'inactive'}`} />
-      <div className={'grid'}>
-        {employees.map(employee => (
-          <EmployeeInfoBox
-            key={employee.id}
-            companyId={companyId}
-            employeeId={employee.id}
-            title={employee.name}
-            subTitle={employee.project}
-            address={employee.address}
-            addressFields={[
-              {
-                id: 'street-address',
-                name: employee.streetAddress
-              },
-              {
-                id: 'postal-address',
-                name: employee.postalAddress
-              },
-              {
-                id: 'prefecture',
-                name: employee.prefecture
-              },
-              {
-                id: 'country',
-                name: employee.country
-              }
-            ]}
-          />
-        ))}
-      </div>
+}) => (
+  <div className={'EmployeeGrid'}>
+    <div className={`overlay ${active ? 'active' : 'inactive'}`} />
+    <div className={'grid'}>
+      {employees.map(employee => (
+        <EmployeeInfoBox
+          key={employee.id}
+          companyId={companyId}
+          employeeId={employee.id}
+          title={employee.name}
+          subTitle={employee.project}
+          address={employee.address}
+          addressFields={[
+            {
+              id: 'street-address',
+              name: employee.streetAddress
+            },
+            {
+              id: 'postal-address',
+              name: employee.postalAddress
+            },
+            {
+              id: 'prefecture',
+              name: employee.prefecture
+            },
+            {
+              id: 'country',
+              name: employee.country
+            }
+          ]}
+        />
+      ))}
     </div>
-  );
-};
+  </div>
+);
 
 EmployeeGrid.propTypes = {
   firebase: PropTypes.shape().isRequired,
