@@ -60,14 +60,6 @@ class CompanyCreator extends Component {
         });
     };
 
-    const cancel = () => {
-      this.setState({
-        company: {
-          name: ''
-        }
-      });
-    };
-
     return (
       <div className={'CompanyCreator'}>
         <input
@@ -145,15 +137,29 @@ class CompanyCreator extends Component {
 }
 
 CompanyCreator.propTypes = {
+  company: PropTypes.shape({
+    name: PropTypes.string,
+    project: PropTypes.string,
+    address: PropTypes.shape({
+      streetAddress: PropTypes.string,
+      postalAddress: PropTypes.string,
+      prefecture: PropTypes.string,
+      country: PropTypes.string
+    })
+  }),
+  companyId: PropTypes.string,
   placeholders: PropTypes.shape({
     name: PropTypes.string,
     address: PropTypes.string
   }),
   firebase: PropTypes.shape().isRequired,
-  auth: PropTypes.shape().isRequired
+  auth: PropTypes.shape().isRequired,
+  endAddCompany: PropTypes.func.isRequired
 };
 
 CompanyCreator.defaultProps = {
+  company: undefined,
+  companyId: undefined,
   placeholders: {
     name: 'Name',
     address: 'Address'
