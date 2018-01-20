@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import InfoBox, { icons } from './InfoBox';
 
@@ -21,6 +22,13 @@ const CompanyInfoBox = ({
       {...rest}
     />
   );
+};
+
+CompanyInfoBox.propTypes = {
+  companyId: PropTypes.string.isRequired,
+  initEditCompany: PropTypes.func.isRequired,
+  firebase: PropTypes.shape().isRequired,
+  auth: PropTypes.shape().isRequired
 };
 
 export default CompanyInfoBox;
