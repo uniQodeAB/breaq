@@ -57,24 +57,30 @@ const Company = ({
 Company.propTypes = {
   company: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    company: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      address: PropTypes.shape({
-        streetAddress: PropTypes.string,
-        postalAddress: PropTypes.string,
-        prefecture: PropTypes.string,
-        country: PropTypes.string
-      }).isRequired,
-      location: PropTypes.shape({
-        lat: PropTypes.number,
-        lng: PropTypes.number
-      }).isRequired
-    })
-  })
+    name: PropTypes.string.isRequired,
+    address: PropTypes.shape({
+      streetAddress: PropTypes.string,
+      postalAddress: PropTypes.string,
+      prefecture: PropTypes.string,
+      country: PropTypes.string
+    }).isRequired,
+    location: PropTypes.shape({
+      lat: PropTypes.number,
+      lng: PropTypes.number
+    }).isRequired
+  }).isRequired,
+  editCompany: PropTypes.bool,
+  addEmployee: PropTypes.bool,
+  editEmployee: PropTypes.bool,
+  editEmployeeId: PropTypes.string,
+  initAddEmployee: PropTypes.func.isRequired
 };
 
 Company.defaultProps = {
-  company: {}
+  editCompany: false,
+  addEmployee: false,
+  editEmployee: false,
+  editEmployeeId: ''
 };
 
 export default Company;
