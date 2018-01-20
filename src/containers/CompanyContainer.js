@@ -6,14 +6,14 @@ import Company from '../components/Company';
 
 function mapDispatchToProps(dispatch) {
   return {
-    initAddEmployee: () => dispatch(initAddEmployee())
+    initAddEmployee: companyId => dispatch(initAddEmployee(companyId))
   };
 }
 
 export default compose(
   connect(
-    ({ app: { addEmployee } }) => ({
-      addEmployee
+    ({ app: { companies } }, { company: { id } }) => ({
+      addEmployee: companies[id] && companies[id].addEmployee
     }),
     mapDispatchToProps
   )

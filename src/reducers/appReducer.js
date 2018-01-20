@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   addCompany: false,
+  companies: {},
   addEmployee: false,
   editHomeBase: false,
   addMode: false,
@@ -25,10 +26,26 @@ export default function appReducer(state = initialState, action) {
       return { ...state, addCompany: false };
     }
     case INIT_ADD_EMPLOYEE: {
-      return { ...state, addEmployee: true };
+      return {
+        ...state,
+        companies: {
+          ...state.companies,
+          [action.payload]: {
+            addEmployee: true
+          }
+        }
+      };
     }
     case END_ADD_EMPLOYEE: {
-      return { ...state, addEmployee: false };
+      return {
+        ...state,
+        companies: {
+          ...state.companies,
+          [action.payload]: {
+            addEmployee: false
+          }
+        }
+      };
     }
     case CANCEL_EDIT_HOME_BASE: {
       return { ...state, editHomeBase: false };

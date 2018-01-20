@@ -7,7 +7,7 @@ import EmployeeCreator from '../components/EmployeeCreator';
 
 function mapDispatchToProps(dispatch) {
   return {
-    endAddEmployee: () => dispatch(endAddEmployee())
+    endAddEmployee: companyId => dispatch(endAddEmployee(companyId))
   };
 }
 

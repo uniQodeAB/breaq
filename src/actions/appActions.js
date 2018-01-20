@@ -13,16 +13,16 @@ export function endAddCompany() {
 }
 
 export const INIT_ADD_EMPLOYEE = 'INIT_ADD_EMPLOYEE';
-export function initAddEmployee() {
+export function initAddEmployee(companyId) {
   return dispatch => {
-    dispatch({ type: INIT_ADD_EMPLOYEE });
+    dispatch({ type: INIT_ADD_EMPLOYEE, payload: companyId });
   };
 }
 
 export const END_ADD_EMPLOYEE = 'END_ADD_EMPLOYEE';
-export function endAddEmployee() {
+export function endAddEmployee(companyId) {
   return dispatch => {
-    dispatch({ type: END_ADD_EMPLOYEE });
+    dispatch({ type: END_ADD_EMPLOYEE, payload: companyId });
   };
 }
 

@@ -137,7 +137,7 @@ class EmployeeCreator extends Component {
         )}
 
         <div className={'buttons'}>
-          <button onClick={endAddEmployee}>Cancel</button>
+          <button onClick={() => endAddEmployee(companyId)}>Cancel</button>
           <button className={'add'} onClick={createEmployee}>
             Save
           </button>

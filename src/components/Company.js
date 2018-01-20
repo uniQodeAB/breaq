@@ -20,7 +20,7 @@ const Company = ({
           <EmployeeCreator companyId={id} />
         ) : (
           <div>
-            <Button onClick={initAddEmployee}>Add employee</Button>
+            <Button onClick={() => initAddEmployee(id)}>Add employee</Button>
             <EmployeeGrid
               employees={
                 employees &&
