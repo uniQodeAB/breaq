@@ -43,7 +43,7 @@ class EmployeeCreator extends Component {
             ...initialState
           });
         })
-        .then(endAddEmployee);
+        .then(() => endAddEmployee(companyId));
     };
 
     const updateEmployee = () => {
