@@ -10,20 +10,19 @@ class CompanyCreator extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      company: {
-        name: ''
-      }
-    };
-  }
+    const { company, companyId } = props;
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      company: {
-        // nextProps.company || {
-        name: ''
-      }
-    });
+    if (company && companyId) {
+      this.state = {
+        company
+      };
+    } else {
+      this.state = {
+        company: {
+          name: ''
+        }
+      };
+    }
   }
 
   render() {

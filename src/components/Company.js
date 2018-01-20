@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import EmployeeGrid from './EmployeeGrid';
-import InfoBox, { icons } from './InfoBox';
+import CompanyInfoBox from '../containers/CompanyInfoBoxContainer';
 import EmployeeCreator from '../containers/EmployeeCreatorContainer';
 import Button from './Button';
+import CompanyCreator from '../containers/CompanyCreatorContainer';
 
 const Company = ({
   company: { id, name, address, employees },
+  editCompany,
   addEmployee,
   initAddEmployee,
   editEmployee,
@@ -14,7 +16,11 @@ const Company = ({
 }) => (
   <div className={'Company'}>
     <div className={'company'}>
-      <InfoBox id={id} title={name} address={address} icon={icons.company} />
+      {editCompany ? (
+        <CompanyCreator companyId={id} />
+      ) : (
+        <CompanyInfoBox companyId={id} title={name} address={address} />
+      )}
     </div>
     <div className={'employees'}>
       <div>

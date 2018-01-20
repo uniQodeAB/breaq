@@ -1,12 +1,12 @@
 import {
   INIT_ADD_COMPANY,
   END_ADD_COMPANY,
+  INIT_EDIT_COMPANY,
+  END_EDIT_COMPANY,
   INIT_ADD_EMPLOYEE,
   END_ADD_EMPLOYEE,
   INIT_EDIT_EMPLOYEE,
-  END_EDIT_EMPLOYEE,
-  CANCEL_EDIT_HOME_BASE,
-  CANCEL_ADD_EDIT_EMPLOYEE
+  END_EDIT_EMPLOYEE
 } from '../actions/appActions';
 
 const initialState = {
@@ -48,6 +48,28 @@ export default function appReducer(state = initialState, action) {
         }
       };
     }
+    case INIT_EDIT_COMPANY: {
+      return {
+        ...state,
+        companies: {
+          ...state.companies,
+          [action.payload]: {
+            editCompany: true
+          }
+        }
+      };
+    }
+    case END_EDIT_COMPANY: {
+      return {
+        ...state,
+        companies: {
+          ...state.companies,
+          [action.payload]: {
+            editCompany: false
+          }
+        }
+      };
+    }
     case INIT_EDIT_EMPLOYEE: {
       return {
         ...state,
@@ -71,12 +93,6 @@ export default function appReducer(state = initialState, action) {
           }
         }
       };
-    }
-    case CANCEL_EDIT_HOME_BASE: {
-      return { ...state, editHomeBase: false };
-    }
-    case CANCEL_ADD_EDIT_EMPLOYEE: {
-      return { ...state, addMode: false, editMode: false, employeeId: '' };
     }
     default:
       return state;

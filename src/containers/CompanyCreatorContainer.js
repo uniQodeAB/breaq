@@ -14,8 +14,13 @@ function mapDispatchToProps(dispatch) {
 export default compose(
   firebaseConnect(),
   connect(
-    ({ firebase: { auth } }) => ({
-      auth
+    ({ firebase: { data, auth } }, { companyId }) => ({
+      auth,
+      company:
+        data.users &&
+        data.users[auth.uid] &&
+        data.users[auth.uid].companies &&
+        data.users[auth.uid].companies[companyId]
     }),
     mapDispatchToProps
   )
