@@ -21,7 +21,7 @@ const Header = ({ firebase, auth }) => {
   return (
     <header className={'row header Header'}>
       <div className="wrapper">
-        <h1>Fun Food Friends</h1>
+        <h1>EMP maps</h1>
         {isLoaded(firebase.profile) ? <span>Loading...</span> : renderButtons()}
       </div>
     </header>
