@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Company from '../containers/CompanyContainer';
 
+import './CompanyList.css';
+
 const CompanyList = ({ companies }) => (
   <div className={'CompanyList'}>
     {Object.entries(companies)

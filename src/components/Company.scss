@@ -1,0 +1,12 @@
+.Company {
+    border: solid 1px;
+    border-color: #d3d3d3;
+    padding: 0.5em;
+    background-color: #fcf5ef;
+
+    .employees {
+        div > button.Button {
+            margin-top: 0.5em;
+        }
+    }
+}

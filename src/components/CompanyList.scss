@@ -1,0 +1,5 @@
+.CompanyList {
+    .Company:not(:first-child) {    
+        margin-top: 0.5em;
+    }
+}

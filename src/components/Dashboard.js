@@ -14,23 +14,17 @@ const DashBoard = ({ user, addCompany, initAddCompany }) => {
     return <div className={'Dashboard'}>Loading...</div>;
   }
 
-  console.log(addCompany);
-
   return (
     <div className={'Dashboard'}>
       <div className={'search-box-pane'}>
         <div className={'search-container'}>
           <div>
             {addCompany ? (
-              <div>
-                <CompanyCreator />
-              </div>
+              <CompanyCreator />
             ) : (
-              <div>
-                <Button onClick={initAddCompany}>Add company</Button>
-                <CompanyList />
-              </div>
+              <Button onClick={initAddCompany}>Add company</Button>
             )}
+            <CompanyList />
           </div>
         </div>
       </div>
