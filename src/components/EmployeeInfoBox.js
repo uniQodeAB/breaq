@@ -31,8 +31,8 @@ EmployeeInfoBox.propTypes = {
   companyId: PropTypes.string.isRequired,
   employeeId: PropTypes.string.isRequired,
   initEditEmployee: PropTypes.func.isRequired,
-  firebase: PropTypes.shape.isRequired,
-  auth: PropTypes.shape.isRequired
+  firebase: PropTypes.shape().isRequired,
+  auth: PropTypes.shape().isRequired
 };
 
 export default EmployeeInfoBox;
