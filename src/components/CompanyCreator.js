@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import SearchBox from './SearchBox';
 import InfoBox, { icons } from './InfoBox';
-import ColorPicker from './ColorPicker';
+import ColorPicker from '../containers/ColorPickerContainer';
 
 import '../styles/CompanyCreator.css';
 
@@ -16,7 +16,7 @@ class CompanyCreator extends Component {
 
     if (company && companyId) {
       this.state = {
-        company
+        ...company
       };
     } else {
       this.state = {
@@ -34,14 +34,16 @@ class CompanyCreator extends Component {
       auth,
       endAddCompany,
       endEditCompany,
-      companyId
+      companyId,
+      color
     } = this.props;
     const { company } = this.state;
 
     const createCompany = () => {
       firebase
         .push(`/users/${auth.uid}/companies/`, {
-          ...company
+          ...company,
+          color
         })
         .then(() => {
           this.setState({
@@ -57,7 +59,8 @@ class CompanyCreator extends Component {
       firebase
         .ref(`/users/${auth.uid}/companies/${companyId}`)
         .update({
-          ...company
+          ...company,
+          color
         })
         .then(() => {
           this.setState({
@@ -70,7 +73,7 @@ class CompanyCreator extends Component {
     };
 
     return (
-      <div className={'CompanyCreator'}>
+      <div className={'CompanyCreator'} style={{ background: `${color}` }}>
         <input
           type={'text'}
           className={'form-input'}
@@ -119,7 +122,7 @@ class CompanyCreator extends Component {
           }}
         />
 
-        <ColorPicker />
+        <ColorPicker companyId={companyId} />
 
         {(company.name || company.address) && (
           <InfoBox

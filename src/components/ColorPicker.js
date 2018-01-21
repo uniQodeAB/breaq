@@ -7,49 +7,69 @@ class ColorPicker extends Component {
   constructor(props) {
     super(props);
 
-    const getRandomInt = (min, max) =>
-      Math.floor(Math.random() * (max - min + 1)) + min;
+    const { color, addColor, changeColor, companyId } = props;
 
-    const selectedColor = colors[getRandomInt(0, colors.length - 1)];
-    this.state = {
-      selectedColor,
-      toggleColapse: false
-    };
+    if (color && companyId) {
+      this.state = {
+        selectedColor: color,
+        toggleColapse: false
+      };
+    } else {
+      const getRandomInt = (min, max) =>
+        Math.floor(Math.random() * (max - min + 1)) + min;
+
+      const selectedColor = colors[getRandomInt(0, colors.length - 1)];
+      this.state = {
+        selectedColor,
+        toggleColapse: false
+      };
+      addColor(selectedColor);
+    }
   }
 
   render() {
+    const { companyId, changeColor, addColor } = this.props;
     const { selectedColor, toggleColapse } = this.state;
 
     return (
       <div className={'ColorPicker'}>
-        <div
-          className={'color'}
-          role={'button'}
-          style={{ background: `${selectedColor}` }}
-          onClick={() => {
-            this.setState({
-              toggleColapse: !toggleColapse
-            });
-          }}
-        />
+        <div className={'border'}>
+          <div
+            className={'color'}
+            role={'button'}
+            style={{ background: `${selectedColor}` }}
+            onClick={() => {
+              this.setState({
+                toggleColapse: !toggleColapse
+              });
+            }}
+          />
 
-        {toggleColapse && (
-          <div className={'color-grid'}>
-            {colors.map(color => (
-              <div
-                className={'color'}
-                style={{ background: `${color}` }}
-                role={'button'}
-                onClick={() => {
-                  this.setState({
-                    selectedColor: color,
-                    toggleColapse: false
-                  });
-                }}
-              />
-            ))}
-          </div>
-        )}
+          {toggleColapse && (
+            <div className={'color-grid'}>
+              {colors.map(color => (
+                <div
+                  key={color}
+                  className={'color'}
+                  style={{ background: `${color}` }}
+                  role={'button'}
+                  onClick={() => {
+                    if (companyId) {
+                      changeColor(companyId, color);
+                    } else {
+                      addColor(color);
+                    }
+
+                    this.setState({
+                      selectedColor: color,
+                      toggleColapse: false
+                    });
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     );
   }

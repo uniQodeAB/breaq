@@ -1,6 +1,11 @@
 .ColorPicker {
     position: relative;
-    margin: 0.5em;
+    margin-top: 0.5em;
+
+    .border {
+        padding: 0.5em;
+        background: white;
+    }
 
     .color-grid {
         position: absolute;

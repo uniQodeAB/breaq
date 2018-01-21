@@ -1,4 +1,7 @@
 .CompanyCreator {
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+
   input.form-input {
     box-sizing: border-box;
     border: 1px solid transparent;
@@ -11,7 +14,6 @@
     outline: none;
     text-overflow: ellipsis;
     margin-top: 0.5em;
-    margin-bottom: 0.5em;
   }
 
   button {
@@ -24,6 +26,10 @@
     font-size: 14px;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
     padding: 10px 6px;
+  }
+
+  .InfoBox {
+    margin-top: 0.5em;
   }
 
   .buttons {

@@ -6,7 +6,9 @@ import {
   INIT_ADD_EMPLOYEE,
   END_ADD_EMPLOYEE,
   INIT_EDIT_EMPLOYEE,
-  END_EDIT_EMPLOYEE
+  END_EDIT_EMPLOYEE,
+  ADD_COLOR,
+  CHANGE_COLOR
 } from '../actions/appActions';
 
 const initialState = {
@@ -85,6 +87,24 @@ export default function appReducer(state = initialState, action) {
           [action.payload.companyId]: {
             editEmployee: false,
             editEmployeeId: ''
+          }
+        }
+      };
+    }
+    case ADD_COLOR: {
+      return {
+        ...state,
+        color: action.payload.color
+      };
+    }
+    case CHANGE_COLOR: {
+      return {
+        ...state,
+        companies: {
+          ...state.companies,
+          [action.payload.companyId]: {
+            ...action.payload.companyId,
+            color: action.payload.color
           }
         }
       };

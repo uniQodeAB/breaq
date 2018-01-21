@@ -53,3 +53,17 @@ export function endEditEmployee(companyId, employeeId) {
     dispatch({ type: END_EDIT_EMPLOYEE, payload: { companyId, employeeId } });
   };
 }
+
+export const ADD_COLOR = 'ADD_COLOR';
+export function addColor(color) {
+  return dispatch => {
+    dispatch({ type: ADD_COLOR, payload: { color } });
+  };
+}
+
+export const CHANGE_COLOR = 'CHANGE_COLOR';
+export function changeColor(companyId, color) {
+  return dispatch => {
+    dispatch({ type: CHANGE_COLOR, payload: { companyId, color } });
+  };
+}

@@ -9,14 +9,14 @@ import CompanyCreator from '../containers/CompanyCreatorContainer';
 import '../styles/Company.css';
 
 const Company = ({
-  company: { id, name, address, employees },
+  company: { id, name, address, employees, color },
   editCompany,
   addEmployee,
   initAddEmployee,
   editEmployee,
   editEmployeeId
 }) => (
-  <div className={'Company'}>
+  <div className={'Company'} style={{ background: `${color}` }}>
     <div className={'company'}>
       {editCompany ? (
         <CompanyCreator companyId={id} />
