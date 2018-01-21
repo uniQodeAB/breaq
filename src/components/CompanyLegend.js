@@ -1,23 +1,49 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const CompanyLegend = ({ companies }) => {
-  const colors = [
-    '#FFB5E8',
-    '#FF9CEE',
-    '#FFCCF9',
-    '#FCC2FF',
-    '#F6A6FF',
-    '#B28DFF',
-    '#C5A3FF',
-    '#D5AAFF',
-    '#ECD4FF',
-    '#FBE4FF',
-    '#DCD3FF',
-    '#A79AFF',
-    '#B5B9FF'
-  ];
+import '../styles/CompanyLegend.css';
 
-  return <div />;
+const CompanyLegend = ({ companies, showCompany, hideCompany }) => (
+  <div className={'CompanyLegend'}>
+    {Object.entries(companies)
+      .reduce((a, [id, company]) => {
+        if (id !== 'undefined') {
+          a.push({
+            id,
+            ...company
+          });
+        }
+        return a;
+      }, [])
+      .reverse()
+      .map(company => (
+        <div key={company.id} style={{ background: `${company.color}` }}>
+          <input
+            name={company.id}
+            type={'checkbox'}
+            defaultChecked
+            onChange={event => {
+              if (event.target.checked) {
+                showCompany(company.id);
+              } else {
+                hideCompany(company.id);
+              }
+            }}
+          />
+          {company.name}
+        </div>
+      ))}
+  </div>
+);
+
+CompanyLegend.propTypes = {
+  companies: PropTypes.shape(),
+  showCompany: PropTypes.func.isRequired,
+  hideCompany: PropTypes.func.isRequired
+};
+
+CompanyLegend.defaultProps = {
+  companies: {}
 };
 
 export default CompanyLegend;

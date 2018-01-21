@@ -8,6 +8,7 @@ import CompanyCreator from '../containers/CompanyCreatorContainer';
 import Button from './Button';
 
 import '../styles/Dashboard.css';
+import CompanyLegendContainer from '../containers/CompanyLegendContainer';
 
 const DashBoard = ({ user, addCompany, initAddCompany }) => {
   if (!isLoaded(user)) {
@@ -29,6 +30,7 @@ const DashBoard = ({ user, addCompany, initAddCompany }) => {
         </div>
       </div>
       <div className={'map-pane'}>
+        <CompanyLegendContainer />
         <MapContainer />
       </div>
     </div>

@@ -67,3 +67,17 @@ export function changeColor(companyId, color) {
     dispatch({ type: CHANGE_COLOR, payload: { companyId, color } });
   };
 }
+
+export const HIDE_COMPANY = 'HIDE_COMPANY';
+export function hideCompany(companyId) {
+  return dispatch => {
+    dispatch({ type: HIDE_COMPANY, payload: { companyId } });
+  };
+}
+
+export const SHOW_COMPANY = 'SHOW_COMPANY';
+export function showCompany(companyId) {
+  return dispatch => {
+    dispatch({ type: SHOW_COMPANY, payload: { companyId } });
+  };
+}

@@ -174,7 +174,8 @@ CompanyCreator.propTypes = {
   firebase: PropTypes.shape().isRequired,
   auth: PropTypes.shape().isRequired,
   endAddCompany: PropTypes.func.isRequired,
-  endEditCompany: PropTypes.func.isRequired
+  endEditCompany: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired
 };
 
 CompanyCreator.defaultProps = {

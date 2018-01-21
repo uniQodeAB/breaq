@@ -190,7 +190,8 @@ EmployeeCreator.propTypes = {
   }),
   firebase: PropTypes.shape().isRequired,
   auth: PropTypes.shape().isRequired,
-  endAddEmployee: PropTypes.func.isRequired
+  endAddEmployee: PropTypes.func.isRequired,
+  endEditEmployee: PropTypes.func.isRequired
 };
 
 EmployeeCreator.defaultProps = {

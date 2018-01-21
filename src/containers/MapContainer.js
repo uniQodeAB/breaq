@@ -9,9 +9,10 @@ export default compose(
 
     return auth ? [`users/${auth.uid}/companies`] : [];
   }),
-  connect(({ firebase: { data, auth } }) => ({
+  connect(({ firebase: { data, auth }, app: { filter } }) => ({
     user: data.users,
     companies:
-      data.users && data.users[auth.uid] && data.users[auth.uid].companies
+      data.users && data.users[auth.uid] && data.users[auth.uid].companies,
+    filter
   }))
 )(Map);

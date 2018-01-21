@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import MapComponent from './MapComponent';
 
-const Map = ({ companies }) => (
+const Map = ({ companies, filter }) => (
   <MapComponent>
     {isEmpty(companies)
       ? []
@@ -13,6 +13,15 @@ const Map = ({ companies }) => (
           .reduce((a, [id, company]) => {
             a.push({
               id,
+              ...company
+            });
+
+            return a;
+          }, [])
+          .filter(company => !filter.includes(company.id))
+          .reduce((a, company) => {
+            a.push({
+              id: company.id,
               location: company.location,
               label: 'B'
             });
@@ -43,11 +52,13 @@ const Map = ({ companies }) => (
 );
 
 Map.propTypes = {
-  companies: PropTypes.shape()
+  companies: PropTypes.shape(),
+  filter: PropTypes.arrayOf(PropTypes.string)
 };
 
 Map.defaultProps = {
-  companies: {}
+  companies: {},
+  filter: []
 };
 
 export default Map;

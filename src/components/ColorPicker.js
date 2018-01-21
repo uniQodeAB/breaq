@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import colors from '../styles/colors.json';
 import '../styles/ColorPicker.css';
@@ -7,7 +8,7 @@ class ColorPicker extends Component {
   constructor(props) {
     super(props);
 
-    const { color, addColor, changeColor, companyId } = props;
+    const { color, addColor, companyId } = props;
 
     if (color && companyId) {
       this.state = {
@@ -35,6 +36,7 @@ class ColorPicker extends Component {
       <div className={'ColorPicker'}>
         <div className={'border'}>
           <div
+            tabIndex={'0'}
             className={'color'}
             role={'button'}
             style={{ background: `${selectedColor}` }}
@@ -49,6 +51,7 @@ class ColorPicker extends Component {
             <div className={'color-grid'}>
               {colors.map(color => (
                 <div
+                  tabIndex={'0'}
                   key={color}
                   className={'color'}
                   style={{ background: `${color}` }}
@@ -74,5 +77,17 @@ class ColorPicker extends Component {
     );
   }
 }
+
+ColorPicker.propTypes = {
+  color: PropTypes.string,
+  addColor: PropTypes.func.isRequired,
+  changeColor: PropTypes.func.isRequired,
+  companyId: PropTypes.string
+};
+
+ColorPicker.defaultProps = {
+  color: '',
+  companyId: ''
+};
 
 export default ColorPicker;

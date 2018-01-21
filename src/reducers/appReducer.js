@@ -8,12 +8,15 @@ import {
   INIT_EDIT_EMPLOYEE,
   END_EDIT_EMPLOYEE,
   ADD_COLOR,
-  CHANGE_COLOR
+  CHANGE_COLOR,
+  HIDE_COMPANY,
+  SHOW_COMPANY
 } from '../actions/appActions';
 
 const initialState = {
   addCompany: false,
-  companies: {}
+  companies: {},
+  filter: []
 };
 export default function appReducer(state = initialState, action) {
   switch (action.type) {
@@ -107,6 +110,20 @@ export default function appReducer(state = initialState, action) {
             color: action.payload.color
           }
         }
+      };
+    }
+    case HIDE_COMPANY: {
+      const filter = state.filter.slice();
+      filter.push(action.payload.companyId);
+      return {
+        ...state,
+        filter
+      };
+    }
+    case SHOW_COMPANY: {
+      return {
+        ...state,
+        filter: state.filter.filter(id => id !== action.payload.companyId)
       };
     }
     default:
