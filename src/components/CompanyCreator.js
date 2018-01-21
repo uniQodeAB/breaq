@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import SearchBox from './SearchBox';
 import InfoBox, { icons } from './InfoBox';
+import ColorPicker from './ColorPicker';
 
 import '../styles/CompanyCreator.css';
 
@@ -117,6 +118,8 @@ class CompanyCreator extends Component {
             });
           }}
         />
+
+        <ColorPicker />
 
         {(company.name || company.address) && (
           <InfoBox
