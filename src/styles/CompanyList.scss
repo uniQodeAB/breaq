@@ -1,5 +1,8 @@
 .CompanyList {
-    .Company:not(:first-child) {    
-        margin-top: 0.5em;
-    }
+		height: 100vh - 100%;
+		overflow: auto;
+
+	.Company:not(:first-child) {    
+			margin-top: 0.5em;
+	}
 }
