@@ -16,7 +16,7 @@ const CompanyList = ({ companies }) => (
         }
         return a;
       }, [])
-      .map(company => <Company company={company} />)}
+      .map(company => <Company key={company.id} company={company} />)}
   </div>
 );
 
