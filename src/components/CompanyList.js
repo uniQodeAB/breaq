@@ -16,6 +16,7 @@ const CompanyList = ({ companies }) => (
         }
         return a;
       }, [])
+      .reverse()
       .map(company => <Company key={company.id} company={company} />)}
   </div>
 );
