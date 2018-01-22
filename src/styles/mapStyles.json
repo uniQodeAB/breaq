@@ -1,4 +1,5 @@
 [
+  { "stylers": [{ "saturation": -50 }] },
   {
     "featureType": "all",
     "elementType": "geometry.fill",
@@ -182,6 +183,15 @@
     "stylers": [
       {
         "color": "#ffffff"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
       }
     ]
   }
