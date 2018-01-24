@@ -132,7 +132,7 @@ class CompanyCreator extends Component {
           }}
         />
 
-        <ColorPicker companyId={companyId} />
+        <ColorPicker companyId={companyId} color={company.color} />
 
         {(company.name || company.address) && (
           <InfoBox
