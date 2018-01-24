@@ -106,7 +106,7 @@ export default function appReducer(state = initialState, action) {
         companies: {
           ...state.companies,
           [action.payload.companyId]: {
-            ...action.payload.companyId,
+            ...state.companies[action.payload.companyId],
             color: action.payload.color
           }
         }
