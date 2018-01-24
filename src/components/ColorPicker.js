@@ -10,7 +10,9 @@ class ColorPicker extends Component {
 
     const { color, addColor, companyId } = props;
 
-    if (color && companyId) {
+    console.log(color);
+
+    if (color) {
       this.state = {
         selectedColor: color,
         toggleColapse: false
