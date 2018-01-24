@@ -13,10 +13,9 @@ class CompanyCreator extends Component {
     super(props);
 
     const { company, companyId } = props;
-
     if (company && companyId) {
       this.state = {
-        ...company
+        company
       };
     } else {
       this.state = {
@@ -27,6 +26,17 @@ class CompanyCreator extends Component {
     }
   }
 
+  componentWillReceiveProps({ color }) {
+    if (color) {
+      this.setState({
+        company: {
+          ...this.state.company,
+          color
+        }
+      });
+    }
+  }
+
   render() {
     const {
       placeholders,
@@ -34,16 +44,14 @@ class CompanyCreator extends Component {
       auth,
       endAddCompany,
       endEditCompany,
-      companyId,
-      color
+      companyId
     } = this.props;
     const { company } = this.state;
 
     const createCompany = () => {
       firebase
         .push(`/users/${auth.uid}/companies/`, {
-          ...company,
-          color
+          ...company
         })
         .then(() => {
           this.setState({
@@ -59,8 +67,7 @@ class CompanyCreator extends Component {
       firebase
         .ref(`/users/${auth.uid}/companies/${companyId}`)
         .update({
-          ...company,
-          color
+          ...company
         })
         .then(() => {
           this.setState({
@@ -73,12 +80,15 @@ class CompanyCreator extends Component {
     };
 
     return (
-      <div className={'CompanyCreator'} style={{ background: `${color}` }}>
+      <div
+        className={'CompanyCreator'}
+        style={{ background: `${company.color}` }}
+      >
         <input
           type={'text'}
           className={'form-input'}
           placeholder={placeholders.name}
-          value={this.state.company.name}
+          value={company.name}
           onChange={e =>
             this.setState({
               company: {
