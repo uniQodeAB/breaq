@@ -4,6 +4,7 @@ import { Marker } from 'react-google-maps';
 import PropTypes from 'prop-types';
 
 import MapComponent from './MapComponent';
+import img from '../resources/Arrow_1.svg';
 
 const Map = ({ companies, filter }) => (
   <MapComponent>
@@ -22,8 +23,7 @@ const Map = ({ companies, filter }) => (
           .reduce((a, company) => {
             a.push({
               id: company.id,
-              location: company.location,
-              label: 'B'
+              location: company.location
             });
 
             if (company.employees) {
@@ -46,6 +46,9 @@ const Map = ({ companies, filter }) => (
               key={location.id}
               position={location.location}
               label={location.label}
+              icon={{
+                url: img // pass your image here
+              }}
             />
           ))}
   </MapComponent>
