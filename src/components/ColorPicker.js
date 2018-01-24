@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CloseOnEscape from 'react-close-on-escape';
 
+import OutsideClickDetecter from './OutsideClickDetecter';
 import colors from '../styles/colors.json';
 import '../styles/ColorPicker.css';
 
@@ -8,9 +10,7 @@ class ColorPicker extends Component {
   constructor(props) {
     super(props);
 
-    const { color, addColor, companyId } = props;
-
-    console.log(color);
+    const { color, addColor } = props;
 
     if (color) {
       this.state = {
@@ -34,6 +34,12 @@ class ColorPicker extends Component {
     const { companyId, changeColor, addColor } = this.props;
     const { selectedColor, toggleColapse } = this.state;
 
+    const handleClose = () => {
+      this.setState({
+        toggleColapse: false
+      });
+    };
+
     return (
       <div className={'ColorPicker'}>
         <div className={'border'}>
@@ -50,29 +56,33 @@ class ColorPicker extends Component {
           />
 
           {toggleColapse && (
-            <div className={'color-grid'}>
-              {colors.map(color => (
-                <div
-                  tabIndex={'0'}
-                  key={color}
-                  className={'color'}
-                  style={{ background: `${color}` }}
-                  role={'button'}
-                  onClick={() => {
-                    if (companyId) {
-                      changeColor(companyId, color);
-                    } else {
-                      addColor(color);
-                    }
+            <CloseOnEscape onEscape={handleClose}>
+              <OutsideClickDetecter handler={handleClose}>
+                <div className={'color-grid'}>
+                  {colors.map(color => (
+                    <div
+                      tabIndex={'0'}
+                      key={color}
+                      className={'color'}
+                      style={{ background: `${color}` }}
+                      role={'button'}
+                      onClick={() => {
+                        if (companyId) {
+                          changeColor(companyId, color);
+                        } else {
+                          addColor(color);
+                        }
 
-                    this.setState({
-                      selectedColor: color,
-                      toggleColapse: false
-                    });
-                  }}
-                />
-              ))}
-            </div>
+                        this.setState({
+                          selectedColor: color,
+                          toggleColapse: false
+                        });
+                      }}
+                    />
+                  ))}
+                </div>
+              </OutsideClickDetecter>
+            </CloseOnEscape>
           )}
         </div>
       </div>
