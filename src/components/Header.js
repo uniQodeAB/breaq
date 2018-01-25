@@ -3,17 +3,14 @@ import { isEmpty, isLoaded } from 'react-redux-firebase';
 import PropTypes from 'prop-types';
 import '../styles/Header.css';
 
-const Header = ({ firebase, auth }) => {
+const Header = ({ firebase, auth, login, logout }) => {
   const renderButtons = () =>
     isEmpty(auth) ? (
-      <button
-        className={'login'}
-        onClick={() => firebase.login({ provider: 'google', type: 'popup' })}
-      >
+      <button className={'login'} onClick={login}>
         Log In
       </button>
     ) : (
-      <button className={'user-profile'} onClick={() => firebase.logout()}>
+      <button className={'user-profile'} onClick={logout}>
         {!isEmpty(auth) && <img src={auth.photoURL} alt={'Logout'} />}
       </button>
     );

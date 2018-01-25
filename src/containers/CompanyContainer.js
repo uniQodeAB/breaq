@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { initAddEmployee } from '../actions/appActions';
 
 import Company from '../components/Company';
 

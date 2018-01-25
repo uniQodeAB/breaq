@@ -14,10 +14,5 @@ function mapDispatchToProps(dispatch) {
 
 export default compose(
   firebaseConnect(),
-  connect(
-    ({ firebase: { auth } }) => ({
-      auth
-    }),
-    mapDispatchToProps
-  )
+  connect(() => {}, mapDispatchToProps)
 )(EmployeeInfoBox);

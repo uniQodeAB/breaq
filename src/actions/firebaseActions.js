@@ -52,3 +52,11 @@ export function updateEmployee(user, companyId, employee) {
       })
       .then(() => dispatch(endEditEmployee(companyId, employee.id)));
 }
+
+export function login() {
+  return () => firebase.login({ provider: 'google', type: 'popup' });
+}
+
+export function logout() {
+  return () => firebase.logout();
+}
