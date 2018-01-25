@@ -1,17 +1,16 @@
 import React from 'react';
-import { isEmpty, isLoaded } from 'react-redux-firebase';
 import PropTypes from 'prop-types';
 import '../styles/Header.css';
 
-const Header = ({ firebase, auth, login, logout }) => {
+const Header = ({ login, logout, isLoggedOut, photo }) => {
   const renderButtons = () =>
-    isEmpty(auth) ? (
+    isLoggedOut ? (
       <button className={'login'} onClick={login}>
         Log In
       </button>
     ) : (
       <button className={'user-profile'} onClick={logout}>
-        {!isEmpty(auth) && <img src={auth.photoURL} alt={'Logout'} />}
+        <img src={photo} alt={'Logout'} />
       </button>
     );
 
@@ -19,22 +18,22 @@ const Header = ({ firebase, auth, login, logout }) => {
     <header className={'row header Header'}>
       <div className="wrapper">
         <h1>EMP maps</h1>
-        {isLoaded(firebase.profile) ? <span>Loading...</span> : renderButtons()}
+        {renderButtons()}
       </div>
     </header>
   );
 };
 
 Header.propTypes = {
-  firebase: PropTypes.shape({
-    login: PropTypes.func.isRequired,
-    logout: PropTypes.func.isRequired
-  }).isRequired,
-  auth: PropTypes.shape()
+  login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  isLoggedOut: PropTypes.bool,
+  photo: PropTypes.string
 };
 
 Header.defaultProps = {
-  auth: {}
+  isLoggedOut: true,
+  photo: ''
 };
 
 export default Header;

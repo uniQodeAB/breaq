@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { firebaseConnect } from 'react-redux-firebase';
+import { firebaseConnect, isEmpty } from 'react-redux-firebase';
 import { compose } from 'redux';
 
 import { login, logout } from '../actions/firebaseActions';
@@ -14,5 +14,11 @@ function mapDispatchToProps(dispatch) {
 
 export default compose(
   firebaseConnect(),
-  connect(({ firebase: { auth } }) => ({ auth }), mapDispatchToProps)
+  connect(
+    ({ firebase: { auth } }) => ({
+      isLoggedOut: isEmpty(auth),
+      photo: !isEmpty(auth) && auth.photoURL
+    }),
+    mapDispatchToProps
+  )
 )(Header);
