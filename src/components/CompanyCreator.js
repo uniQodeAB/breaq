@@ -15,7 +15,10 @@ class CompanyCreator extends Component {
     const { company, companyId } = props;
     if (company && companyId) {
       this.state = {
-        company
+        company: {
+          ...company,
+          id: companyId
+        }
       };
     } else {
       this.state = {
@@ -40,44 +43,13 @@ class CompanyCreator extends Component {
   render() {
     const {
       placeholders,
-      firebase,
-      auth,
       endAddCompany,
       endEditCompany,
-      companyId
+      companyId,
+      addCompany,
+      updateCompany
     } = this.props;
     const { company } = this.state;
-
-    const createCompany = () => {
-      firebase
-        .push(`/users/${auth.uid}/companies/`, {
-          ...company
-        })
-        .then(() => {
-          this.setState({
-            company: {
-              name: ''
-            }
-          });
-        })
-        .then(endAddCompany);
-    };
-
-    const updateCompany = () => {
-      firebase
-        .ref(`/users/${auth.uid}/companies/${companyId}`)
-        .update({
-          ...company
-        })
-        .then(() => {
-          this.setState({
-            company: {
-              name: ''
-            }
-          });
-        })
-        .then(() => endEditCompany(companyId));
-    };
 
     return (
       <div className={'CompanyCreator'}>
@@ -142,14 +114,17 @@ class CompanyCreator extends Component {
           {companyId ? (
             <div>
               <button onClick={() => endEditCompany(companyId)}>Cancel</button>
-              <button className={'update'} onClick={updateCompany}>
+              <button
+                className={'update'}
+                onClick={() => updateCompany(company)}
+              >
                 Update
               </button>
             </div>
           ) : (
             <div>
               <button onClick={endAddCompany}>Cancel</button>
-              <button className={'add'} onClick={createCompany}>
+              <button className={'add'} onClick={() => addCompany(company)}>
                 Save
               </button>
             </div>
