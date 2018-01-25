@@ -1,5 +1,10 @@
 import firebase from '../firebase';
-import { endAddCompany, endEditCompany } from './appActions';
+import {
+  endAddCompany,
+  endEditCompany,
+  endAddEmployee,
+  endEditEmployee
+} from './appActions';
 
 export const DELETE_COMPANY = 'DELETE_COMPANY';
 export function deleteCompany(user, companyId) {
@@ -27,4 +32,23 @@ export function updateCompany(user, company) {
         ...company
       })
       .then(() => dispatch(endEditCompany(company.id)));
+}
+
+export function addEmployee(user, companyId, employee) {
+  return dispatch =>
+    firebase
+      .push(`/users/${user.uid}/companies/${companyId}/employees/`, {
+        ...employee
+      })
+      .then(() => dispatch(endAddEmployee(companyId)));
+}
+
+export function updateEmployee(user, companyId, employee) {
+  return dispatch =>
+    firebase
+      .ref(`/users/${user.uid}/companies/${companyId}/employees/${employee.id}`)
+      .update({
+        ...employee
+      })
+      .then(() => dispatch(endEditEmployee(companyId, employee.id)));
 }

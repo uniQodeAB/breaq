@@ -3,10 +3,17 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { endAddEmployee, endEditEmployee } from '../actions/appActions';
+import { addEmployee, updateEmployee } from '../actions/firebaseActions';
 import EmployeeCreator from '../components/EmployeeCreator';
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, state) {
+  const { currentUser } = state.firebase.auth();
+
   return {
+    addEmployee: (companyId, employee) =>
+      dispatch(addEmployee(currentUser, companyId, employee)),
+    updateEmployee: (companyId, employee) =>
+      dispatch(updateEmployee(currentUser, companyId, employee)),
     endAddEmployee: companyId => dispatch(endAddEmployee(companyId)),
     endEditEmployee: (companyId, employeeId) =>
       dispatch(endEditEmployee(companyId, employeeId))

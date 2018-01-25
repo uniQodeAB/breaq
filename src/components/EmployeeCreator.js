@@ -21,7 +21,10 @@ class EmployeeCreator extends Component {
 
     if (employee && employeeId) {
       this.state = {
-        employee
+        employee: {
+          ...employee,
+          id: employeeId
+        }
       };
     } else {
       this.state = {
@@ -33,45 +36,16 @@ class EmployeeCreator extends Component {
   render() {
     const {
       placeholders,
-      firebase,
-      auth,
       companyId,
       employeeId,
+      addEmployee,
+      updateEmployee,
       endAddEmployee,
       endEditEmployee,
       color
     } = this.props;
 
     const { employee } = this.state;
-
-    const createEmployee = () => {
-      firebase
-        .push(`/users/${auth.uid}/companies/${companyId}/employees/`, {
-          ...employee
-        })
-        .then(() => {
-          this.setState({
-            ...initialState
-          });
-        })
-        .then(() => endAddEmployee(companyId));
-    };
-
-    const updateEmployee = () => {
-      firebase
-        .ref(
-          `/users/${auth.uid}/companies/${companyId}/employees/${employeeId}`
-        )
-        .update({
-          ...employee
-        })
-        .then(() => {
-          this.setState({
-            ...initialState
-          });
-        })
-        .then(() => endEditEmployee(companyId, employeeId));
-    };
 
     return (
       <div className={'CompanyCreator'}>
@@ -152,14 +126,20 @@ class EmployeeCreator extends Component {
               <button onClick={() => endEditEmployee(companyId, employeeId)}>
                 Cancel
               </button>
-              <button className={'update'} onClick={updateEmployee}>
+              <button
+                className={'update'}
+                onClick={() => updateEmployee(companyId, employee)}
+              >
                 Update
               </button>
             </div>
           ) : (
             <div>
               <button onClick={() => endAddEmployee(companyId)}>Cancel</button>
-              <button className={'add'} onClick={createEmployee}>
+              <button
+                className={'add'}
+                onClick={() => addEmployee(companyId, employee)}
+              >
                 Save
               </button>
             </div>
