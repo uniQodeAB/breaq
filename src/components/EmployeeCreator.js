@@ -38,7 +38,8 @@ class EmployeeCreator extends Component {
       companyId,
       employeeId,
       endAddEmployee,
-      endEditEmployee
+      endEditEmployee,
+      color
     } = this.props;
 
     const { employee } = this.state;
@@ -136,15 +137,14 @@ class EmployeeCreator extends Component {
             });
           }}
         />
-
-        {(employee.name || employee.project || employee.address) && (
-          <InfoBox
-            title={employee.name}
-            subTitle={employee.project}
-            icon={icons.employee}
-            address={employee.address}
-          />
-        )}
+        {console.log(color)}
+        <InfoBox
+          title={employee.name}
+          subTitle={employee.project}
+          icon={icons.employee}
+          address={employee.address}
+          color={color}
+        />
 
         <div className={'buttons'}>
           {employeeId ? (

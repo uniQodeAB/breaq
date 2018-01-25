@@ -23,7 +23,9 @@ const DashBoard = ({ user, addCompany, initAddCompany }) => {
             {addCompany ? (
               <CompanyCreator />
             ) : (
-              <Button onClick={initAddCompany}>Add company</Button>
+              <Button onClick={initAddCompany}>
+                <i className={'fas fa-plus'} />
+              </Button>
             )}
             <CompanyList />
           </div>

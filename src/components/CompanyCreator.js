@@ -80,10 +80,7 @@ class CompanyCreator extends Component {
     };
 
     return (
-      <div
-        className={'CompanyCreator'}
-        style={{ background: `${company.color}` }}
-      >
+      <div className={'CompanyCreator'}>
         <input
           type={'text'}
           className={'form-input'}
@@ -133,15 +130,13 @@ class CompanyCreator extends Component {
         />
 
         <ColorPicker companyId={companyId} color={company.color} />
-
-        {(company.name || company.address) && (
-          <InfoBox
-            title={company.name}
-            id={'temp'}
-            icon={icons.company}
-            address={company.address}
-          />
-        )}
+        <InfoBox
+          title={company.name}
+          id={'temp'}
+          icon={icons.company}
+          address={company.address}
+          color={company.color}
+        />
 
         <div className={'buttons'}>
           {companyId ? (

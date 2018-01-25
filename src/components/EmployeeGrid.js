@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import '../styles/EmployeeGrid.css';
 import EmployeeInfoBox from '../containers/EmployeeInfoBoxContainer';
 
-const EmployeeGrid = ({ companyId, employees, active }) => (
+const EmployeeGrid = ({ companyId, employees, active, color }) => (
   <div className={'EmployeeGrid'}>
     <div className={`overlay ${active ? 'active' : 'inactive'}`} />
     <div className={'grid'}>
@@ -16,6 +16,7 @@ const EmployeeGrid = ({ companyId, employees, active }) => (
           title={employee.name}
           subTitle={employee.project}
           address={employee.address}
+          color={color}
         />
       ))}
     </div>

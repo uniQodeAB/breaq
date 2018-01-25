@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import EmployeeGrid from './EmployeeGrid';
 import CompanyInfoBox from '../containers/CompanyInfoBoxContainer';
 import EmployeeCreator from '../containers/EmployeeCreatorContainer';
-import Button from './Button';
 import CompanyCreator from '../containers/CompanyCreatorContainer';
 
 import '../styles/Company.css';
@@ -12,27 +11,35 @@ const Company = ({
   company: { id, name, address, employees, color },
   editCompany,
   addEmployee,
-  initAddEmployee,
   editEmployee,
   editEmployeeId
 }) => (
-  <div className={'Company'} style={{ background: `${color}` }}>
+  <div className={'Company'}>
     <div className={'company'}>
       {editCompany ? (
         <CompanyCreator companyId={id} />
       ) : (
-        <CompanyInfoBox companyId={id} title={name} address={address} />
+        <CompanyInfoBox
+          companyId={id}
+          title={name}
+          address={address}
+          color={color}
+        />
       )}
     </div>
     <div className={'employees'}>
       <div>
         {addEmployee || editEmployee ? (
-          <EmployeeCreator companyId={id} employeeId={editEmployeeId} />
+          <EmployeeCreator
+            companyId={id}
+            employeeId={editEmployeeId}
+            color={color}
+          />
         ) : (
           <div>
-            <Button onClick={() => initAddEmployee(id)}>Add employee</Button>
             <EmployeeGrid
               companyId={id}
+              color={color}
               employees={
                 employees
                   ? Object.entries(employees).reduce(

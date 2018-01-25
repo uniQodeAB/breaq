@@ -2,7 +2,6 @@
   .wrapper {
     display: grid;
     grid-template-columns: 3em 1fr;
-    background: #FA6900;
     color: #EFF6FC;
     .side-wrapper {
       display: flex;
@@ -30,7 +29,8 @@
         .controls {
           display: flex;
           flex-direction: column;
-          width: 3em;          
+          width: 3em;    
+          position: relative;      
 
           button {
             cursor: pointer;
@@ -47,6 +47,13 @@
             color: #fff;
             font-size: 1rem;
             min-height: 2em;
+  
+            &.button-employee {
+              position: absolute;
+              top: 2em;
+              left: 3em;
+              bottom: 0;
+            }
           }
         }
       }

@@ -2,9 +2,10 @@
     border: solid 1px;
     border-color: #d3d3d3;
     padding: 0.5em;
+    background: #ffffff;
 
     .employees {
-        div > button.Button {
+        &>div {
             margin-top: 0.5em;
         }
     }

@@ -7,11 +7,20 @@ export const icons = {
   company: 'fa-home'
 };
 
-const InfoBox = ({ title, subTitle, address, icon, onEdit, onDelete }) => (
+const InfoBox = ({
+  title,
+  subTitle,
+  address,
+  icon,
+  onEdit,
+  onDelete,
+  onAdd,
+  color
+}) => (
   <div className={'InfoBox'}>
     <div className={'wrapper'}>
       <div className={'side-wrapper'}>
-        <div className={'side'}>
+        <div className={'side'} style={{ background: `${color}` }}>
           <div className={'icon'}>
             <i className={`fas ${icon}`} aria-hidden={'true'} />
           </div>
@@ -23,8 +32,14 @@ const InfoBox = ({ title, subTitle, address, icon, onEdit, onDelete }) => (
             )}
 
             {onDelete && (
-              <button onClick={onDelete}>
-                <i className={'fas fa-trash-alt'} />
+              <button onClick={onDelete} className={'button-delete'}>
+                <i className={'fas fa-trash-alt button-delete'} />
+              </button>
+            )}
+
+            {onAdd && (
+              <button onClick={onAdd} className={'button-employee'}>
+                <i className={'fas fa-user-plus'} />
               </button>
             )}
           </div>

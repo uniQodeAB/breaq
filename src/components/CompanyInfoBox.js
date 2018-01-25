@@ -8,17 +8,21 @@ const CompanyInfoBox = ({
   initEditCompany,
   firebase,
   auth,
+  addEmployee,
   ...rest
 }) => {
   const deleteCompany = () => {
     firebase.ref(`/users/${auth.uid}/companies/${companyId}`).remove();
   };
 
+  console.log(rest);
+
   return (
     <InfoBox
       icon={icons.company}
       onEdit={() => initEditCompany(companyId)}
       onDelete={deleteCompany}
+      onAdd={() => addEmployee(companyId)}
       {...rest}
     />
   );
