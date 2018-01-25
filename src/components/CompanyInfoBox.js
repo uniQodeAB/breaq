@@ -6,27 +6,18 @@ import InfoBox, { icons } from './InfoBox';
 const CompanyInfoBox = ({
   companyId,
   initEditCompany,
-  firebase,
-  auth,
   addEmployee,
+  deleteCompany,
   ...rest
-}) => {
-  const deleteCompany = () => {
-    firebase.ref(`/users/${auth.uid}/companies/${companyId}`).remove();
-  };
-
-  console.log(rest);
-
-  return (
-    <InfoBox
-      icon={icons.company}
-      onEdit={() => initEditCompany(companyId)}
-      onDelete={deleteCompany}
-      onAdd={() => addEmployee(companyId)}
-      {...rest}
-    />
-  );
-};
+}) => (
+  <InfoBox
+    icon={icons.company}
+    onEdit={() => initEditCompany(companyId)}
+    onDelete={() => deleteCompany(companyId)}
+    onAdd={() => addEmployee(companyId)}
+    {...rest}
+  />
+);
 
 CompanyInfoBox.propTypes = {
   companyId: PropTypes.string.isRequired,

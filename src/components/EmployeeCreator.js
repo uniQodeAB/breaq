@@ -137,7 +137,7 @@ class EmployeeCreator extends Component {
             });
           }}
         />
-        {console.log(color)}
+
         <InfoBox
           title={employee.name}
           subTitle={employee.project}
