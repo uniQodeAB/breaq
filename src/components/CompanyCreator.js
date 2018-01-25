@@ -47,9 +47,12 @@ class CompanyCreator extends Component {
       endEditCompany,
       companyId,
       addCompany,
-      updateCompany
+      updateCompany,
+      test
     } = this.props;
     const { company } = this.state;
+
+    console.log(test);
 
     return (
       <div className={'CompanyCreator'}>

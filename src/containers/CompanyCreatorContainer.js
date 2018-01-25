@@ -4,6 +4,8 @@ import { compose } from 'redux';
 
 import { endAddCompany, endEditCompany } from '../actions/appActions';
 import { addCompany, updateCompany } from '../actions/firebaseActions';
+import deepGet from '../helpers';
+
 import CompanyCreator from '../components/CompanyCreator';
 
 function mapDispatchToProps(dispatch, state) {
@@ -25,11 +27,7 @@ export default compose(
       { companyId }
     ) => ({
       auth,
-      company:
-        data.users &&
-        data.users[auth.uid] &&
-        data.users[auth.uid].companies &&
-        data.users[auth.uid].companies[companyId],
+      company: deepGet(data, ['users', auth.uid, 'companies', companyId], {}),
       color: companyId
         ? companies[companyId] && companies[companyId].color
         : color

@@ -4,6 +4,8 @@ import { compose } from 'redux';
 
 import { endAddEmployee, endEditEmployee } from '../actions/appActions';
 import { addEmployee, updateEmployee } from '../actions/firebaseActions';
+import deepGet from '../helpers';
+
 import EmployeeCreator from '../components/EmployeeCreator';
 
 function mapDispatchToProps(dispatch, state) {
@@ -30,14 +32,15 @@ export default compose(
       : [];
   }),
   connect(
-    ({ firebase, firebase: { data, auth } }, { companyId, employeeId }) => ({
-      employee:
-        data.users &&
-        data.users[auth.uid] &&
-        data.users[auth.uid].companies &&
-        data.users[auth.uid].companies[companyId] &&
-        data.users[auth.uid].companies[companyId].employees &&
-        data.users[auth.uid].companies[companyId].employees[employeeId],
+    (
+      { firebase, firebase: { data, auth, ref } },
+      { companyId, employeeId }
+    ) => ({
+      employee: deepGet(
+        data,
+        ['users', auth.uid, 'companies', companyId, 'employees', employeeId],
+        {}
+      ),
       auth
     }),
     mapDispatchToProps

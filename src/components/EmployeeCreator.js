@@ -42,10 +42,13 @@ class EmployeeCreator extends Component {
       updateEmployee,
       endAddEmployee,
       endEditEmployee,
-      color
+      color,
+      test
     } = this.props;
 
     const { employee } = this.state;
+
+    console.log(test);
 
     return (
       <div className={'CompanyCreator'}>

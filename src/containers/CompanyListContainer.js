@@ -2,6 +2,7 @@ import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
+import deepGet from '../helpers';
 import CompanyList from '../components/CompanyList';
 
 export default compose(
@@ -11,8 +12,6 @@ export default compose(
     return auth ? [`users/${auth.uid}/companies/`] : [];
   }),
   connect(({ firebase: { data, auth } }) => ({
-    companies:
-      (data.users && data.users[auth.uid] && data.users[auth.uid].companies) ||
-      {}
+    companies: deepGet(data, ['users', auth.uid, 'companies'], {})
   }))
 )(CompanyList);
