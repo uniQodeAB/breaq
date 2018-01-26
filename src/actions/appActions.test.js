@@ -7,63 +7,145 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('appActions', () => {
-  it('should create an action to edit home base', () => {
+  let store;
+
+  beforeEach(() => {
+    store = mockStore({});
+  });
+
+  it('should create an action to add a company', () => {
     const expectedAction = [
       {
-        type: actions.INIT_EDIT_HOME_BASE
+        type: actions.INIT_ADD_COMPANY
       }
     ];
-    const store = mockStore({});
 
-    store.dispatch(actions.initEditHomeBase());
+    store.dispatch(actions.initAddCompany());
     expect(store.getActions()).toEqual(expectedAction);
   });
 
-  it('should create an action to cancel edit home base', () => {
+  it('should create an action to end adding a company', () => {
     const expectedAction = [
       {
-        type: actions.CANCEL_EDIT_HOME_BASE
+        type: actions.END_ADD_COMPANY
       }
     ];
-    const store = mockStore({});
 
-    store.dispatch(actions.cancelEditHomeBase());
+    store.dispatch(actions.endAddCompany());
     expect(store.getActions()).toEqual(expectedAction);
   });
 
-  it('should create an action to add an employee', () => {
+  it('should create an action to init editing a company', () => {
     const expectedAction = [
       {
-        type: actions.INIT_ADD_EMPLOYEE
+        type: actions.INIT_EDIT_COMPANY,
+        payload: {
+          companyId: 'test id'
+        }
       }
     ];
-    const store = mockStore({});
 
-    store.dispatch(actions.initAddEmployee());
+    store.dispatch(actions.initEditCompany('test id'));
     expect(store.getActions()).toEqual(expectedAction);
   });
 
-  it('should create an action to cancel add or edit of an employee', () => {
+  it('should create an action to end editing a company', () => {
     const expectedAction = [
       {
-        type: actions.CANCEL_ADD_EDIT_EMPLOYEE
+        type: actions.END_EDIT_COMPANY,
+        payload: {
+          companyId: 'test id'
+        }
       }
     ];
-    const store = mockStore({});
 
-    store.dispatch(actions.cancelAddEditEmployee());
+    store.dispatch(actions.endEditCompany('test id'));
     expect(store.getActions()).toEqual(expectedAction);
   });
 
-  it('should create an action to edit an employee', () => {
+  it('should create an action to init adding an employee', () => {
     const expectedAction = [
       {
-        type: actions.INIT_EDIT_EMPLOYEE
+        type: actions.INIT_ADD_EMPLOYEE,
+        payload: {
+          companyId: 'test id'
+        }
       }
     ];
-    const store = mockStore({});
 
-    store.dispatch(actions.initEditEmployee());
+    store.dispatch(actions.initAddEmployee('test id'));
+    expect(store.getActions()).toEqual(expectedAction);
+  });
+
+  it('should create an action to end adding an employee', () => {
+    const expectedAction = [
+      {
+        type: actions.END_ADD_EMPLOYEE,
+        payload: {
+          companyId: 'test id'
+        }
+      }
+    ];
+
+    store.dispatch(actions.endAddEmployee('test id'));
+    expect(store.getActions()).toEqual(expectedAction);
+  });
+
+  it('should create an action to init editing an employee', () => {
+    const expectedAction = [
+      {
+        type: actions.INIT_EDIT_EMPLOYEE,
+        payload: {
+          companyId: 'test id',
+          employeeId: 'employee id'
+        }
+      }
+    ];
+
+    store.dispatch(actions.initEditEmployee('test id', 'employee id'));
+    expect(store.getActions()).toEqual(expectedAction);
+  });
+
+  it('should create an action to end editing an employee', () => {
+    const expectedAction = [
+      {
+        type: actions.END_EDIT_EMPLOYEE,
+        payload: {
+          companyId: 'test id',
+          employeeId: 'employee id'
+        }
+      }
+    ];
+
+    store.dispatch(actions.endEditEmployee('test id', 'employee id'));
+    expect(store.getActions()).toEqual(expectedAction);
+  });
+
+  it('should create an action to show a company', () => {
+    const expectedAction = [
+      {
+        type: actions.SHOW_COMPANY,
+        payload: {
+          companyId: 'test id'
+        }
+      }
+    ];
+
+    store.dispatch(actions.showCompany('test id'));
+    expect(store.getActions()).toEqual(expectedAction);
+  });
+
+  it('should create an action to show a company', () => {
+    const expectedAction = [
+      {
+        type: actions.HIDE_COMPANY,
+        payload: {
+          companyId: 'test id'
+        }
+      }
+    ];
+
+    store.dispatch(actions.hideCompany('test id'));
     expect(store.getActions()).toEqual(expectedAction);
   });
 });

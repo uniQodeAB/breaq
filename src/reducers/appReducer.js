@@ -7,8 +7,6 @@ import {
   END_ADD_EMPLOYEE,
   INIT_EDIT_EMPLOYEE,
   END_EDIT_EMPLOYEE,
-  ADD_COLOR,
-  CHANGE_COLOR,
   HIDE_COMPANY,
   SHOW_COMPANY
 } from '../actions/appActions';
@@ -31,7 +29,7 @@ export default function appReducer(state = initialState, action) {
         ...state,
         companies: {
           ...state.companies,
-          [action.payload]: {
+          [action.payload.companyId]: {
             addEmployee: true
           }
         }
@@ -42,7 +40,7 @@ export default function appReducer(state = initialState, action) {
         ...state,
         companies: {
           ...state.companies,
-          [action.payload]: {
+          [action.payload.companyId]: {
             addEmployee: false
           }
         }
@@ -53,7 +51,7 @@ export default function appReducer(state = initialState, action) {
         ...state,
         companies: {
           ...state.companies,
-          [action.payload]: {
+          [action.payload.companyId]: {
             editCompany: true
           }
         }
@@ -64,7 +62,7 @@ export default function appReducer(state = initialState, action) {
         ...state,
         companies: {
           ...state.companies,
-          [action.payload]: {
+          [action.payload.companyId]: {
             editCompany: false
           }
         }
@@ -90,24 +88,6 @@ export default function appReducer(state = initialState, action) {
           [action.payload.companyId]: {
             editEmployee: false,
             editEmployeeId: ''
-          }
-        }
-      };
-    }
-    case ADD_COLOR: {
-      return {
-        ...state,
-        color: action.payload.color
-      };
-    }
-    case CHANGE_COLOR: {
-      return {
-        ...state,
-        companies: {
-          ...state.companies,
-          [action.payload.companyId]: {
-            ...state.companies[action.payload.companyId],
-            color: action.payload.color
           }
         }
       };
