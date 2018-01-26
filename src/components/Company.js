@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import EmployeeGrid from './EmployeeGrid';
 import CompanyInfoBox from '../containers/CompanyInfoBoxContainer';
 import EmployeeCreator from '../containers/EmployeeCreatorContainer';
-import CompanyCreator from '../containers/CompanyCreatorContainer';
+import CompanyEditor from '../containers/CompanyEditorContainer';
 
 import '../styles/Company.css';
 
@@ -17,7 +17,7 @@ const Company = ({
   <div className={'Company'}>
     <div className={'company'}>
       {editCompany ? (
-        <CompanyCreator companyId={id} />
+        <CompanyEditor companyId={id} />
       ) : (
         <CompanyInfoBox
           companyId={id}

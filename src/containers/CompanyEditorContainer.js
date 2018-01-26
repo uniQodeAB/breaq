@@ -6,7 +6,7 @@ import { endAddCompany, endEditCompany } from '../actions/appActions';
 import { addCompany, updateCompany } from '../actions/firebaseActions';
 import deepGet from '../helpers';
 
-import CompanyCreator from '../components/CompanyCreator';
+import CompanyEditor from '../components/CompanyEditor';
 
 function mapDispatchToProps(dispatch, state) {
   const { currentUser } = state.firebase.auth();
@@ -34,4 +34,4 @@ export default compose(
     }),
     mapDispatchToProps
   )
-)(CompanyCreator);
+)(CompanyEditor);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import SearchBox from './SearchBox';
+import { EditorSearchBox, EditorButtons, EditorInput } from './Editor';
 import InfoBox, { icons } from './InfoBox';
 
 import '../styles/CompanyCreator.css';
@@ -48,13 +48,9 @@ class EmployeeCreator extends Component {
 
     const { employee } = this.state;
 
-    console.log(test);
-
     return (
       <div className={'CompanyCreator'}>
-        <input
-          type={'text'}
-          className={'form-input'}
+        <EditorInput
           placeholder={placeholders.name}
           value={employee.name}
           onChange={e =>
@@ -67,9 +63,7 @@ class EmployeeCreator extends Component {
           }
         />
 
-        <input
-          type={'text'}
-          className={'form-input'}
+        <EditorInput
           placeholder={placeholders.project}
           value={employee.project}
           onChange={e =>
@@ -82,34 +76,14 @@ class EmployeeCreator extends Component {
           }
         />
 
-        <SearchBox
-          placeholder={placeholders.address}
-          onChangePlace={(
-            {
-              street_number = { longName: '' },
-              route = { longName: '' },
-              postal_code = { longName: '' },
-              postal_town = { longName: '' },
-              administrative_area_level_1 = { longName: '' },
-              country = { longName: '' }
-            },
-            geometry = { location: {} }
-          ) => {
+        <EditorSearchBox
+          placeholder="Employee address"
+          addressCallback={address => {
             this.setState({
               employee: {
                 ...employee,
-                address: {
-                  streetAddress: `${street_number.longName} ${route.longName}`,
-                  postalAddress: `${postal_code.longName} ${
-                    postal_town.longName
-                  }`,
-                  prefecture: administrative_area_level_1.longName,
-                  country: country.longName
-                },
-                location: {
-                  lat: geometry.location ? geometry.location.lat() : {},
-                  lng: geometry.location ? geometry.location.lng() : {}
-                }
+                address: address.address,
+                location: address.location
               }
             });
           }}
@@ -123,31 +97,13 @@ class EmployeeCreator extends Component {
           color={color}
         />
 
-        <div className={'buttons'}>
-          {employeeId ? (
-            <div>
-              <button onClick={() => endEditEmployee(companyId, employeeId)}>
-                Cancel
-              </button>
-              <button
-                className={'update'}
-                onClick={() => updateEmployee(companyId, employee)}
-              >
-                Update
-              </button>
-            </div>
-          ) : (
-            <div>
-              <button onClick={() => endAddEmployee(companyId)}>Cancel</button>
-              <button
-                className={'add'}
-                onClick={() => addEmployee(companyId, employee)}
-              >
-                Save
-              </button>
-            </div>
-          )}
-        </div>
+        <EditorButtons
+          isUpdate={!!employeeId}
+          onCancelUpdate={() => endEditEmployee(companyId, employeeId)}
+          onUpdate={() => updateEmployee(companyId, employee)}
+          onCancelAdd={() => endAddEmployee(companyId)}
+          onAdd={() => addEmployee(companyId, employee)}
+        />
       </div>
     );
   }

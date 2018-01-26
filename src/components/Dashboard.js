@@ -4,7 +4,7 @@ import { isLoaded } from 'react-redux-firebase';
 import PropTypes from 'prop-types';
 import MapContainer from '../containers/MapContainer';
 import CompanyList from '../containers/CompanyListContainer';
-import CompanyCreator from '../containers/CompanyCreatorContainer';
+import CompanyEditor from '../containers/CompanyEditorContainer';
 import Button from './Button';
 
 import '../styles/Dashboard.css';
@@ -21,7 +21,7 @@ const DashBoard = ({ user, addCompany, initAddCompany }) => {
         <div className={'search-container'}>
           <div>
             {addCompany ? (
-              <CompanyCreator />
+              <CompanyEditor />
             ) : (
               <Button onClick={initAddCompany}>
                 <i className={'fas fa-plus'} />
