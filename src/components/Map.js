@@ -4,7 +4,6 @@ import { Marker } from 'react-google-maps';
 import PropTypes from 'prop-types';
 
 import MapComponent from './MapComponent';
-import img from '../resources/Arrow_1.svg';
 
 const Map = ({ companies, filter }) => (
   <MapComponent>
@@ -46,9 +45,6 @@ const Map = ({ companies, filter }) => (
               key={location.id}
               position={location.location}
               label={location.label}
-              icon={{
-                url: img // pass your image here
-              }}
             />
           ))}
   </MapComponent>
