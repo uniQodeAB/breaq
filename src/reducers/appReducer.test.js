@@ -1,93 +1,398 @@
-import reducer from './appReducer';
-import * as types from '../actions/appActions';
+import reducer, { initialState } from './appReducer';
+import * as actions from '../actions/appActions';
 
 describe('appReducer', () => {
-  const initialState = {
-    editHomeBase: false,
-    addMode: false,
-    editMode: false,
-    employeeId: ''
-  };
-
-  it('should return the initial state', () => {
+  it('should return the initial state if no matching action', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it(`should handle ${types.INIT_EDIT_HOME_BASE} and ${
-    types.CANCEL_EDIT_HOME_BASE
-  }`, () => {
-    const expectedState1 = {
-      editHomeBase: true,
-      addMode: false,
-      editMode: false,
-      employeeId: ''
-    };
-    const expectedState2 = {
-      editHomeBase: false,
-      addMode: false,
-      editMode: false,
-      employeeId: ''
+  function initAddCompany(prevState) {
+    return reducer(prevState, {
+      type: actions.INIT_ADD_COMPANY
+    });
+  }
+  it(`should handle ${actions.INIT_ADD_COMPANY}`, () => {
+    const expectedState = {
+      addCompany: true,
+      companies: {},
+      filter: []
     };
 
-    expect(
-      reducer(initialState, {
-        type: types.INIT_EDIT_HOME_BASE
-      })
-    ).toEqual(expectedState1);
+    expect(initAddCompany(initialState)).toEqual(expectedState);
 
-    expect(
-      reducer(expectedState1, {
-        type: types.CANCEL_EDIT_HOME_BASE
-      })
-    ).toEqual(expectedState2);
-
-    // Should not have changed the original state
-    expect(expectedState1.editHomeBase).toBe(true);
+    expect(expectedState).not.toBe(initialState);
   });
 
-  it(`should handle ${types.INIT_ADD_EMPLOYEE}, ${
-    types.CANCEL_ADD_EDIT_EMPLOYEE
-  } and ${types.INIT_EDIT_EMPLOYEE}`, () => {
-    const expectedState1 = {
-      editHomeBase: false,
-      addMode: true,
-      editMode: false,
-      employeeId: ''
+  function endAddCompany(prevState) {
+    return reducer(prevState, {
+      type: actions.END_ADD_COMPANY
+    });
+  }
+  it(`should handle ${actions.END_ADD_COMPANY}`, () => {
+    const expectedState = {
+      addCompany: false,
+      companies: {},
+      filter: []
     };
-    const expectedState2 = {
-      editHomeBase: false,
-      addMode: false,
-      editMode: false,
-      employeeId: ''
+
+    expect(endAddCompany(initialState)).toEqual(expectedState);
+
+    expect(expectedState).not.toBe(initialState);
+  });
+
+  function initEditCompany(prevState) {
+    return reducer(prevState, {
+      type: actions.INIT_EDIT_COMPANY,
+      payload: {
+        companyId: 'test id'
+      }
+    });
+  }
+  it(`should handle ${actions.INIT_EDIT_COMPANY}`, () => {
+    const expectedState = {
+      addCompany: false,
+      companies: {
+        'test id': {
+          editCompany: true
+        }
+      },
+      filter: []
     };
-    const expectedState3 = {
-      editHomeBase: false,
-      addMode: false,
-      editMode: true,
-      employeeId: 'employee_id'
+
+    expect(initEditCompany(initialState)).toEqual(expectedState);
+
+    expect(expectedState).not.toBe(initialState);
+  });
+
+  function endEditCompany(prevState) {
+    return reducer(prevState, {
+      type: actions.END_EDIT_COMPANY,
+      payload: {
+        companyId: 'test id'
+      }
+    });
+  }
+  it(`should handle ${actions.END_EDIT_COMPANY}`, () => {
+    const expectedState = {
+      addCompany: false,
+      companies: {
+        'test id': {
+          editCompany: false
+        }
+      },
+      filter: []
+    };
+
+    expect(endEditCompany(initialState)).toEqual(expectedState);
+
+    expect(expectedState).not.toBe(initialState);
+  });
+
+  function initAddEmployee(prevState) {
+    return reducer(prevState, {
+      type: actions.INIT_ADD_EMPLOYEE,
+      payload: {
+        companyId: 'test id',
+        employeeId: 'employee id'
+      }
+    });
+  }
+  it(`should handle ${actions.INIT_ADD_EMPLOYEE}`, () => {
+    const expectedState = {
+      addCompany: false,
+      companies: {
+        'test id': {
+          addEmployee: true
+        }
+      },
+      filter: []
+    };
+
+    expect(initAddEmployee(initialState)).toEqual(expectedState);
+
+    expect(expectedState).not.toBe(initialState);
+  });
+
+  function endAddEmployee(prevState) {
+    return reducer(prevState, {
+      type: actions.END_ADD_EMPLOYEE,
+      payload: {
+        companyId: 'test id',
+        employeeId: 'employee id'
+      }
+    });
+  }
+  it(`should handle ${actions.END_ADD_EMPLOYEE}`, () => {
+    const expectedState = {
+      addCompany: false,
+      companies: {
+        'test id': {
+          addEmployee: false
+        }
+      },
+      filter: []
+    };
+
+    expect(endAddEmployee(initialState)).toEqual(expectedState);
+
+    expect(expectedState).not.toBe(initialState);
+  });
+
+  function initEditEmployee(prevState) {
+    return reducer(prevState, {
+      type: actions.INIT_EDIT_EMPLOYEE,
+      payload: {
+        companyId: 'test id',
+        employeeId: 'employee id'
+      }
+    });
+  }
+  it(`should handle ${actions.INIT_EDIT_EMPLOYEE}`, () => {
+    const expectedState = {
+      addCompany: false,
+      companies: {
+        'test id': {
+          editEmployee: true,
+          editEmployeeId: 'employee id'
+        }
+      },
+      filter: []
+    };
+
+    expect(initEditEmployee(initialState)).toEqual(expectedState);
+
+    expect(expectedState).not.toBe(initialState);
+  });
+
+  function endEditEmployee(prevState) {
+    return reducer(prevState, {
+      type: actions.END_EDIT_EMPLOYEE,
+      payload: {
+        companyId: 'test id',
+        employeeId: 'employee id'
+      }
+    });
+  }
+  it(`should handle ${actions.END_EDIT_EMPLOYEE}`, () => {
+    const expectedState = {
+      addCompany: false,
+      companies: {
+        'test id': {
+          editEmployee: false,
+          editEmployeeId: ''
+        }
+      },
+      filter: []
+    };
+
+    expect(endEditEmployee(initialState)).toEqual(expectedState);
+
+    expect(expectedState).not.toBe(initialState);
+  });
+
+  it(`should handle ${actions.SHOW_COMPANY}`, () => {
+    const expectedState = {
+      addCompany: false,
+      companies: {},
+      filter: []
     };
 
     expect(
       reducer(initialState, {
-        type: types.INIT_ADD_EMPLOYEE
+        type: actions.SHOW_COMPANY,
+        payload: {
+          companyId: 'test id'
+        }
       })
-    ).toEqual(expectedState1);
+    ).toEqual(expectedState);
+
+    expect(expectedState).not.toBe(initialState);
+  });
+
+  it(`should handle ${actions.HIDE_COMPANY}`, () => {
+    const expectedState = {
+      addCompany: false,
+      companies: {},
+      filter: ['test id']
+    };
 
     expect(
-      reducer(expectedState1, {
-        type: types.CANCEL_ADD_EDIT_EMPLOYEE
+      reducer(initialState, {
+        type: actions.HIDE_COMPANY,
+        payload: {
+          companyId: 'test id'
+        }
       })
-    ).toEqual(expectedState2);
+    ).toEqual(expectedState);
 
-    expect(
-      reducer(expectedState2, {
-        type: types.INIT_EDIT_EMPLOYEE,
-        payload: 'employee_id'
-      })
-    ).toEqual(expectedState3);
+    expect(expectedState).not.toBe(initialState);
+  });
 
-    // Should not have changed the original state
-    expect(expectedState1.addMode).toBe(true);
-    expect(expectedState2.editMode).toBe(false);
+  describe('a simple scenario', () => {
+    let state;
+
+    it('1. should handle init add company', () => {
+      state = initAddCompany(initialState);
+
+      expect(state).toEqual({
+        addCompany: true,
+        companies: {},
+        filter: []
+      });
+    });
+
+    it('2. should handle cancel add company', () => {
+      state = endAddCompany(state);
+
+      expect(state).toEqual({
+        addCompany: false,
+        companies: {},
+        filter: []
+      });
+    });
+
+    it('3. should handle init edit company', () => {
+      state = initEditCompany(state);
+      expect(state).toEqual({
+        addCompany: false,
+        companies: {
+          'test id': {
+            editCompany: true
+          }
+        },
+        filter: []
+      });
+    });
+
+    it('4. should handle end edit company', () => {
+      state = endEditCompany(state);
+      expect(state).toEqual({
+        addCompany: false,
+        companies: {
+          'test id': {
+            editCompany: false
+          }
+        },
+        filter: []
+      });
+    });
+
+    it('5. should handle init add employee', () => {
+      state = initAddEmployee(state);
+      expect(state).toEqual({
+        addCompany: false,
+        companies: {
+          'test id': {
+            editCompany: false,
+            addEmployee: true
+          }
+        },
+        filter: []
+      });
+    });
+
+    it('6. should handle end add employee', () => {
+      state = endAddEmployee(state);
+      expect(state).toEqual({
+        addCompany: false,
+        companies: {
+          'test id': {
+            editCompany: false,
+            addEmployee: false
+          }
+        },
+        filter: []
+      });
+    });
+
+    it('7. should handle init edit employee', () => {
+      state = initEditEmployee(state);
+      expect(state).toEqual({
+        addCompany: false,
+        companies: {
+          'test id': {
+            editCompany: false,
+            addEmployee: false,
+            editEmployee: true,
+            editEmployeeId: 'employee id'
+          }
+        },
+        filter: []
+      });
+    });
+
+    it('8. should handle end edit employee', () => {
+      state = endEditEmployee(state);
+      expect(state).toEqual({
+        addCompany: false,
+        companies: {
+          'test id': {
+            editCompany: false,
+            addEmployee: false,
+            editEmployee: false,
+            editEmployeeId: ''
+          }
+        },
+        filter: []
+      });
+    });
+
+    it('8. should handle three consecutive hide company commands', () => {
+      state = reducer(state, {
+        type: actions.HIDE_COMPANY,
+        payload: {
+          companyId: 'id1'
+        }
+      });
+
+      state = reducer(state, {
+        type: actions.HIDE_COMPANY,
+        payload: {
+          companyId: 'id2'
+        }
+      });
+
+      state = reducer(state, {
+        type: actions.HIDE_COMPANY,
+        payload: {
+          companyId: 'id3'
+        }
+      });
+
+      expect(state).toEqual({
+        addCompany: false,
+        companies: {
+          'test id': {
+            editCompany: false,
+            addEmployee: false,
+            editEmployee: false,
+            editEmployeeId: ''
+          }
+        },
+        filter: ['id1', 'id2', 'id3']
+      });
+    });
+
+    it('8. should handle show company action for id2', () => {
+      state = reducer(state, {
+        type: actions.SHOW_COMPANY,
+        payload: {
+          companyId: 'id2'
+        }
+      });
+
+      expect(state).toEqual({
+        addCompany: false,
+        companies: {
+          'test id': {
+            editCompany: false,
+            addEmployee: false,
+            editEmployee: false,
+            editEmployeeId: ''
+          }
+        },
+        filter: ['id1', 'id3']
+      });
+    });
   });
 });

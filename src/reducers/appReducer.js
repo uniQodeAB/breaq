@@ -11,7 +11,7 @@ import {
   SHOW_COMPANY
 } from '../actions/appActions';
 
-const initialState = {
+export const initialState = {
   addCompany: false,
   companies: {},
   filter: []
@@ -30,6 +30,7 @@ export default function appReducer(state = initialState, action) {
         companies: {
           ...state.companies,
           [action.payload.companyId]: {
+            ...state.companies[action.payload.companyId],
             addEmployee: true
           }
         }
@@ -41,6 +42,7 @@ export default function appReducer(state = initialState, action) {
         companies: {
           ...state.companies,
           [action.payload.companyId]: {
+            ...state.companies[action.payload.companyId],
             addEmployee: false
           }
         }
@@ -74,6 +76,7 @@ export default function appReducer(state = initialState, action) {
         companies: {
           ...state.companies,
           [action.payload.companyId]: {
+            ...state.companies[action.payload.companyId],
             editEmployee: true,
             editEmployeeId: action.payload.employeeId
           }
@@ -86,6 +89,7 @@ export default function appReducer(state = initialState, action) {
         companies: {
           ...state.companies,
           [action.payload.companyId]: {
+            ...state.companies[action.payload.companyId],
             editEmployee: false,
             editEmployeeId: ''
           }
