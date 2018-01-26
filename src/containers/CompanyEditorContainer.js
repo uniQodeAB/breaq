@@ -8,12 +8,10 @@ import deepGet from '../helpers';
 
 import CompanyEditor from '../components/CompanyEditor';
 
-function mapDispatchToProps(dispatch, state) {
-  const { currentUser } = state.firebase.auth();
-
+function mapDispatchToProps(dispatch) {
   return {
-    addCompany: company => dispatch(addCompany(currentUser, company)),
-    updateCompany: company => dispatch(updateCompany(currentUser, company)),
+    addCompany: company => dispatch(addCompany(company)),
+    updateCompany: company => dispatch(updateCompany(company)),
     endAddCompany: () => dispatch(endAddCompany()),
     endEditCompany: id => dispatch(endEditCompany(id))
   };

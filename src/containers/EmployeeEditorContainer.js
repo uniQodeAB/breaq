@@ -8,14 +8,12 @@ import deepGet from '../helpers';
 
 import EmployeeEditor from '../components/EmployeeEditor';
 
-function mapDispatchToProps(dispatch, state) {
-  const { currentUser } = state.firebase.auth();
-
+function mapDispatchToProps(dispatch) {
   return {
     addEmployee: (companyId, employee) =>
-      dispatch(addEmployee(currentUser, companyId, employee)),
+      dispatch(addEmployee(companyId, employee)),
     updateEmployee: (companyId, employee) =>
-      dispatch(updateEmployee(currentUser, companyId, employee)),
+      dispatch(updateEmployee(companyId, employee)),
     endAddEmployee: companyId => dispatch(endAddEmployee(companyId)),
     endEditEmployee: (companyId, employeeId) =>
       dispatch(endEditEmployee(companyId, employeeId))

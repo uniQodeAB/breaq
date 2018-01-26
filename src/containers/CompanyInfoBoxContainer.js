@@ -6,11 +6,9 @@ import { deleteCompany } from '../actions/firebaseActions';
 
 import CompanyInfoBox from '../components/CompanyInfoBox';
 
-function mapDispatchToProps(dispatch, state) {
-  const { currentUser } = state.firebase.auth();
-
+function mapDispatchToProps(dispatch) {
   return {
-    deleteCompany: companyId => dispatch(deleteCompany(currentUser, companyId)),
+    deleteCompany: companyId => dispatch(deleteCompany(companyId)),
     addEmployee: companyId => dispatch(initAddEmployee(companyId)),
     initEditCompany: companyId => dispatch(initEditCompany(companyId))
   };
