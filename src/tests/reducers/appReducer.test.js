@@ -1,5 +1,5 @@
-import reducer, { initialState } from './appReducer';
-import * as actions from '../actions/appActions';
+import reducer, { initialState } from '../../reducers/appReducer';
+import * as actions from '../../actions/appActions';
 
 describe('appReducer', () => {
   it('should return the initial state if no matching action', () => {
