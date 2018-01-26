@@ -5,7 +5,7 @@ import InfoBox, { icons } from './InfoBox';
 import { EditorSearchBox, EditorButtons, EditorInput } from './Editor';
 import ColorPicker from './ColorPicker';
 
-import '../styles/CompanyCreator.css';
+import '../styles/Editor.css';
 
 class CompanyEditor extends Component {
   constructor(props) {
@@ -39,7 +39,7 @@ class CompanyEditor extends Component {
     const { company } = this.state;
 
     return (
-      <div className={'CompanyCreator'}>
+      <div className={'Editor'}>
         <EditorInput
           placeholder={placeholders.name}
           value={company.name}

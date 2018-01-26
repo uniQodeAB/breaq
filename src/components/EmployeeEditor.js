@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { EditorSearchBox, EditorButtons, EditorInput } from './Editor';
 import InfoBox, { icons } from './InfoBox';
 
-import '../styles/CompanyCreator.css';
+import '../styles/Editor.css';
 
 const initialState = {
   employee: {
@@ -49,7 +49,7 @@ class EmployeeCreator extends Component {
     const { employee } = this.state;
 
     return (
-      <div className={'CompanyCreator'}>
+      <div className={'Editor'}>
         <EditorInput
           placeholder={placeholders.name}
           value={employee.name}
