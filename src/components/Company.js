@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import EmployeeGrid from './EmployeeGrid';
 import CompanyInfoBox from '../containers/CompanyInfoBoxContainer';
-import EmployeeCreator from '../containers/EmployeeCreatorContainer';
+import EmployeeEditor from '../containers/EmployeeEditorContainer';
 import CompanyEditor from '../containers/CompanyEditorContainer';
 
 import '../styles/Company.css';
@@ -30,7 +30,7 @@ const Company = ({
     <div className={'employees'}>
       <div>
         {addEmployee || editEmployee ? (
-          <EmployeeCreator
+          <EmployeeEditor
             companyId={id}
             employeeId={editEmployeeId}
             color={color}

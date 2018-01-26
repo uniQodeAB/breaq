@@ -6,7 +6,7 @@ import { endAddEmployee, endEditEmployee } from '../actions/appActions';
 import { addEmployee, updateEmployee } from '../actions/firebaseActions';
 import deepGet from '../helpers';
 
-import EmployeeCreator from '../components/EmployeeCreator';
+import EmployeeEditor from '../components/EmployeeEditor';
 
 function mapDispatchToProps(dispatch, state) {
   const { currentUser } = state.firebase.auth();
@@ -45,4 +45,4 @@ export default compose(
     }),
     mapDispatchToProps
   )
-)(EmployeeCreator);
+)(EmployeeEditor);
