@@ -10,7 +10,7 @@ class ColorPicker extends Component {
   constructor(props) {
     super(props);
 
-    const { color, addColor } = props;
+    const { color, onColorChange } = props;
 
     if (color) {
       this.state = {
@@ -26,12 +26,12 @@ class ColorPicker extends Component {
         selectedColor,
         toggleColapse: false
       };
-      addColor(selectedColor);
+      onColorChange(selectedColor);
     }
   }
 
   render() {
-    const { companyId, changeColor, addColor } = this.props;
+    const { companyId, onColorChange } = this.props;
     const { selectedColor, toggleColapse } = this.state;
 
     const handleClose = () => {
@@ -67,11 +67,7 @@ class ColorPicker extends Component {
                       style={{ background: `${color}` }}
                       role={'button'}
                       onClick={() => {
-                        if (companyId) {
-                          changeColor(companyId, color);
-                        } else {
-                          addColor(color);
-                        }
+                        onColorChange(color);
 
                         this.setState({
                           selectedColor: color,
