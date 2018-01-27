@@ -64,6 +64,6 @@ export const EditorInput = ({ placeholder, value, onChange }) => (
     className={'form-input'}
     placeholder={placeholder}
     value={value}
-    onChange={onChange}
+    onChange={e => onChange(e.target.value)}
   />
 );

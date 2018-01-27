@@ -12,6 +12,7 @@ class CompanyEditor extends Component {
     super(props);
 
     const { company } = props;
+
     if (company && company.id) {
       this.state = {
         company: {
@@ -43,11 +44,11 @@ class CompanyEditor extends Component {
         <EditorInput
           placeholder={placeholders.name}
           value={company.name}
-          onChange={e =>
+          onChange={name =>
             this.setState({
               company: {
                 ...company,
-                name: e.target.value
+                name
               }
             })
           }
@@ -99,6 +100,7 @@ class CompanyEditor extends Component {
 
 CompanyEditor.propTypes = {
   company: PropTypes.shape({
+    id: PropTypes.string,
     name: PropTypes.string,
     project: PropTypes.string,
     address: PropTypes.shape({
@@ -106,23 +108,21 @@ CompanyEditor.propTypes = {
       postalAddress: PropTypes.string,
       prefecture: PropTypes.string,
       country: PropTypes.string
-    })
+    }),
+    color: PropTypes.string
   }),
-  companyId: PropTypes.string,
   placeholders: PropTypes.shape({
     name: PropTypes.string,
     address: PropTypes.string
   }),
-  firebase: PropTypes.shape().isRequired,
-  auth: PropTypes.shape().isRequired,
   endAddCompany: PropTypes.func.isRequired,
   endEditCompany: PropTypes.func.isRequired,
-  color: PropTypes.string.isRequired
+  addCompany: PropTypes.func.isRequired,
+  updateCompany: PropTypes.func.isRequired
 };
 
 CompanyEditor.defaultProps = {
   company: {},
-  companyId: undefined,
   placeholders: {
     name: 'Name',
     address: 'Address'
