@@ -11,26 +11,10 @@ jest.mock('react-redux-firebase', () => ({
 }));
 
 jest.mock('../../containers/MapContainer', () => 'MapContainer');
-jest.mock(
-  '../../containers/EmployeeInfoBoxContainer',
-  () => 'EmployeeInfoBoxContainer'
-);
-jest.mock(
-  '../../containers/CompanyInfoBoxContainer',
-  () => 'CompanyInfoBoxContainer'
-);
-jest.mock(
-  '../../containers/EmployeeCreatorContainer',
-  () => 'EmployeeCreatorContainer'
-);
-jest.mock(
-  '../../containers/CompanyListContainer',
-  () => 'CompanyListContainer'
-);
-jest.mock(
-  '../../containers/CompanyCreatorContainer',
-  () => 'CompanyCreatorContainer'
-);
+jest.mock('../../containers/CompanyListContainer', () => 'CompanyList');
+jest.mock('../../containers/CompanyEditorContainer', () => 'CompanyEditor');
+
+jest.mock('../../containers/CompanyLegendContainer', () => 'CompanyLegend');
 
 isLoaded.mockReturnValueOnce(false).mockReturnValue(true);
 
@@ -76,7 +60,7 @@ describe('Dashboard', () => {
     });
 
     it('should always render a `CompanyListContainer`', () => {
-      expect(dashboard.find('CompanyListContainer').length).toBe(1);
+      expect(dashboard.find('CompanyList').length).toBe(1);
     });
 
     describe('when addCompany is false', () => {
@@ -104,8 +88,8 @@ describe('Dashboard', () => {
           <Dashboard addCompany initAddCompany={jest.fn()} />
         );
       });
-      it('should render a `CompanyCreator`', () => {
-        expect(dashboard.find('CompanyCreatorContainer').length).toBe(1);
+      it('should render a `CompanyEditor`', () => {
+        expect(dashboard.find('CompanyEditor').length).toBe(1);
       });
     });
   });
