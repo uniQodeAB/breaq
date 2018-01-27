@@ -16,5 +16,5 @@ function mapDispatchToProps(dispatch) {
 
 export default compose(
   firebaseConnect(),
-  connect(() => {}, mapDispatchToProps)
+  connect(() => ({}), mapDispatchToProps)
 )(CompanyInfoBox);
