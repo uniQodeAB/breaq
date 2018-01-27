@@ -114,6 +114,10 @@ describe('ColorPicker', () => {
         it('should have called onColorChange callback with the selected color', () => {
           expect(mockColorChange.mock.calls[0][0]).toBe(colors[0]);
         });
+
+        it('should reset toggle state to false', () => {
+          expect(colorPicker.state().toggleColapse).toBe(false);
+        });
       });
     });
   });
