@@ -32,7 +32,7 @@ class CompanyEditor extends Component {
       placeholders,
       endAddCompany,
       endEditCompany,
-      companyId,
+      company: { id },
       addCompany,
       updateCompany
     } = this.props;
@@ -86,8 +86,8 @@ class CompanyEditor extends Component {
         />
 
         <EditorButtons
-          isUpdate={!!companyId}
-          onCancelUpdate={() => endEditCompany(companyId)}
+          isUpdate={!!id}
+          onCancelUpdate={() => endEditCompany(id)}
           onUpdate={() => updateCompany(company)}
           onCancelAdd={endAddCompany}
           onAdd={() => addCompany(company)}
@@ -121,7 +121,7 @@ CompanyEditor.propTypes = {
 };
 
 CompanyEditor.defaultProps = {
-  company: undefined,
+  company: {},
   companyId: undefined,
   placeholders: {
     name: 'Name',

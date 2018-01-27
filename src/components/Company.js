@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { isEmpty } from 'lodash';
+
 import EmployeeGrid from './EmployeeGrid';
 import CompanyInfoBox from '../containers/CompanyInfoBoxContainer';
 import EmployeeEditor from '../containers/EmployeeEditorContainer';
@@ -7,7 +9,18 @@ import CompanyEditor from '../containers/CompanyEditorContainer';
 
 import '../styles/Company.css';
 
+const employeesAsArray = employees =>
+  isEmpty(employees)
+    ? []
+    : Object.entries(employees).reduce((a, [, employee]) => {
+        a.push({
+          ...employee
+        });
+        return a;
+      }, []);
+
 const Company = ({
+  company,
   company: { id, name, address, employees, color },
   editCompany,
   addEmployee,
@@ -17,7 +30,7 @@ const Company = ({
   <div className={'Company'}>
     <div className={'company'}>
       {editCompany ? (
-        <CompanyEditor companyId={id} />
+        <CompanyEditor company={company} />
       ) : (
         <CompanyInfoBox
           companyId={id}
@@ -40,20 +53,7 @@ const Company = ({
             <EmployeeGrid
               companyId={id}
               color={color}
-              employees={
-                employees
-                  ? Object.entries(employees).reduce(
-                      (a, [employeeId, employee]) => {
-                        a.push({
-                          id: employeeId,
-                          ...employee
-                        });
-                        return a;
-                      },
-                      []
-                    )
-                  : []
-              }
+              employees={employeesAsArray(employees)}
             />
           </div>
         )}
@@ -80,8 +80,7 @@ Company.propTypes = {
   editCompany: PropTypes.bool,
   addEmployee: PropTypes.bool,
   editEmployee: PropTypes.bool,
-  editEmployeeId: PropTypes.string,
-  initAddEmployee: PropTypes.func.isRequired
+  editEmployeeId: PropTypes.string
 };
 
 Company.defaultProps = {

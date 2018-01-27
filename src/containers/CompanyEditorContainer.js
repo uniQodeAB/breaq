@@ -19,17 +19,5 @@ function mapDispatchToProps(dispatch) {
 
 export default compose(
   firebaseConnect(),
-  connect(
-    (
-      { firebase: { data, auth }, app: { companies, color } },
-      { companyId }
-    ) => ({
-      auth,
-      company: deepGet(data, ['users', auth.uid, 'companies', companyId], {}),
-      color: companyId
-        ? companies[companyId] && companies[companyId].color
-        : color
-    }),
-    mapDispatchToProps
-  )
+  connect(() => ({}), mapDispatchToProps)
 )(CompanyEditor);
