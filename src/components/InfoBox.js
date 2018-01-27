@@ -81,8 +81,6 @@ export const EmployeeInfoBox = ({
   employeeId,
   deleteEmployee,
   initEditEmployee,
-  firebase,
-  auth,
   ...rest
 }) => (
   <InfoBox
@@ -104,7 +102,9 @@ InfoBox.propTypes = {
   }),
   icon: PropTypes.string,
   onEdit: PropTypes.func,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
+  onAdd: PropTypes.func,
+  color: PropTypes.string.isRequired
 };
 
 InfoBox.defaultProps = {
@@ -113,22 +113,21 @@ InfoBox.defaultProps = {
   icon: 'fa-user',
   address: {},
   onEdit: undefined,
-  onDelete: undefined
+  onDelete: undefined,
+  onAdd: undefined
 };
 
 CompanyInfoBox.propTypes = {
   companyId: PropTypes.string.isRequired,
   initEditCompany: PropTypes.func.isRequired,
-  firebase: PropTypes.shape().isRequired,
-  auth: PropTypes.shape().isRequired
+  addEmployee: PropTypes.func.isRequired,
+  deleteCompany: PropTypes.func.isRequired
 };
 
 EmployeeInfoBox.propTypes = {
   companyId: PropTypes.string.isRequired,
   employeeId: PropTypes.string.isRequired,
-  initEditEmployee: PropTypes.func.isRequired,
-  firebase: PropTypes.shape().isRequired,
-  auth: PropTypes.shape().isRequired
+  initEditEmployee: PropTypes.func.isRequired
 };
 
 export default InfoBox;
