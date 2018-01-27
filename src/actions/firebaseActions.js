@@ -11,12 +11,16 @@ function getUID() {
 }
 
 export function addCompany(company) {
-  return dispatch =>
-    firebase
-      .push(`/users/${getUID()}/companies/`, {
-        ...company
+  return dispatch => {
+    const id = firebase.ref(`/users/${getUID()}/companies/`).push().key;
+    return firebase
+      .ref(`/users/${getUID()}/companies/${id}`)
+      .update({
+        ...company,
+        id
       })
       .then(() => dispatch(endAddCompany()));
+  };
 }
 
 export function updateCompany(company) {
@@ -35,12 +39,19 @@ export function deleteCompany(companyId) {
 }
 
 export function addEmployee(companyId, employee) {
-  return dispatch =>
+  return dispatch => {
+    const id = firebase
+      .ref(`/users/${getUID()}/companies/${companyId}/employees/`)
+      .push().key;
+
     firebase
-      .push(`/users/${getUID()}/companies/${companyId}/employees/`, {
-        ...employee
+      .ref(`/users/${getUID()}/companies/${companyId}/employees/${id}`)
+      .update({
+        ...employee,
+        id
       })
       .then(() => dispatch(endAddEmployee(companyId)));
+  };
 }
 
 export function updateEmployee(companyId, employee) {
