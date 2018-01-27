@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 // Initialize Firebase
 const config = {
-  apiKey: 'AIzaSyAqtI5Is5e83rbmKOGHqeSU4sJwOvHIrDg',
+  apiKey: `${process.env.REACT_APP_FIREBASE_API_KEY}`,
   authDomain: 'fmaps-ax.firebaseapp.com',
   databaseURL: 'https://fmaps-ax.firebaseio.com',
   projectId: 'fmaps-ax',
