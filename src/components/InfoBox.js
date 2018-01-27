@@ -104,7 +104,7 @@ InfoBox.propTypes = {
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
   onAdd: PropTypes.func,
-  color: PropTypes.string.isRequired
+  color: PropTypes.string
 };
 
 InfoBox.defaultProps = {
@@ -114,7 +114,8 @@ InfoBox.defaultProps = {
   address: {},
   onEdit: undefined,
   onDelete: undefined,
-  onAdd: undefined
+  onAdd: undefined,
+  color: ''
 };
 
 CompanyInfoBox.propTypes = {

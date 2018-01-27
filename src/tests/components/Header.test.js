@@ -1,9 +1,12 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
 
 import Header from '../../components/Header';
+
+import configureEnzyme from '../testUtil.test';
+
+configureEnzyme();
 
 jest.mock('react-redux-firebase', () => ({
   isLoaded: jest.fn(),
@@ -13,113 +16,64 @@ jest.mock('react-redux-firebase', () => ({
 isLoaded.mockReturnValueOnce(true);
 
 describe('Header', () => {
-  beforeEach(() => {
-    Enzyme.configure({ adapter: new Adapter() });
-  });
+  describe('when logged out', () => {
+    let header;
+    const props = {
+      isLoggedOut: true,
+      login: jest.fn(),
+      logout: jest.fn()
+    };
 
-  describe('when not loaded', () => {
-    it('renders a loading indicator', () => {
-      const header = shallow(
-        <Header
-          firebase={{
-            profile: jest.fn(),
-            login: jest.fn(),
-            logout: jest.fn()
-          }}
-        />
-      );
+    beforeEach(() => {
+      header = shallow(<Header {...props} />);
+    });
 
-      expect(header.find('span').length).toBeGreaterThan(0);
-      expect(
-        header
-          .find('span')
-          .first()
-          .text()
-      ).toBe('Loading...');
+    it('should render a button to login', () => {
+      expect(header.find('button').length).toBe(1);
+    });
+
+    describe('when the button is clicked', () => {
+      it('should call login method', () => {
+        header.find('button').simulate('click');
+        expect(props.login.mock.calls.length).toBe(1);
+      });
     });
   });
 
-  describe('when loaded', () => {
-    describe('when not logged in', () => {
-      beforeEach(() => {
-        isEmpty.mockReturnValueOnce(true);
-      });
+  describe('when logged in', () => {
+    let header;
+    const props = {
+      isLoggedOut: false,
+      login: jest.fn(),
+      logout: jest.fn(),
+      photo: '/image.png'
+    };
 
-      it('should render a login button if not logged in', () => {
-        const header = shallow(
-          <Header
-            firebase={{
-              profile: jest.fn(),
-              login: jest.fn(),
-              logout: jest.fn()
-            }}
-          />
-        );
-
-        expect(header.find('button').length).toBe(1);
-
-        const button = header.find('button');
-        expect(button.text()).toBe('Log In');
-      });
-
-      it('should call firebase login when clicking login button', () => {
-        const loginMock = jest.fn();
-
-        const header = shallow(
-          <Header
-            firebase={{
-              profile: jest.fn(),
-              login: loginMock,
-              logout: jest.fn()
-            }}
-          />
-        );
-
-        header
-          .find('button')
-          .first()
-          .simulate('click');
-        expect(loginMock.mock.calls.length).toEqual(1);
-      });
+    beforeEach(() => {
+      header = shallow(<Header {...props} />);
     });
 
-    describe('when logged in', () => {
-      it('should render a logout button if logged in', () => {
-        const header = shallow(
-          <Header
-            firebase={{
-              profile: jest.fn(),
-              login: jest.fn(),
-              logout: jest.fn()
-            }}
-            auth={{}}
-          />
-        );
-
-        expect(header.find('button').length).toBe(1);
-
-        const button = header.find('button');
-        expect(button.find('img').length).toBe(1);
-      });
+    it('should render a button to logout', () => {
+      expect(header.find('button').length).toBe(1);
     });
 
-    it('should call firebase logout on button click', () => {
-      const logoutMock = jest.fn();
-      const header = shallow(
-        <Header
-          firebase={{
-            profile: jest.fn(),
-            login: jest.fn(),
-            logout: logoutMock
-          }}
-          auth={{}}
-        />
-      );
-      header
-        .find('button')
-        .first()
-        .simulate('click');
-      expect(logoutMock.mock.calls.length).toEqual(1);
+    describe('the rendered button', () => {
+      it('should have a profile photo', () => {
+        expect(
+          header
+            .find('button')
+            .children()
+            .find('img')
+            .props().src
+        ).toBe(props.photo);
+      });
+
+      describe('when the button is clicked', () => {
+        it('should call logout method', () => {
+          header.find('button').simulate('click');
+          expect(props.logout.mock.calls.length).toBe(1);
+        });
+      });
     });
   });
 });
