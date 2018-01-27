@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import '../styles/InfoBox.css';
 
 export const icons = {
@@ -59,6 +60,39 @@ const InfoBox = ({
   </div>
 );
 
+export const CompanyInfoBox = ({
+  companyId,
+  initEditCompany,
+  addEmployee,
+  deleteCompany,
+  ...rest
+}) => (
+  <InfoBox
+    icon={icons.company}
+    onEdit={() => initEditCompany(companyId)}
+    onDelete={() => deleteCompany(companyId)}
+    onAdd={() => addEmployee(companyId)}
+    {...rest}
+  />
+);
+
+export const EmployeeInfoBox = ({
+  companyId,
+  employeeId,
+  deleteEmployee,
+  initEditEmployee,
+  firebase,
+  auth,
+  ...rest
+}) => (
+  <InfoBox
+    icon={icons.employee}
+    onEdit={() => initEditEmployee(companyId, employeeId)}
+    onDelete={() => deleteEmployee(companyId, employeeId)}
+    {...rest}
+  />
+);
+
 InfoBox.propTypes = {
   title: PropTypes.string,
   subTitle: PropTypes.string,
@@ -80,6 +114,21 @@ InfoBox.defaultProps = {
   address: {},
   onEdit: undefined,
   onDelete: undefined
+};
+
+CompanyInfoBox.propTypes = {
+  companyId: PropTypes.string.isRequired,
+  initEditCompany: PropTypes.func.isRequired,
+  firebase: PropTypes.shape().isRequired,
+  auth: PropTypes.shape().isRequired
+};
+
+EmployeeInfoBox.propTypes = {
+  companyId: PropTypes.string.isRequired,
+  employeeId: PropTypes.string.isRequired,
+  initEditEmployee: PropTypes.func.isRequired,
+  firebase: PropTypes.shape().isRequired,
+  auth: PropTypes.shape().isRequired
 };
 
 export default InfoBox;

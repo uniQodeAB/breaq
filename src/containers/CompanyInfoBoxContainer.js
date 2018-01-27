@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { initEditCompany, initAddEmployee } from '../actions/appActions';
 import { deleteCompany } from '../actions/firebaseActions';
 
-import CompanyInfoBox from '../components/CompanyInfoBox';
+import { CompanyInfoBox } from '../components/InfoBox';
 
 function mapDispatchToProps(dispatch) {
   return {
