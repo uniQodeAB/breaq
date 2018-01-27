@@ -31,7 +31,7 @@ class ColorPicker extends Component {
   }
 
   render() {
-    const { companyId, onColorChange } = this.props;
+    const { onColorChange } = this.props;
     const { selectedColor, toggleColapse } = this.state;
 
     const handleClose = () => {
@@ -88,14 +88,11 @@ class ColorPicker extends Component {
 
 ColorPicker.propTypes = {
   color: PropTypes.string,
-  addColor: PropTypes.func.isRequired,
-  changeColor: PropTypes.func.isRequired,
-  companyId: PropTypes.string
+  onColorChange: PropTypes.func.isRequired
 };
 
 ColorPicker.defaultProps = {
-  color: '',
-  companyId: ''
+  color: ''
 };
 
 export default ColorPicker;
