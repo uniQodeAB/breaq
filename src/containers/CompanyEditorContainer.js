@@ -4,7 +4,6 @@ import { compose } from 'redux';
 
 import { endAddCompany, endEditCompany } from '../actions/appActions';
 import { addCompany, updateCompany } from '../actions/firebaseActions';
-import deepGet from '../helpers';
 
 import CompanyEditor from '../components/CompanyEditor';
 

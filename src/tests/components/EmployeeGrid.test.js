@@ -1,6 +1,5 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 
 import EmployeeGrid from '../../components/EmployeeGrid';
 
@@ -8,12 +7,9 @@ describe('EmployeeGrid', () => {
   let props;
 
   beforeEach(() => {
-    Enzyme.configure({ adapter: new Adapter() });
-
     props = {
       companyId: 'id',
-      firebase: {},
-      auth: {}
+      color: '#abc'
     };
   });
 

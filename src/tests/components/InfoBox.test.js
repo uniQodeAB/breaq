@@ -6,9 +6,6 @@ import InfoBox, {
   CompanyInfoBox,
   EmployeeInfoBox
 } from '../../components/InfoBox';
-import configureEnzyme from '../testUtil.test';
-
-configureEnzyme();
 
 describe('InfoBox', () => {
   const props = {

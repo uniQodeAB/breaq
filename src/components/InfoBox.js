@@ -128,7 +128,8 @@ CompanyInfoBox.propTypes = {
 EmployeeInfoBox.propTypes = {
   companyId: PropTypes.string.isRequired,
   employeeId: PropTypes.string.isRequired,
-  initEditEmployee: PropTypes.func.isRequired
+  initEditEmployee: PropTypes.func.isRequired,
+  deleteEmployee: PropTypes.func.isRequired
 };
 
 export default InfoBox;

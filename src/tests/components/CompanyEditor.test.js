@@ -3,10 +3,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import CompanyEditor from '../../components/CompanyEditor';
 
-import configureEnzyme from '../testUtil.test';
-
-configureEnzyme();
-
 jest.mock('../../components/Editor', () => ({
   EditorInput: () => <div />,
   EditorSearchBox: () => <div />,

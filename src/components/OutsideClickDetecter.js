@@ -43,3 +43,7 @@ OutsideClickDetecter.propTypes = {
 };
 
 export default OutsideClickDetecter;
+
+OutsideClickDetecter.propTypes = {
+  handler: PropTypes.func.isRequired
+};

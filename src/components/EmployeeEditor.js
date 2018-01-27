@@ -42,8 +42,7 @@ class EmployeeCreator extends Component {
       updateEmployee,
       endAddEmployee,
       endEditEmployee,
-      color,
-      test
+      color
     } = this.props;
 
     const { employee } = this.state;
@@ -127,10 +126,11 @@ EmployeeCreator.propTypes = {
     address: PropTypes.string,
     project: PropTypes.string
   }),
-  firebase: PropTypes.shape().isRequired,
-  auth: PropTypes.shape().isRequired,
   endAddEmployee: PropTypes.func.isRequired,
-  endEditEmployee: PropTypes.func.isRequired
+  endEditEmployee: PropTypes.func.isRequired,
+  addEmployee: PropTypes.func.isRequired,
+  updateEmployee: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired
 };
 
 EmployeeCreator.defaultProps = {

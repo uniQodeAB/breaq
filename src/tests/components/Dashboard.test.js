@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { isLoaded } from 'react-redux-firebase';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 
 import Dashboard from '../../components/Dashboard';
 
@@ -19,10 +18,6 @@ jest.mock('../../containers/CompanyLegendContainer', () => 'CompanyLegend');
 isLoaded.mockReturnValueOnce(false).mockReturnValue(true);
 
 describe('Dashboard', () => {
-  beforeEach(() => {
-    Enzyme.configure({ adapter: new Adapter() });
-  });
-
   describe('when not yet loaded', () => {
     it('should indicate that it is loading', () => {
       const dashboard = shallow(<Dashboard initAddCompany={jest.fn()} />);

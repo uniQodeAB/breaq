@@ -1,11 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import configureEnzyme from '../testUtil.test';
 import ColorPicker from '../../components/ColorPicker';
 import colors from '../../styles/colors.json';
-
-configureEnzyme();
 
 // Essentially mock the getRandomInt method
 const mockMath = Object.create(global.Math);

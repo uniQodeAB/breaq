@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import SearchBox from './SearchBox';
 
 /* eslint-disable camelcase */
@@ -67,3 +69,25 @@ export const EditorInput = ({ placeholder, value, onChange }) => (
     onChange={e => onChange(e.target.value)}
   />
 );
+
+EditorSearchBox.propTypes = {
+  placeholder: PropTypes.string.isRequired,
+  addressCallback: PropTypes.func.isRequired
+};
+
+EditorButtons.propTypes = {
+  isUpdate: PropTypes.bool,
+  onCancelUpdate: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
+  onCancelAdd: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired
+};
+EditorButtons.defaultProps = {
+  isUpdate: false
+};
+
+EditorInput.propTypes = {
+  placeholder: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
+};

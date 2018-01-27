@@ -1,10 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import configureEnzyme from '../testUtil.test';
 import Button from '../../components/Button';
-
-configureEnzyme();
 
 describe('Button', () => {
   let button;

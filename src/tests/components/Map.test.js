@@ -1,10 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import configureEnzyme from '../testUtil.test';
 import Map from '../../components/Map';
-
-configureEnzyme();
 
 describe('Map', () => {
   let map;

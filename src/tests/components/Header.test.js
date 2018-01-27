@@ -1,16 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { isLoaded, isEmpty } from 'react-redux-firebase';
+import { isLoaded } from 'react-redux-firebase';
 
 import Header from '../../components/Header';
 
-import configureEnzyme from '../testUtil.test';
-
-configureEnzyme();
-
 jest.mock('react-redux-firebase', () => ({
-  isLoaded: jest.fn(),
-  isEmpty: jest.fn()
+  isLoaded: jest.fn()
 }));
 
 isLoaded.mockReturnValueOnce(true);

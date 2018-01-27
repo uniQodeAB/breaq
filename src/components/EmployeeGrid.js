@@ -38,7 +38,8 @@ EmployeeGrid.propTypes = {
       })
     })
   ).isRequired,
-  active: PropTypes.bool
+  active: PropTypes.bool,
+  color: PropTypes.string.isRequired
 };
 
 EmployeeGrid.defaultProps = {

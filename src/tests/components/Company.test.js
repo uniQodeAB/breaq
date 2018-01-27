@@ -3,10 +3,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Company from '../../components/Company';
 
-import configureEnzyme from '../testUtil.test';
-
-configureEnzyme();
-
 jest.mock('../../containers/CompanyInfoBoxContainer', () => 'CompanyInfoBox');
 
 jest.mock('../../containers/CompanyEditorContainer', () => 'CompanyEditor');
