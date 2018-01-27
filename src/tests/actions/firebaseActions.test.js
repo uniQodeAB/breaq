@@ -13,7 +13,9 @@ jest.mock('../../firebase', () => ({
       uid: '1234'
     }
   },
-  ref: jest.fn()
+  ref: jest.fn(),
+  login: jest.fn(),
+  logout: jest.fn()
 }));
 
 describe('firebaseActions', () => {
@@ -89,5 +91,17 @@ describe('firebaseActions', () => {
     store.dispatch(actions.deleteEmployee('5678', '5678'));
 
     expect(mockRemove.mock.calls.length).toEqual(1);
+  });
+
+  it('should login a user', () => {
+    store.dispatch(actions.login());
+
+    expect(firebase.login.mock.calls.length).toBe(1);
+  });
+
+  it('should logout a user', () => {
+    store.dispatch(actions.logout());
+
+    expect(firebase.logout.mock.calls.length).toBe(1);
   });
 });

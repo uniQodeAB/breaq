@@ -149,4 +149,20 @@ describe('Company', () => {
       expect(company.find('EmployeeGrid').length).toBe(0);
     });
   });
+
+  describe('when there are no employees', () => {
+    beforeEach(() => {
+      props.company.employees = {};
+      company = shallow(<Company {...props} />);
+    });
+
+    it('should render `EmployeeGrid` with an empty array of employees', () => {
+      expect(company.find('EmployeeGrid').props()).toEqual({
+        active: false,
+        companyId: props.company.id,
+        color: props.company.color,
+        employees: []
+      });
+    });
+  });
 });

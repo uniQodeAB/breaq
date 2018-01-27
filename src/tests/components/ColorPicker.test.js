@@ -120,5 +120,16 @@ describe('ColorPicker', () => {
         });
       });
     });
+
+    it('should set toggle to false if click outside of component', () => {
+      expect(colorPicker.find('OutsideClickDetecter').length).toBe(1);
+
+      colorPicker
+        .find('OutsideClickDetecter')
+        .props()
+        .handler();
+
+      expect(colorPicker.state().toggleColapse).toBe(false);
+    });
   });
 });
