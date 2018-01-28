@@ -151,6 +151,28 @@ describe('InfoBox', () => {
       expect(infoBox.find('.info-content h2').text()).toBe('Test subtitle');
     });
   });
+
+  it('should render an address', () => {
+    const infoBox = shallow(
+      <InfoBox
+        {...props}
+        address={{
+          streetAddress: 'street address',
+          postalAddress: 'postal address',
+          prefecture: 'prefecture',
+          country: 'country'
+        }}
+      />
+    );
+    expect(infoBox.find('.info-content p').get(0)).toEqual(
+      <p>street address</p>
+    );
+    expect(infoBox.find('.info-content p').get(1)).toEqual(
+      <p>postal address</p>
+    );
+    expect(infoBox.find('.info-content p').get(2)).toEqual(<p>prefecture</p>);
+    expect(infoBox.find('.info-content p').get(3)).toEqual(<p>country</p>);
+  });
 });
 
 describe('CompanyInfoBox', () => {

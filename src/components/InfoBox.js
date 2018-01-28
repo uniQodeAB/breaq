@@ -8,7 +8,16 @@ export const icons = {
   company: 'fa-home'
 };
 
-const InfoBox = ({ title, subTitle, icon, onEdit, onDelete, onAdd, color }) => (
+const InfoBox = ({
+  title,
+  subTitle,
+  address,
+  icon,
+  onEdit,
+  onDelete,
+  onAdd,
+  color
+}) => (
   <div className={'InfoBox'}>
     <div className={'wrapper'}>
       <div className={'side-wrapper'}>
@@ -41,6 +50,10 @@ const InfoBox = ({ title, subTitle, icon, onEdit, onDelete, onAdd, color }) => (
         <div className={'info-container'}>
           <h1>{title}</h1>
           <h2>{subTitle}</h2>
+          <p>{address.streetAddress}</p>
+          <p>{address.postalAddress}</p>
+          <p>{address.prefecture}</p>
+          <p>{address.country}</p>
         </div>
       </div>
     </div>
@@ -81,6 +94,12 @@ export const EmployeeInfoBox = ({
 InfoBox.propTypes = {
   title: PropTypes.string,
   subTitle: PropTypes.string,
+  address: PropTypes.shape({
+    streetAddress: PropTypes.string,
+    postalAddress: PropTypes.string,
+    prefecture: PropTypes.string,
+    country: PropTypes.string
+  }),
   icon: PropTypes.string,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
