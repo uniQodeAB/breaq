@@ -3,6 +3,10 @@
 		overflow: auto;
 
 	.Company:not(:first-child) {    
-			margin-top: 0.25em;
-	}
+		margin-top: 0.25em;
+  }
+  
+  .Company {
+    padding-bottom: 0;
+  }
 }
