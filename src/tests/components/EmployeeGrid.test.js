@@ -38,9 +38,9 @@ describe('EmployeeGrid', () => {
         <EmployeeGrid employees={employees} {...props} />
       );
 
-      expect(employeeGrid.find('.EmployeeGrid .grid').children().length).toBe(
-        1
-      );
+      expect(
+        employeeGrid.find('.EmployeeGrid .employee-grid').children().length
+      ).toBe(1);
     });
 
     it('should be able to render multiple employees', () => {
@@ -53,9 +53,9 @@ describe('EmployeeGrid', () => {
         <EmployeeGrid employees={employees} {...props} />
       );
 
-      expect(employeeGrid.find('.EmployeeGrid .grid').children().length).toBe(
-        3
-      );
+      expect(
+        employeeGrid.find('.EmployeeGrid .employee-grid').children().length
+      ).toBe(3);
     });
   });
 });

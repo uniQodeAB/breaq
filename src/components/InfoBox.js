@@ -32,22 +32,22 @@ const InfoBox = ({
               </button>
             )}
 
-            {onDelete && (
-              <button onClick={onDelete} className={'button-delete'}>
-                <i className={'fas fa-trash-alt button-delete'} />
-              </button>
-            )}
-
             {onAdd && (
               <button onClick={onAdd} className={'button-employee'}>
                 <i className={'fas fa-user-plus'} />
               </button>
             )}
+
+            {onDelete && (
+              <button onClick={onDelete} className={'button-delete'}>
+                <i className={'fas fa-trash-alt button-delete'} />
+              </button>
+            )}
           </div>
         </div>
       </div>
-      <div className={'content'}>
-        <div className={'container'}>
+      <div className={'info-content'}>
+        <div className={'info-container'}>
           <h1>{title}</h1>
           <h2>{subTitle}</h2>
           <p>{address.streetAddress}</p>

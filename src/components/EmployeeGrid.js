@@ -7,7 +7,7 @@ import EmployeeInfoBox from '../containers/EmployeeInfoBoxContainer';
 const EmployeeGrid = ({ companyId, employees, active, color }) => (
   <div className={'EmployeeGrid'}>
     <div className={`overlay ${active ? 'active' : 'inactive'}`} />
-    <div className={'grid'}>
+    <div className={'employee-grid'}>
       {employees.map(employee => (
         <EmployeeInfoBox
           key={employee.id}

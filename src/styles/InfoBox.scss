@@ -1,7 +1,7 @@
 .InfoBox {
   .wrapper {
     display: grid;
-    grid-template-columns: 3em 1fr;
+    grid-template-columns: 1em 1fr;
     color: #EFF6FC;
     .side-wrapper {
       display: flex;
@@ -9,28 +9,30 @@
       .side {
         display: flex;
         flex-direction: column;
+        width: 100%;
 
         .icon {
           margin-top: 0.5em;
           margin-bottom: 0.5em;
           flex-grow: 1;
           min-height: 1em;
+          font-size: 1rem;
         }
 
         i {
-          font-size: xx-large;
+          font-size: 1rem;
         }
 
         svg {
           display: block;
           margin: auto;
+          font-size: 1rem;
         }
 
         .controls {
           display: flex;
           flex-direction: column;
-          width: 3em;    
-          position: relative;      
+          width: 100%;          
 
           button {
             cursor: pointer;
@@ -47,13 +49,6 @@
             color: #fff;
             font-size: 1rem;
             min-height: 2em;
-  
-            &.button-employee {
-              position: absolute;
-              top: 2em;
-              left: 3em;
-              bottom: 0;
-            }
           }
         }
       }
@@ -61,13 +56,13 @@
     }
   }
 
-  .content {
+  .info-content {
     grid-column: 2;
     grid-row: 1;
     background: #103D5D;
 
-    .container {
-      padding: 0.5em;
+    .info-container {
+      padding: 0.15em;
       text-align: right;
 
       span {
@@ -75,12 +70,12 @@
       }
 
       h1 {
-        font-size: 1em;
+        font-size: 1rem;
         margin: 0;
       }
 
       h2 {
-        font-size: 0.75em;
+        font-size: 0.75rem;
         margin-top: 0.1em;
         margin-bottom: 0.1em;
         font-weight: bold;
@@ -88,7 +83,7 @@
 
       p {
         margin: 0;
-        font-size: 0.75em;
+        font-size: 0.75rem;
         font-weight: lighter;
       }
 

@@ -1,10 +1,11 @@
 .ColorPicker {
     position: relative;
-    margin-top: 0.5em;
+    margin-top: 0.25em;
 
     .border {
-        padding: 0.5em;
+        padding: 0.25em;
         background: white;
+        border: solid 1px #d3d3d3;
     }
 
     .color-grid {
@@ -20,10 +21,10 @@
         padding: 0.1em;
     }
     .color {
-        min-width: 1em;
-        min-height: 1em;
-        width: 1em;
-        border-radius: 0.15em;
+        min-width: 0.5em;
+        min-height: 0.5em;
+        width: 0.5em;
+        border-radius: 15%;
         border: solid 1px #d3d3d3;
 
         &:hover {

@@ -1,6 +1,8 @@
 .Editor {
-  padding: 0.5em;
-  margin-bottom: 0.5em;
+  padding: 0.25em;
+  padding-top: 0;
+  margin-bottom: 0.25em;
+  width: 100%;
 
   input.form-input {
     box-sizing: border-box;
@@ -13,7 +15,7 @@
     font-size: 14px;
     outline: none;
     text-overflow: ellipsis;
-    margin-top: 0.5em;
+    margin-top: 0.25em;
   }
 
   button {
@@ -29,15 +31,24 @@
   }
 
   .InfoBox {
-    margin-top: 0.5em;
+    margin-top: 0.25em;
   }
 
   .buttons {
-    margin-top: 0.5em;
+    margin-top: 0.25em;
+
+    & > div {
+      display: flex;
+    }
 
     button {
       margin-right: 0.5em;
     }
+  }
+
+  .search-box > div {
+    display: flex;
+    margin-top: 0.25em;
   }
 
 }

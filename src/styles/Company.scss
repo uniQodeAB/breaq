@@ -1,12 +1,17 @@
 .Company {
     border: solid 1px;
     border-color: #d3d3d3;
-    padding: 0.5em;
+    padding: 0.25em;
     background: #ffffff;
 
     .employees {
         &>div {
-            margin-top: 0.5em;
+            margin-top: 0.25em;
         }
+    }
+
+    .Editor {
+      padding: 0;
+      display: grid;
     }
 }

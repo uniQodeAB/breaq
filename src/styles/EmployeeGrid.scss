@@ -16,10 +16,10 @@
     display: none;
   }
 
-  .grid {
+  .employee-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 0.5em;
+    grid-gap: 0.25em;
 
     .Address {
       margin: 0;

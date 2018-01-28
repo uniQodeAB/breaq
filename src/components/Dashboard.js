@@ -8,7 +8,7 @@ import CompanyEditor from '../containers/CompanyEditorContainer';
 import Button from './Button';
 
 import '../styles/Dashboard.css';
-import CompanyLegendContainer from '../containers/CompanyLegendContainer';
+import CompanyLegend from '../containers/CompanyLegendContainer';
 
 const DashBoard = ({ user, addCompany, initAddCompany }) => {
   if (!isLoaded(user)) {
@@ -17,9 +17,9 @@ const DashBoard = ({ user, addCompany, initAddCompany }) => {
 
   return (
     <div className={'Dashboard'}>
-      <div className={'search-box-pane'}>
-        <div className={'search-container'}>
-          <div>
+      <div className={'container'}>
+        <div className={'grid sidebar'}>
+          <div className={'add-company'}>
             {addCompany ? (
               <CompanyEditor />
             ) : (
@@ -27,13 +27,15 @@ const DashBoard = ({ user, addCompany, initAddCompany }) => {
                 <i className={'fas fa-plus'} />
               </Button>
             )}
-            <CompanyList />
+          </div>
+          <CompanyList />
+        </div>
+        <div className={'grid content'}>
+          <MapContainer />
+          <div className={'grid extra'}>
+            <CompanyLegend />
           </div>
         </div>
-      </div>
-      <div className={'map-pane'}>
-        <CompanyLegendContainer />
-        <MapContainer />
       </div>
     </div>
   );

@@ -141,14 +141,14 @@ describe('InfoBox', () => {
   describe('when rendering content', () => {
     it('should render a title as h1', () => {
       const infoBox = shallow(<InfoBox {...props} title={'Test title'} />);
-      expect(infoBox.find('.content h1').text()).toBe('Test title');
+      expect(infoBox.find('.info-content h1').text()).toBe('Test title');
     });
 
     it('should render a subtitle as h2', () => {
       const infoBox = shallow(
         <InfoBox {...props} subTitle={'Test subtitle'} />
       );
-      expect(infoBox.find('.content h2').text()).toBe('Test subtitle');
+      expect(infoBox.find('.info-content h2').text()).toBe('Test subtitle');
     });
 
     it('should render an address', () => {
@@ -163,10 +163,14 @@ describe('InfoBox', () => {
           }}
         />
       );
-      expect(infoBox.find('.content p').get(0)).toEqual(<p>street address</p>);
-      expect(infoBox.find('.content p').get(1)).toEqual(<p>postal address</p>);
-      expect(infoBox.find('.content p').get(2)).toEqual(<p>prefecture</p>);
-      expect(infoBox.find('.content p').get(3)).toEqual(<p>country</p>);
+      expect(infoBox.find('.info-content p').get(0)).toEqual(
+        <p>street address</p>
+      );
+      expect(infoBox.find('.info-content p').get(1)).toEqual(
+        <p>postal address</p>
+      );
+      expect(infoBox.find('.info-content p').get(2)).toEqual(<p>prefecture</p>);
+      expect(infoBox.find('.info-content p').get(3)).toEqual(<p>country</p>);
     });
   });
 });
