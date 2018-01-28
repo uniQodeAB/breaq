@@ -52,11 +52,11 @@ class EmployeeCreator extends Component {
         <EditorInput
           placeholder={placeholders.name}
           value={employee.name}
-          onChange={e =>
+          onChange={name =>
             this.setState({
               employee: {
                 ...employee,
-                name: e.target.value
+                name
               }
             })
           }
@@ -65,11 +65,11 @@ class EmployeeCreator extends Component {
         <EditorInput
           placeholder={placeholders.project}
           value={employee.project}
-          onChange={e =>
+          onChange={project =>
             this.setState({
               employee: {
                 ...employee,
-                project: e.target.value
+                project
               }
             })
           }
