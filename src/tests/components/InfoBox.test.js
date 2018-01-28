@@ -60,7 +60,7 @@ describe('InfoBox', () => {
 
       it('should render an edit button', () => {
         expect(infoBox.find('.controls button').get(0)).toEqual(
-          <button onClick={mockCallback}>
+          <button onClick={mockCallback} className={'button-edit'}>
             <i className={'fas fa-edit'} />
           </button>
         );
@@ -149,28 +149,6 @@ describe('InfoBox', () => {
         <InfoBox {...props} subTitle={'Test subtitle'} />
       );
       expect(infoBox.find('.info-content h2').text()).toBe('Test subtitle');
-    });
-
-    it('should render an address', () => {
-      const infoBox = shallow(
-        <InfoBox
-          {...props}
-          address={{
-            streetAddress: 'street address',
-            postalAddress: 'postal address',
-            prefecture: 'prefecture',
-            country: 'country'
-          }}
-        />
-      );
-      expect(infoBox.find('.info-content p').get(0)).toEqual(
-        <p>street address</p>
-      );
-      expect(infoBox.find('.info-content p').get(1)).toEqual(
-        <p>postal address</p>
-      );
-      expect(infoBox.find('.info-content p').get(2)).toEqual(<p>prefecture</p>);
-      expect(infoBox.find('.info-content p').get(3)).toEqual(<p>country</p>);
     });
   });
 });

@@ -1,10 +1,51 @@
 .InfoBox {
+  position: relative;
+  height: 100%;
+
+  button {
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    border: 0;
+    min-width: 0;
+    width: 3em;
+    height: 100%;
+    background: #ffbb30;
+   
+    color: #fff;
+    font-size: 1rem;
+    min-height: 2em;
+    position: absolute;
+    top: 0;
+    transition: transform 0.5s;
+    z-index: -1;
+  }
+
+  &:hover {
+    button {
+
+      &.button-delete {
+        transform: translate(3em, 0);
+      }
+
+      &.button-edit {
+        transform: translate(6em, 0);
+      }
+
+      &.button-employee {
+        transform: translate(9em, 0);
+      }
+    }
+  }
+
   .wrapper {
     display: grid;
     grid-template-columns: 1em 1fr;
     color: #EFF6FC;
     .side-wrapper {
       display: flex;
+      z-index: 2;
 
       .side {
         display: flex;
@@ -32,24 +73,7 @@
         .controls {
           display: flex;
           flex-direction: column;
-          width: 100%;          
-
-          button {
-            cursor: pointer;
-            padding: 0;
-            margin: 0;
-            border-radius: 0;
-            border: 0;
-            min-width: 0;
-            width: 100%;
-            flex-grow: 1;
-            background: #ffbb30;
-            -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-            box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.26);
-            color: #fff;
-            font-size: 1rem;
-            min-height: 2em;
-          }
+          width: 100%;
         }
       }
 
