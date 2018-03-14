@@ -17,7 +17,7 @@ const Header = ({ login, logout, isLoggedOut, photo }) => {
   return (
     <header className={'row header Header'}>
       <div className="wrapper">
-        <h1>EMP maps</h1>
+        <h1>Breaq</h1>
         {renderButtons()}
       </div>
     </header>
