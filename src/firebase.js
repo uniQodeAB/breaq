@@ -2,11 +2,11 @@ import firebase from 'firebase';
 // Initialize Firebase
 const config = {
   apiKey: `${process.env.REACT_APP_FIREBASE_API_KEY}`,
-  authDomain: 'fmaps-ax.firebaseapp.com',
-  databaseURL: 'https://fmaps-ax.firebaseio.com',
-  projectId: 'fmaps-ax',
-  storageBucket: 'fmaps-ax.appspot.com',
-  messagingSenderId: '777480926020'
+  authDomain: 'breaq-uniqode.firebaseapp.com',
+  databaseURL: 'https://breaq-uniqode.firebaseio.com',
+  projectId: 'breaq-uniqode',
+  storageBucket: 'breaq-uniqode.appspot.com',
+  messagingSenderId: '728259108467'
 };
 firebase.initializeApp(config);
 
