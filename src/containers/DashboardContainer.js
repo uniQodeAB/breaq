@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { initAddCompany } from '../actions/appActions';
 
-import DashBoard from '../components/Dashboard';
+import Dashboard from '../components/Dashboard';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -12,7 +12,19 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
-  firebaseConnect(),
+  firebaseConnect((props, store) => {
+    const { auth } = store.getState().firebase;
+
+    return auth
+      ? [
+          {
+            path: 'companies',
+            collection: `users/${auth.uid}/companies`,
+            storeAs: 'companies'
+          }
+        ]
+      : [];
+  }),
   connect(
     ({ firebase: { data, auth }, app: { addCompany } }) => ({
       user: data.users && data.users[auth.uid],
@@ -21,4 +33,4 @@ export default compose(
     }),
     mapDispatchToProps
   )
-)(DashBoard);
+)(Dashboard);

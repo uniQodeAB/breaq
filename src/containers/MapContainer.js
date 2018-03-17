@@ -1,18 +1,24 @@
-import { firebaseConnect } from 'react-redux-firebase';
+import { firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Map from '../components/Map';
 
 export default compose(
-  firebaseConnect((props, store) => {
+  firestoreConnect((props, store) => {
     const { auth } = store.getState().firebase;
-
-    return auth ? [`users/${auth.uid}/companies`] : [];
+    return auth
+      ? [
+          {
+            collection: 'users',
+            doc: auth.uid,
+            subcollections: [{ collection: 'companies' }]
+          }
+        ]
+      : [];
   }),
-  connect(({ firebase: { data, auth }, app: { filter } }) => ({
-    user: data.users,
-    companies:
-      data.users && data.users[auth.uid] && data.users[auth.uid].companies,
+  connect(({ firebase: { auth }, app: { filter }, firestore: { data } }) => ({
+    auth,
+    data,
     filter
   }))
 )(Map);

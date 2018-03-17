@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import '../styles/EmployeeGrid.css';
 import EmployeeInfoBox from '../containers/EmployeeInfoBoxContainer';
 
-const EmployeeGrid = ({ companyId, employees, active, color }) => (
+const EmployeeGrid = ({ employees, active, color }) => (
   <div className={'EmployeeGrid'}>
     <div className={`overlay ${active ? 'active' : 'inactive'}`} />
     <div className={'employee-grid'}>
       {employees.map(employee => (
         <EmployeeInfoBox
           key={employee.id}
-          companyId={companyId}
+          companyId={employee.belongsToCompany}
           employeeId={employee.id}
           title={employee.name}
           subTitle={employee.project}
@@ -24,11 +24,11 @@ const EmployeeGrid = ({ companyId, employees, active, color }) => (
 );
 
 EmployeeGrid.propTypes = {
-  companyId: PropTypes.string.isRequired,
   employees: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
+      belongsToCompany: PropTypes.string.isRequired,
       project: PropTypes.string,
       address: PropTypes.shape({
         streetAddress: PropTypes.string,

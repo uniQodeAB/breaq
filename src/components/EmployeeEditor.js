@@ -13,7 +13,7 @@ const initialState = {
   }
 };
 /* eslint-disable camelcase */
-class EmployeeCreator extends Component {
+class EmployeeEditor extends Component {
   constructor(props) {
     super(props);
 
@@ -108,7 +108,7 @@ class EmployeeCreator extends Component {
   }
 }
 
-EmployeeCreator.propTypes = {
+EmployeeEditor.propTypes = {
   companyId: PropTypes.string.isRequired,
   employeeId: PropTypes.string,
   employee: PropTypes.shape({
@@ -133,7 +133,7 @@ EmployeeCreator.propTypes = {
   color: PropTypes.string.isRequired
 };
 
-EmployeeCreator.defaultProps = {
+EmployeeEditor.defaultProps = {
   employeeId: undefined,
   employee: undefined,
   placeholders: {
@@ -143,4 +143,4 @@ EmployeeCreator.defaultProps = {
   }
 };
 
-export default EmployeeCreator;
+export default EmployeeEditor;

@@ -5,6 +5,7 @@ import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise-middleware';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
+import { reduxFirestore } from 'redux-firestore';
 
 import reducer from './reducers';
 import firebase from './firebase';
@@ -14,11 +15,14 @@ import history from './history';
 const rrfConfig = {
   userProfile: 'users', // firebase root where user profiles are stored
   attachAuthIsReady: true, // attaches auth is ready promise to store
-  firebaseStateName: 'firebase' // should match the reducer name ('firebase' is default),
+  firebaseStateName: 'firebase', // should match the reducer name ('firebase' is default),
+  useFirestoreForProfile: true,
+  allowMultipleListeners: true
 };
 
 const createStoreWithFirebase = compose(
   reactReduxFirebase(firebase, rrfConfig),
+  reduxFirestore(firebase),
   applyMiddleware(
     promise(),
     thunk.withExtraArgument(getFirebase),

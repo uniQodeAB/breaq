@@ -1,4 +1,4 @@
-import { firebaseConnect } from 'react-redux-firebase';
+import { firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { initEditEmployee } from '../actions/appActions';
@@ -16,6 +16,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
-  firebaseConnect(),
+  firestoreConnect(),
   connect(() => ({}), mapDispatchToProps)
 )(EmployeeInfoBox);
