@@ -29,7 +29,8 @@ describe('EmployeeGrid', () => {
       project: 'project',
       address: {
         streetAddress: 'streetAddress'
-      }
+      },
+      belongsToCompany: '1'
     };
 
     it('should be able to render one employee', () => {

@@ -7,7 +7,7 @@ describe('Map', () => {
   let map;
 
   beforeEach(() => {
-    map = shallow(<Map />);
+    map = shallow(<Map data={{}} filter={[]} auth={{}} />);
   });
 
   it('should render a `MapComponent`', () => {

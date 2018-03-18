@@ -9,6 +9,8 @@ jest.mock('../../containers/CompanyEditorContainer', () => 'CompanyEditor');
 
 jest.mock('../../containers/EmployeeEditorContainer', () => 'EmployeeEditor');
 
+jest.mock('../../containers/EmployeeGridContainer', () => 'EmployeeGrid');
+
 describe('Company', () => {
   let company;
   let props;
@@ -20,21 +22,7 @@ describe('Company', () => {
         name: 'name',
         address: {},
         location: {},
-        color: 'color',
-        employees: {
-          a: {
-            id: '1',
-            name: 'Kalle'
-          },
-          b: {
-            id: '2',
-            name: 'Lisa'
-          },
-          c: {
-            id: '3',
-            name: 'Pelle'
-          }
-        }
+        color: 'color'
       }
     };
 
@@ -100,16 +88,10 @@ describe('Company', () => {
     });
 
     describe('The rendered `EmployeeGrid', () => {
-      it('should accept props company id, color and array of employees', () => {
+      it('should accept props company id and color', () => {
         expect(company.find('EmployeeGrid').props()).toEqual({
-          active: false,
           companyId: props.company.id,
-          color: props.company.color,
-          employees: [
-            { id: '1', name: 'Kalle' },
-            { id: '2', name: 'Lisa' },
-            { id: '3', name: 'Pelle' }
-          ]
+          color: props.company.color
         });
       });
     });
@@ -143,22 +125,6 @@ describe('Company', () => {
 
     it('should not render a `EmployeeGrid`', () => {
       expect(company.find('EmployeeGrid').length).toBe(0);
-    });
-  });
-
-  describe('when there are no employees', () => {
-    beforeEach(() => {
-      props.company.employees = {};
-      company = shallow(<Company {...props} />);
-    });
-
-    it('should render `EmployeeGrid` with an empty array of employees', () => {
-      expect(company.find('EmployeeGrid').props()).toEqual({
-        active: false,
-        companyId: props.company.id,
-        color: props.company.color,
-        employees: []
-      });
     });
   });
 });
