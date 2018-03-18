@@ -1,58 +1,45 @@
 import React from 'react';
-import { isEmpty } from 'react-redux-firebase';
 import { Marker } from 'react-google-maps';
 import PropTypes from 'prop-types';
 
 import MapComponent from './MapComponent';
 
-const Map = ({ companies, filter }) => (
-  <MapComponent>
-    {isEmpty(companies)
-      ? []
-      : Object.entries(companies)
-          .reduce((a, [id, company]) => {
-            a.push({
-              id,
-              ...company
-            });
+const getCompanies = (data, filter, auth) =>
+  Object.values(((data.users || {})[auth.uid] || {}).companies || {})
+    .map(value => value)
+    .filter(company => !filter.includes(company.id)) || [];
 
-            return a;
-          }, [])
-          .filter(company => !filter.includes(company.id))
-          .reduce((a, company) => {
-            a.push({
-              id: company.id,
-              location: company.location
-            });
+const getEmployees = (data, filter) =>
+  Object.keys(data)
+    .filter(propertyName => propertyName.indexOf('employees') === 0)
+    .filter(propertyName => !!data[propertyName])
+    .reduce((acc, property) => {
+      Object.values(data[property]).forEach(value => {
+        acc.push(value);
+      });
+      return acc;
+    }, [])
+    .filter(employee => !filter.includes(employee.belongsToCompany)) || [];
 
-            if (company.employees) {
-              Object.entries(company.employees).forEach(
-                ([employeeId, employee]) => {
-                  if (employee) {
-                    a.push({
-                      id: employeeId,
-                      location: employee.location
-                    });
-                  }
-                }
-              );
-            }
+const createMarkers = entities =>
+  entities.map(entity => (
+    <Marker key={entity.id} position={entity.location} label={entity.label} />
+  ));
 
-            return a;
-          }, [])
-          .map(location => (
-            <Marker
-              key={location.id}
-              position={location.location}
-              label={location.label}
-            />
-          ))}
-  </MapComponent>
-);
+const Map = ({ data, filter, auth }) => {
+  const companies = getCompanies(data, filter, auth);
+  const employees = getEmployees(data, filter);
+
+  const companyMarkers = createMarkers(companies);
+  const employeeMarkers = createMarkers(employees);
+
+  return <MapComponent>{companyMarkers.concat(employeeMarkers)}</MapComponent>;
+};
 
 Map.propTypes = {
-  companies: PropTypes.shape(),
-  filter: PropTypes.arrayOf(PropTypes.string)
+  data: PropTypes.shape().isRequired,
+  filter: PropTypes.arrayOf(PropTypes.string),
+  auth: PropTypes.shape().isRequired
 };
 
 Map.defaultProps = {

@@ -1,10 +1,9 @@
-import { firebaseConnect } from 'react-redux-firebase';
+import { firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { endAddEmployee, endEditEmployee } from '../actions/appActions';
 import { addEmployee, updateEmployee } from '../actions/firebaseActions';
-import deepGet from '../helpers';
 
 import EmployeeEditor from '../components/EmployeeEditor';
 
@@ -21,23 +20,14 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
-  firebaseConnect((props, store) => {
-    const { auth } = store.getState().firebase;
-    const { companyId, employeeId } = props;
-
-    return auth
-      ? [`users/${auth.uid}/companies/${companyId}/employees/${employeeId}`]
-      : [];
-  }),
+  firestoreConnect(),
   connect(
     (
-      { firebase, firebase: { data, auth, ref } },
+      { firebase, firebase: { data, auth, ref }, firestore: { ordered } },
       { companyId, employeeId }
     ) => ({
-      employee: deepGet(
-        data,
-        ['users', auth.uid, 'companies', companyId, 'employees', employeeId],
-        {}
+      employee: ordered[`employees/${companyId}`].find(
+        employee => employee.id === employeeId
       ),
       auth
     }),

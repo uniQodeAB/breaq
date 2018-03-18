@@ -13,85 +13,91 @@ jest.mock('../../firebase', () => ({
       uid: '1234'
     }
   },
-  ref: jest.fn(),
+  firestore: {
+    collection: () => ({
+      doc: () => ({
+        collection: () => ({
+          doc: () => ({
+            set: () =>
+              new Promise(resolve => {
+                resolve();
+              }),
+            update: () =>
+              new Promise(resolve => {
+                resolve();
+              }),
+            delete: () =>
+              new Promise(resolve => {
+                resolve();
+              })
+          })
+        })
+      })
+    })
+  },
   login: jest.fn(),
   logout: jest.fn()
 }));
 
 describe('firebaseActions', () => {
   let store;
-  let mockUpdate;
-  let mockRemove;
 
   beforeEach(() => {
     store = mockStore({});
-
-    const mockPush = jest.fn(() => ({ key: '5678' }));
-    mockUpdate = jest.fn(
-      () =>
-        new Promise(resolve => {
-          resolve();
-        })
-    );
-    mockRemove = jest.fn();
-    const mockRef = jest.fn(() => ({
-      push: mockPush,
-      update: mockUpdate,
-      remove: mockRemove
-    }));
-
-    firebase.ref.mockReturnValue(mockRef());
   });
 
-  it('should add a company', () => {
-    store.dispatch(actions.addCompany({ name: 'abc' }));
+  it('should add a company', () =>
+    store
+      .dispatch(actions.addCompany({ name: 'abc' }))
+      .then(() =>
+        expect(store.getActions()).toEqual([{ type: 'END_ADD_COMPANY' }])
+      ));
 
-    expect(mockUpdate.mock.calls[0][0]).toEqual({
-      id: '5678',
-      name: 'abc'
-    });
-  });
+  it('should update a company', () =>
+    store
+      .dispatch(actions.updateCompany({ id: '5678', name: 'def' }))
+      .then(() =>
+        expect(store.getActions()).toEqual([
+          {
+            type: 'END_EDIT_COMPANY',
+            payload: {
+              companyId: '5678'
+            }
+          }
+        ])
+      ));
 
-  it('should update a company', () => {
-    store.dispatch(actions.updateCompany({ id: '5678', name: 'def' }));
-
-    expect(mockUpdate.mock.calls[0][0]).toEqual({
-      id: '5678',
-      name: 'def'
-    });
-  });
-
-  it('should delete a company', () => {
-    store.dispatch(actions.deleteCompany({ id: '5678', name: 'def' }));
-
-    expect(mockRemove.mock.calls.length).toEqual(1);
-  });
+  it('should delete a company', () =>
+    store
+      .dispatch(actions.deleteCompany({ id: '5678', name: 'def' }))
+      .then(() => expect(store.getActions()).toEqual([])));
 
   it('should add an employee', () => {
     store.dispatch(actions.addEmployee('5678', { name: 'employee' }));
-
-    expect(mockUpdate.mock.calls[0][0]).toEqual({
-      id: '5678',
-      name: 'employee'
-    });
+    // Todo add assert
   });
 
-  it('should update an employee', () => {
-    store.dispatch(
-      actions.updateEmployee('5678', { id: '5678', name: 'employee2' })
-    );
+  it('should update an employee', () =>
+    store
+      .dispatch(
+        actions.updateEmployee('5678', { id: '5678', name: 'employee2' })
+      )
+      .then(() =>
+        expect(store.getActions()).toEqual([
+          {
+            payload: {
+              companyId: '5678',
+              employeeId: '5678'
+            },
+            type: 'END_EDIT_EMPLOYEE'
+          }
+        ])
+      ));
 
-    expect(mockUpdate.mock.calls[0][0]).toEqual({
-      id: '5678',
-      name: 'employee2'
-    });
-  });
-
-  it('should delete an employee', () => {
-    store.dispatch(actions.deleteEmployee('5678', '5678'));
-
-    expect(mockRemove.mock.calls.length).toEqual(1);
-  });
+  it('should delete an employee', () =>
+    store
+      .dispatch(actions.deleteEmployee('5678', '5678'))
+      .then(() => expect(store.getActions()).toEqual([])));
 
   it('should login a user', () => {
     store.dispatch(actions.login());

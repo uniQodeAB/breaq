@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { firebaseConnect, isEmpty } from 'react-redux-firebase';
+import { firestoreConnect, isEmpty } from 'react-redux-firebase';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { Route, Redirect } from 'react-router-dom';
@@ -34,6 +34,6 @@ PrivateRoute.defaultProps = {
 };
 
 export default compose(
-  firebaseConnect(), // withFirebase can also be used
+  firestoreConnect(), // withFirebase can also be used
   connect(({ firebase: { auth } }) => ({ auth }))
 )(PrivateRoute);

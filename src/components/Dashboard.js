@@ -10,7 +10,7 @@ import Button from './Button';
 import '../styles/Dashboard.css';
 import CompanyLegend from '../containers/CompanyLegendContainer';
 
-const DashBoard = ({ user, addCompany, initAddCompany }) => {
+const Dashboard = ({ user, addCompany, initAddCompany }) => {
   if (!isLoaded(user)) {
     return <div className={'Dashboard'}>Loading...</div>;
   }
@@ -41,15 +41,15 @@ const DashBoard = ({ user, addCompany, initAddCompany }) => {
   );
 };
 
-DashBoard.propTypes = {
+Dashboard.propTypes = {
   user: PropTypes.shape(),
   addCompany: PropTypes.bool,
   initAddCompany: PropTypes.func.isRequired
 };
 
-DashBoard.defaultProps = {
+Dashboard.defaultProps = {
   user: {},
   addCompany: false
 };
 
-export default DashBoard;
+export default Dashboard;

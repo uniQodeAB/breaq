@@ -1,4 +1,4 @@
-import firebase, { auth } from '../firebase';
+import firebase, { auth, firestore } from '../firebase';
 import {
   endAddCompany,
   endEditCompany,
@@ -6,75 +6,66 @@ import {
   endEditEmployee
 } from './appActions';
 
-function getUID() {
-  return auth.currentUser.uid;
-}
+const getUID = () => auth.currentUser.uid;
+const getUserRef = () => firestore.collection('users').doc(getUID());
+const getCompaniesRef = () => getUserRef().collection('companies');
+const getEmployeesRef = () => getUserRef().collection('employees');
 
-export function addCompany(company) {
-  return dispatch => {
-    const id = firebase.ref(`/users/${getUID()}/companies/`).push().key;
-    return firebase
-      .ref(`/users/${getUID()}/companies/${id}`)
-      .update({
+export const addCompany = company => {
+  const newCompanyRef = getCompaniesRef().doc();
+
+  return dispatch =>
+    newCompanyRef
+      .set({
         ...company,
-        id
+        id: newCompanyRef.id
       })
       .then(() => dispatch(endAddCompany()));
-  };
-}
+};
 
-export function updateCompany(company) {
+export const updateCompany = company => {
+  const companyRef = getCompaniesRef().doc(company.id);
+
   return dispatch =>
-    firebase
-      .ref(`/users/${getUID()}/companies/${company.id}`)
+    companyRef
       .update({
         ...company
       })
       .then(() => dispatch(endEditCompany(company.id)));
-}
+};
 
-export function deleteCompany(companyId) {
-  return () =>
-    firebase.ref(`/users/${getUID()}/companies/${companyId}`).remove();
-}
+export const deleteCompany = companyId => () =>
+  getCompaniesRef()
+    .doc(companyId)
+    .delete();
 
-export function addEmployee(companyId, employee) {
+export const addEmployee = (companyId, employee) => {
+  const employeeRef = getEmployeesRef().doc();
+
   return dispatch => {
-    const id = firebase
-      .ref(`/users/${getUID()}/companies/${companyId}/employees/`)
-      .push().key;
-
-    firebase
-      .ref(`/users/${getUID()}/companies/${companyId}/employees/${id}`)
-      .update({
+    employeeRef
+      .set({
         ...employee,
-        id
+        id: employeeRef.id,
+        belongsToCompany: companyId
       })
       .then(() => dispatch(endAddEmployee(companyId)));
   };
-}
+};
 
-export function updateEmployee(companyId, employee) {
-  return dispatch =>
-    firebase
-      .ref(`/users/${getUID()}/companies/${companyId}/employees/${employee.id}`)
-      .update({
-        ...employee
-      })
-      .then(() => dispatch(endEditEmployee(companyId, employee.id)));
-}
+export const updateEmployee = (companyId, employee) => dispatch =>
+  getEmployeesRef()
+    .doc(employee.id)
+    .update({
+      ...employee
+    })
+    .then(() => dispatch(endEditEmployee(companyId, employee.id)));
 
-export function deleteEmployee(companyId, employeeId) {
-  return () =>
-    firebase
-      .ref(`/users/${getUID()}/companies/${companyId}/employees/${employeeId}`)
-      .remove();
-}
+export const deleteEmployee = (companyId, employeeId) => () =>
+  getEmployeesRef()
+    .doc(employeeId)
+    .delete();
 
-export function login() {
-  return () => firebase.login({ provider: 'google', type: 'popup' });
-}
-
-export function logout() {
-  return () => firebase.logout();
-}
+export const login = () => () =>
+  firebase.login({ provider: 'google', type: 'popup' });
+export const logout = () => () => firebase.logout();

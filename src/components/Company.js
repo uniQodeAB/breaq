@@ -1,27 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEmpty } from 'lodash';
 
-import EmployeeGrid from './EmployeeGrid';
+import EmployeeGrid from '../containers/EmployeeGridContainer';
 import CompanyInfoBox from '../containers/CompanyInfoBoxContainer';
 import EmployeeEditor from '../containers/EmployeeEditorContainer';
 import CompanyEditor from '../containers/CompanyEditorContainer';
 
 import '../styles/Company.css';
 
-const employeesAsArray = employees =>
-  isEmpty(employees)
-    ? []
-    : Object.entries(employees).reduce((a, [, employee]) => {
-        a.push({
-          ...employee
-        });
-        return a;
-      }, []);
-
 const Company = ({
   company,
-  company: { id, name, address, employees, color },
+  company: { id, name, address, color },
   editCompany,
   addEmployee,
   editEmployee,
@@ -50,11 +39,7 @@ const Company = ({
           />
         ) : (
           <div>
-            <EmployeeGrid
-              companyId={id}
-              color={color}
-              employees={employeesAsArray(employees)}
-            />
+            <EmployeeGrid companyId={id} color={color} />
           </div>
         )}
       </div>
