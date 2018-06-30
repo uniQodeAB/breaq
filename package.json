@@ -9,7 +9,9 @@
     "firebase": "^5.1.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts-ts": "2.16.0"
+    "react-redux": "^5.0.7",
+    "react-scripts-ts": "2.16.0",
+    "redux": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -22,6 +24,8 @@
     "@types/node": "^10.3.6",
     "@types/react": "^16.4.2",
     "@types/react-dom": "^16.0.6",
+    "@types/react-redux": "^6.0.3",
+    "ajv": "^6.5.1",
     "typescript": "^2.9.2"
   }
 }
