@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IClient } from '../types';
 
-interface IProps {
+export interface IProps {
   client: IClient;
   submitClient: (client:IClient) => Promise<void>;
 }
