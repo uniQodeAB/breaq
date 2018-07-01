@@ -14,10 +14,8 @@ function mapDispatchToProps(dispatch:ThunkDispatch<IStoreState, void, ClientActi
   };
 }
 
-function mapStateToProps({ client }: IStoreState) {
-  return {
-    client
-  };
+function mapStateToProps() {
+  return { };
 }
 
 export default compose<React.SFC>(

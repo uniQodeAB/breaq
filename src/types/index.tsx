@@ -1,5 +1,7 @@
+import { COMPLETE, FAIL, INACTIVE, SUBMIT } from '../constants';
+
 export interface IStoreState {
-  client: IClient;
+  addClientState: IComponentState;
 }
 
 export interface IClient {
@@ -8,4 +10,9 @@ export interface IClient {
 
 export interface IFirestoreState {
   firestore: any | null;
+}
+
+export interface IComponentState {
+  state: INACTIVE | SUBMIT | COMPLETE | FAIL;
+  message?: string;
 }

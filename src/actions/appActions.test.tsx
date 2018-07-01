@@ -53,7 +53,7 @@ describe('submitClient', () => {
       { type: constants.SUBMIT_CLIENT },
       { type: constants.SUBMIT_CLIENT_FAILED, payload: 'Fail' }
     ]
-    const store = mockStore({ todos: [] })
+    const store = mockStore({ })
 ​
     const client:IClient = { name: '' };
     await store.dispatch<any>(actions.submitClient(client));
