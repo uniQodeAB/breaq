@@ -4,8 +4,13 @@ import { compose } from 'redux';
 import { addClient } from '../actions/appActions';
 
 import { submitClient } from '../actions/firebaseActions';
-import AddClient from '../components/AddClient';
-import { IClient, IStoreState } from '../types';
+import ListClients from '../components/ListClients';
+import { IClient, IFirestoreState } from '../types';
+
+interface IClientDoc {
+  id: string,
+  client: IClient
+}
 
 function mapDispatchToProps(dispatch:any) {
   return {
@@ -14,14 +19,16 @@ function mapDispatchToProps(dispatch:any) {
   };
 }
 
-function mapStateToProps({ client }: IStoreState) {
+function mapStateToProps({ firestore: { ordered } }:IFirestoreState) {
+  const clientDocs:IClientDoc[] = ordered.clients;
+
   return {
-    client
+    clients : clientDocs ? clientDocs.map((clientDoc) => clientDoc.client) : []
   }
 }
 
 
 export default compose<React.SFC>(
-  firestoreConnect(),
+  firestoreConnect(['clients']),
   connect(mapStateToProps, mapDispatchToProps)
-)(AddClient);
+)(ListClients);

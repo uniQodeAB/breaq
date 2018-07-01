@@ -1,15 +1,13 @@
 import * as React from 'react';
 import { IClient } from '../types';
 
-export interface IProps {
+interface IProps {
   client: IClient;
   submitClient: (client:IClient) => Promise<void>;
 }
-
-export interface IState {
+interface IState {
   readonly client: IClient;
 }
-
 class AddClient extends React.Component<IProps, IState> {
   constructor(props:IProps) {
     super(props);

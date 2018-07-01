@@ -4,11 +4,11 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
 import { Provider } from 'react-redux';
+import App from './App';
 import store from './configureStore';
 // import { createStore } from 'redux';
 // import { EnthusiasmAction } from './actions/index';
 // import Hello from './containers/Hello';
-import AddClient from './containers/AddClient';
 // import { enthusiasm } from './reducers/index';
 // import { IStoreState } from './types/index';
 
@@ -20,7 +20,7 @@ import AddClient from './containers/AddClient';
 
 ReactDOM.render(
   <Provider store={store}>
-    <AddClient />
+    <App />
   </Provider>,
   document.getElementById('root') as HTMLElement
 );
