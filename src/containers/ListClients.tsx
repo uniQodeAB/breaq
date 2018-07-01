@@ -1,9 +1,7 @@
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import { addClient } from '../actions/appActions';
 
-import { submitClient } from '../actions/firebaseActions';
 import ListClients from '../components/ListClients';
 import { IClient, IFirestoreState } from '../types';
 
@@ -13,10 +11,7 @@ interface IClientDoc {
 }
 
 function mapDispatchToProps(dispatch:any) {
-  return {
-    addClient: (client:IClient) => dispatch(addClient(client)),
-    submitClient: (client:IClient) => dispatch(submitClient(client)),
-  };
+  return { };
 }
 
 function mapStateToProps({ firestore: { ordered } }:IFirestoreState) {
