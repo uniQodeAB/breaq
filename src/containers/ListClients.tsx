@@ -27,7 +27,6 @@ function mapStateToProps({ firestore: { ordered } }:IFirestoreState) {
   }
 }
 
-
 export default compose<React.SFC>(
   firestoreConnect(['clients']),
   connect(mapStateToProps, mapDispatchToProps)

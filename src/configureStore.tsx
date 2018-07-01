@@ -33,19 +33,4 @@ const createStoreWithFirebase:StoreEnhancerStoreCreator = compose<StoreEnhancerS
 const initialState = {};
 const store = createStoreWithFirebase(reducer, initialState);
 
-// Listen for auth ready (promise available on store due to attachAuthIsReady: true config option)
-/* store.firebaseAuthIsReady.then(() => {
-  console.log('Auth has loaded'); // eslint-disable-line no-console
-}); */
-
 export default store;
-
-
-
-
-/* const store = createStore<IStoreState, EnthusiasmAction, any, any>(enthusiasm, {
-  enthusiasmLevel: 1,
-  languageName: 'TypeScript',
-});
-*/
-

@@ -17,9 +17,8 @@ function mapDispatchToProps(dispatch:any) {
 function mapStateToProps({ client }: IStoreState) {
   return {
     client
-  }
+  };
 }
-
 
 export default compose<React.SFC>(
   firestoreConnect(),

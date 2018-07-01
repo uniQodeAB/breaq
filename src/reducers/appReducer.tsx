@@ -5,9 +5,7 @@ import { IStoreState } from '../types/index';
 export const initialState = {
   client: {
     name: ''
-  },
-  enthusiasmLevel: 0,
-  languageName: 'en'
+  }
 };
 export default function appReducer(state: IStoreState = initialState, action: ClientAction): IStoreState {
   switch (action.type) {
