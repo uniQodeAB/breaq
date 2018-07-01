@@ -1,23 +1,29 @@
 import * as constants from '../constants'
+import { IClient } from '../types';
 
-export interface IIncrementEnthusiasm {
-    type: constants.INCREMENT_ENTHUSIASM;
+export interface IAddClient {
+  type: constants.ADD_CLIENT;
+  payload: IClient,
 }
 
-export interface IDecrementEnthusiasm {
-    type: constants.DECREMENT_ENTHUSIASM;
+export type AppAction = IAddClient;
+
+export interface ISubmitClient {
+  type: constants.SUBMIT_CLIENT;
 }
 
-export type EnthusiasmAction = IIncrementEnthusiasm | IDecrementEnthusiasm;
-
-export function incrementEnthusiasm(): IIncrementEnthusiasm {
-    return {
-        type: constants.INCREMENT_ENTHUSIASM
-    }
+export interface ISubmitClientSuccessful {
+  type: constants.SUBMIT_CLIENT_SUCCESSFUL;
 }
 
-export function decrementEnthusiasm(): IDecrementEnthusiasm {
-    return {
-        type: constants.DECREMENT_ENTHUSIASM
-    }
+export interface ISubmitClientFailed {
+  type: constants.SUBMIT_CLIENT_FAILED;
+  payload: string;
 }
+
+export type ClientAction =
+  IAddClient | ISubmitClient | ISubmitClientSuccessful | ISubmitClientFailed;
+
+export type FirebaseAction = ISubmitClient | ISubmitClientSuccessful | ISubmitClientFailed;
+
+

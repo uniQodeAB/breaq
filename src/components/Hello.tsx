@@ -1,4 +1,5 @@
 import * as React from 'react';
+import AddClient from '../containers/AddClient';
 
 export interface IProps {
   name: string;
@@ -22,6 +23,8 @@ function Hello({ name, enthusiasmLevel = 1, onIncrement, onDecrement }: IProps) 
         <button onClick={onDecrement}>-</button>
         <button onClick={onIncrement}>+</button>
       </div>
+
+      <AddClient />
     </div>
   );
 }

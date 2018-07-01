@@ -1,17 +1,19 @@
-import { EnthusiasmAction } from '../actions';
-import { DECREMENT_ENTHUSIASM, INCREMENT_ENTHUSIASM } from '../constants/index';
+import { ClientAction } from '../actions';
+import { ADD_CLIENT } from '../constants/index';
 import { IStoreState } from '../types/index';
 
 export const initialState = {
+  client: {
+    name: ''
+  },
   enthusiasmLevel: 0,
   languageName: 'en'
 };
-export default function enthusiasm(state: IStoreState = initialState, action: EnthusiasmAction): IStoreState {
+export default function appReducer(state: IStoreState = initialState, action: ClientAction): IStoreState {
   switch (action.type) {
-    case INCREMENT_ENTHUSIASM:
-      return { ...state, enthusiasmLevel: state.enthusiasmLevel + 1 };
-    case DECREMENT_ENTHUSIASM:
-      return { ...state, enthusiasmLevel: Math.max(1, state.enthusiasmLevel - 1) };
+    case ADD_CLIENT:
+      const client = { ...state.client, name: action.payload.name }
+      return { ...state, client };
   }
   return state;
 }
