@@ -1,4 +1,4 @@
-import { ClientAction } from '../actions';
+import { AddClientAction } from '../actions';
 import {
   COMPLETE,
   FAIL,
@@ -15,9 +15,13 @@ export const initialState:IStoreState = {
   addClientState: {
     message: '',
     state: INACTIVE
+  },
+  deleteClientState: {
+    message: '',
+    state: INACTIVE
   }
 };
-export default function appReducer(state: IStoreState = initialState, action: ClientAction): IStoreState {
+export default function appReducer(state: IStoreState = initialState, action: AddClientAction): IStoreState {
   switch (action.type) {
     case SUBMIT_CLIENT:
       return {

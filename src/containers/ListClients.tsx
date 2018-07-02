@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
+import { deleteClient } from '../actions/appActions';
 import ListClients from '../components/ListClients';
 import { IClient, IFirestoreState } from '../types';
 
@@ -11,7 +12,9 @@ interface IClientDoc {
 }
 
 function mapDispatchToProps(dispatch:any) {
-  return { };
+  return {
+    deleteClient: (client:IClient) => dispatch(deleteClient(client)),
+  };
 }
 
 function mapStateToProps({ firestore: { ordered } }:IFirestoreState) {

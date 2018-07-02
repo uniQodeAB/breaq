@@ -10,6 +10,10 @@ describe('app reducer', () => {
       addClientState: {
         message: '',
         state: INACTIVE
+      },
+      deleteClientState: {
+        message: '',
+        state: INACTIVE
       }
     };
   })
@@ -17,11 +21,9 @@ describe('app reducer', () => {
   it('should change the state of addClientState to "SUBMIT"', () => {
     const newState = reducer(state, { type: SUBMIT_CLIENT });
 
-    expect(newState).toEqual(
-      { addClientState: {
-        message: '',
-        state: SUBMIT
-      }
+    expect(newState.addClientState).toEqual({
+      message: '',
+      state: SUBMIT
     });
 
     // original store state should not have changed
@@ -31,11 +33,9 @@ describe('app reducer', () => {
   it('should change the state of addClientState to "COMPLETE"', () => {
     const newState = reducer(state, { type: SUBMIT_CLIENT_SUCCESSFUL });
 
-    expect(newState).toEqual(
-      { addClientState: {
-        message: '',
-        state: COMPLETE
-      }
+    expect(newState.addClientState).toEqual({
+      message: '',
+      state: COMPLETE
     });
 
     // original store state should not have changed
@@ -48,11 +48,9 @@ describe('app reducer', () => {
       type: SUBMIT_CLIENT_FAILED,
     });
 
-    expect(newState).toEqual(
-      { addClientState: {
+    expect(newState.addClientState).toEqual({
         message: 'test',
         state: FAIL
-      }
     });
 
     // original store state should not have changed

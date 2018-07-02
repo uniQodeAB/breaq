@@ -2,6 +2,7 @@ import { COMPLETE, FAIL, INACTIVE, SUBMIT } from '../constants';
 
 export interface IStoreState {
   addClientState: IComponentState;
+  deleteClientState: IComponentState;
 }
 
 export interface IClient {

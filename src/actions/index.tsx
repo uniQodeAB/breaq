@@ -13,6 +13,20 @@ export interface ISubmitClientFailed {
   payload: string;
 }
 
-export type ClientAction = ISubmitClient | ISubmitClientSuccessful | ISubmitClientFailed;
+export interface IDeleteClient {
+  type: constants.DETELE_CLIENT;
+}
+
+export interface IDeleteClientSuccessful {
+  type: constants.DELETE_CLIENT_SUCCESSFUL;
+}
+
+export interface IDeleteClientFailed {
+  type: constants.DELETE_CLIENT_FAILED;
+  payload: string;
+}
+
+export type AddClientAction = ISubmitClient | ISubmitClientSuccessful | ISubmitClientFailed;
+export type DeleteClientAction = IDeleteClient | IDeleteClientSuccessful | IDeleteClientFailed;
 
 
