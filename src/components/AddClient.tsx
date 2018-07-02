@@ -7,6 +7,7 @@ export interface IProps {
 }
 interface IState {
   readonly client: IClient;
+  readonly showMessage: boolean;
 }
 class AddClient extends React.Component<IProps, IState> {
   constructor(props:IProps) {
@@ -15,15 +16,19 @@ class AddClient extends React.Component<IProps, IState> {
     this.state = {
       client: {
         name: ''
-      }
+      },
+      showMessage: false,
     }
   }
 
   public render() {
-    const { client } = this.state;
+    const { client, showMessage } = this.state;
 
     return (
       <div>
+          {showMessage && (
+            <span>You need add a client before submitting</span>
+          )}
           <input
             type={'text'}
             className={'form-input'}
@@ -40,6 +45,7 @@ class AddClient extends React.Component<IProps, IState> {
 
   private onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
+      ...this.state,
       client: {
         ...this.state.client,
         name: e.target.value
@@ -47,18 +53,33 @@ class AddClient extends React.Component<IProps, IState> {
     })
   }
 
+  private clientIsValid = (client:IClient):boolean => !!client.name;
+
   private onSubmit = async () => {
     const { submitClient } = this.props;
     const { client } = this.state;
 
-    await submitClient(client);
+    // Check if input is empty
+    if (this.clientIsValid(client)) {
+      this.setState({
+        ...this.state,
+        showMessage: false
+      });
 
-    // Reset state
-    this.setState({
-      client: {
-        name: ''
-      }
-    })
+      await submitClient(client);
+
+      // Reset state
+      this.setState({
+        client: {
+          name: ''
+        }
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        showMessage: true
+      });
+    }
   }
 }
 
