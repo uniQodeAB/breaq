@@ -29,4 +29,5 @@ export interface IDeleteClientFailed {
 export type AddClientAction = ISubmitClient | ISubmitClientSuccessful | ISubmitClientFailed;
 export type DeleteClientAction = IDeleteClient | IDeleteClientSuccessful | IDeleteClientFailed;
 
+export type AppAction = AddClientAction | DeleteClientAction;
 
