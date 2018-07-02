@@ -35,7 +35,7 @@ export const deleteClient: ActionCreator<
 > = (client:IClient) => {
   return async (dispatch: Dispatch<DeleteClientAction>): Promise<DeleteClientAction> => {
     dispatch({
-      type: constants.DETELE_CLIENT
+      type: constants.DELETE_CLIENT
     });
 
     try {

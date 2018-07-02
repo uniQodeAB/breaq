@@ -14,7 +14,7 @@ export interface ISubmitClientFailed {
 }
 
 export interface IDeleteClient {
-  type: constants.DETELE_CLIENT;
+  type: constants.DELETE_CLIENT
 }
 
 export interface IDeleteClientSuccessful {
