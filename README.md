@@ -12,6 +12,11 @@ Test
 npm run test
 ```
 
+Test with coverage report
+```
+npm run test:coverage
+```
+
 Create production build
 ```
 npm run build
