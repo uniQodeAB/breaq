@@ -1,3 +1,5 @@
+[![VSTS Build Status](https://uniqode-ab.visualstudio.com/_apis/public/build/definitions/2be82d53-0ced-4225-b090-a22d1a9338cb/1/badge)](https://uniqode-ab.visualstudio.com/BreaQ/_build/latest?definitionId=1&view=logs) 
+
 # Breaq
 An app for finding your colleagues.
 
