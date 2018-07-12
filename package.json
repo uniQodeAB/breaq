@@ -7,22 +7,42 @@
     "@firebase/app-types": "^0.3.2",
     "@firebase/firestore": "^0.5.5",
     "firebase": "^5.1.0",
+    "history": "^4.7.2",
+    "npm": "^6.1.0",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-scripts-ts": "2.16.0"
+    "react-redux": "^5.0.7",
+    "react-redux-firebase": "^2.1.6",
+    "react-router-redux": "^4.0.8",
+    "react-scripts-ts": "2.16.0",
+    "redux": "^4.0.0",
+    "redux-firestore": "^0.5.7",
+    "redux-logger": "^3.0.6",
+    "redux-promise-middleware": "^5.1.1",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
+    "test:coverage": "npm test -- --coverage",
     "test-ci": "set CI=true &&react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.1.11",
+    "@types/enzyme-adapter-react-16": "^1.0.2",
     "@types/jest": "^23.1.2",
     "@types/node": "^10.3.6",
     "@types/react": "^16.4.2",
     "@types/react-dom": "^16.0.6",
+    "@types/react-redux": "^6.0.3",
+    "@types/react-router-redux": "^5.0.15",
+    "@types/redux-logger": "^3.0.6",
+    "ajv": "^6.5.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "react-dom": "^16.4.1",
+    "react-test-renderer": "^16.4.1",
     "typescript": "^2.9.2"
   }
 }

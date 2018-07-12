@@ -14,6 +14,11 @@ Test
 npm run test
 ```
 
+Test with coverage report
+```
+npm run test:coverage
+```
+
 Create production build
 ```
 npm run build
@@ -25,6 +30,22 @@ Some basic guidelines is not to do development in `master` and instead do it in 
 The app has been bootstrapped with [TypeScript React Starter](https://github.com/Microsoft/TypeScript-React-Starter) configured with TypeScript. Please refer to the starter for further documentation on its use.
 
 Below are README content created after bootstrapping. It is included temporarily in the README to aid in development of the app.
+
+## Firebase configuration
+To be able to run this you need to set up Firebase configuration. To do this create a `.env` file to store your environment variables.
+
+```
+REACT_APP_FIREBASE_API_KEY=<apiKey>
+REACT_APP_FIREBASE_AUTH_DOMAIN=<authDomain>
+REACT_APP_FIREBASE_DATABASE_URL=<databaseURL>
+REACT_APP_FIREBASE_PROJECT_ID=<projectId>
+REACT_APP_FIREBASE_STORAGE_BUCKET=<storageBucket>
+REACT_APP_FIREBASE_MESSAGEING_SENDER_ID=<messagingSenderId>
+```
+
+The Firebase configuration data can be found in the Firebase console for the project. Do not under any circumstances commit any API keys.
+
+If you want to have a separate instance of Firebase for development, then you can create another Firebase project and create a `.env.local` file with the same keys as `.env` but with values from the other Firebase project. `.env.local` will take precedence over `.env`.
 
 ---
 ---
