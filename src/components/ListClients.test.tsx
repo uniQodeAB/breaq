@@ -23,10 +23,16 @@ it('renders an empty list, and does not fail, if the clients are undefined', () 
 it('renders a list of clients with buttons', () => {
   const props:IProps = {
     clients: [{
+      id: '123',
+      locations: [],
       name: 'abc'
     }, {
+      id: '456',
+      locations: [],
       name: 'def'
     }, {
+      id: '789',
+      locations: [],
       name: 'ghi'
     }],
     deleteClient: jest.fn()
@@ -44,10 +50,16 @@ it('renders a list of clients with buttons', () => {
 it('calls the `deleteClient` method for the selected client when button clicked', async () => {
   const props:IProps = {
     clients: [{
+      id: '123',
+      locations: [],
       name: 'abc'
     }, {
+      id: '456',
+      locations: [],
       name: 'def'
     }, {
+      id: '789',
+      locations: [],
       name: 'ghi'
     }],
     deleteClient: jest.fn()
@@ -60,6 +72,8 @@ it('calls the `deleteClient` method for the selected client when button clicked'
   await listClients.update();
 
   expect(props.deleteClient).toBeCalledWith({
+    id: '456',
+    locations: [],
     name: 'def'
   });
 

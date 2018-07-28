@@ -1,15 +1,23 @@
 import * as React from 'react';
-import { IClient } from '../types';
+import { IClient, ILocation } from '../types';
 
 export interface IProps {
   clients?: IClient[];
   deleteClient: (client:IClient) => Promise<void>;
 }
 
+const renderLocations = (locations : ILocation[]) => (
+  <ol>
+    {locations && locations.map((location:ILocation) => (
+      <li key={location.id}>{location.address}</li>
+    ))}
+  </ol>
+)
+
 const renderClients = (clients: IClient[], deleteClient: (client:IClient) => Promise<void>) => {
   return clients.map((client) => (
     // tslint:disable-next-line:jsx-no-lambda
-    <li key={client.name}>{client.name}<button onClick={() => deleteClient(client)}>Delete</button></li>
+    <li key={client.name}>{client.name}{renderLocations(client.locations)}<button onClick={() => deleteClient(client)}>Delete</button></li>
   ));
 }
 

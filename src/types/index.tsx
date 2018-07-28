@@ -6,7 +6,16 @@ export interface IStoreState {
 }
 
 export interface IClient {
+  id: string;
   name: string;
+  locations: ILocation[];
+}
+
+export interface ILocation {
+  id: string;
+  address: string;
+  lat: number;
+  lng: number;
 }
 
 export interface IFirestoreState {

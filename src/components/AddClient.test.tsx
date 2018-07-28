@@ -2,51 +2,143 @@ import * as enzyme from 'enzyme';
 import * as React from 'react';
 import AddClient, { IProps } from './AddClient';
 
-
-it('renders an empty input when the client name is empty', () => {
-  const props:IProps = {
-    client: {
-      name: ''
-    },
-    submitClient: jest.fn()
+jest.mock('../containers/ClientAutocomplete', () => {
+  return {
+    default: 'Autocomplete'
   }
-  const addClient = enzyme.shallow(<AddClient { ...props }/>);
-  expect(addClient.find('input').text()).toEqual('');
 });
 
-it('updates internal state when the value of the input field changes', () => {
-  const props:IProps = {
-    client: {
-      name: ''
-    },
-    submitClient: jest.fn()
+jest.mock('./LocationSearchBox', () => {
+  return {
+    default: 'LocationSearchBox'
   }
-  const wrapper = enzyme.shallow(<AddClient { ...props }/>);
-  expect(wrapper.state()).toEqual({
-    client: {
-      name: ''
-    },
-    showMessage:false
+});
+
+jest.mock('../firebase', () => {
+  return {
+    firestore: {
+      doc: (path:string) => ({
+        get: () => ({
+          data: () => ({
+            client: {
+              id: 'clientid',
+              locations: [{
+                address: 'address',
+                id: 'addressid',
+                lat: 112,
+                lng: 358
+              }],
+
+              name: 'abc',
+            }
+          }),
+          exists: true,
+        })
+      })
+    }
+  }
+})
+
+describe('AddClient', () => {
+  let props:IProps;
+  let addClient:enzyme.ShallowWrapper;
+
+  beforeEach(() => {
+    props = {
+      createClient: jest.fn(),
+      updateClient: jest.fn(),
+    }
+
+    addClient = enzyme.shallow(<AddClient { ...props }/>);
+  })
+
+  it('initially renders an AutoComplete without the LocationSearchBox', () => {
+    expect(addClient.find('Autocomplete')).toHaveLength(1);
+    expect(addClient.find('LocationSearchBox')).toHaveLength(0);
   });
 
-  wrapper.find('input').simulate('change', { target: { value: 'My new value'} });
-  expect(wrapper.state()).toEqual({
-    client: {
-      name: 'My new value',
-    },
-    showMessage: false
+  describe('Autocomplete', () => {
+    it('should render Autocomplete with props', () => {
+      expect(addClient.find('Autocomplete').props()).toEqual({
+        onChange: expect.any(Function),
+        onSelect: expect.any(Function),
+        placeholder: expect.any(String),
+        value: '',
+      })
+    });
+
+    it('update client name in state on onChange callback from Autocomplete', () => {
+      const onAutocompleteChange:any = addClient.find('Autocomplete').props().onChange!;
+
+      let state:any = addClient.state();
+      expect(state.client.name).toHaveLength(0);
+
+      onAutocompleteChange('test');
+
+      state = addClient.state();
+      expect(state.client.name).toEqual('test');
+    });
+
+    it('update client on onSelect callback from Autocomplete', async () => {
+      const onClientSelect:any = addClient.find('Autocomplete').props().onSelect!;
+
+      let state:any = addClient.state();
+
+      expect(state.client).toEqual({
+        id: '',
+        locations:
+        [ ],
+        name: ''
+      });
+
+      await onClientSelect({}, {
+        suggestion: {
+          id: '123',
+          name: 'abc'
+        }
+      });
+
+      state = addClient.state();
+
+      expect(state.client).toEqual({
+        id: 'clientid',
+        locations:
+        [ { address: 'address', id: 'addressid', lat: 112, lng: 358 } ],
+        name: 'abc'
+      });
+    });
+  });
+
+  describe('LocationSearchBox', () => {
+    it('should show LocationSearchBox if the "Add location" button is clicked', () => {
+      addClient.find('#add-location').simulate('click');
+
+      expect(addClient.find('Autocomplete')).toHaveLength(1);
+      expect(addClient.find('LocationSearchBox')).toHaveLength(1);
+    });
+
+    it('should render LocationSearchBox with props', () => {
+      addClient.setState({
+        ...addClient.state,
+        addLocation: true
+      });
+
+      expect(addClient.find('LocationSearchBox').props()).toEqual({
+        onChange: expect.any(Function),
+        placeholder: expect.any(String),
+      })
+    });
   });
 });
 
+/*
 it('renders a button that executes submitClient and clears state when clicked', async () => {
   const submitClientStub:jest.Mock = jest.fn()
   const props:IProps = {
-    client: {
-      name: ''
-    },
-    submitClient: submitClientStub
+    createClient: submitClientStub,
+    updateClient: jest.fn(),
   }
-  const wrapper = enzyme.shallow(<AddClient client={props.client} submitClient={props.submitClient}/>);
+  const wrapper = enzyme.shallow(<AddClient {...props} />);
 
   // Change state
   wrapper.find('input').simulate('change', { target: { value: 'My new value'} });
@@ -73,12 +165,10 @@ it('should show a message and not execute submitClient if the input is empty whe
  async () => {
   const submitClientStub:jest.Mock = jest.fn()
   const props:IProps = {
-    client: {
-      name: ''
-    },
-    submitClient: submitClientStub
+    createClient: submitClientStub,
+    updateClient: jest.fn()
   }
-  const wrapper = enzyme.shallow(<AddClient client={props.client} submitClient={props.submitClient}/>);
+  const wrapper = enzyme.shallow(<AddClient { ...props } />);
 
   // The span should only be rendered when showMessage is true
   expect(wrapper.find('span').length).toEqual(0);
@@ -105,4 +195,4 @@ it('should show a message and not execute submitClient if the input is empty whe
 
   expect(wrapper.find('span').text().length).toBeGreaterThan(0);
 });
-
+*/
