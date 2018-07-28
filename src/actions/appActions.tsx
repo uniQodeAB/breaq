@@ -44,9 +44,6 @@ export const updateClient: ActionCreator<
       type: constants.UPDATE_CLIENT
     });
 
-    // tslint:disable-next-line:no-console
-    console.log(client);
-
     try {
       const clientDoc = await firestore.doc(`clients/${client.id}`).get();
 
