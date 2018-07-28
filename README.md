@@ -1,4 +1,4 @@
-[![VSTS Build Status](https://uniqode-ab.visualstudio.com/_apis/public/build/definitions/2be82d53-0ced-4225-b090-a22d1a9338cb/1/badge)](https://uniqode-ab.visualstudio.com/BreaQ/_build/latest?definitionId=1&view=logs) 
+[![VSTS Build Status](https://uniqode-ab.visualstudio.com/_apis/public/build/definitions/2be82d53-0ced-4225-b090-a22d1a9338cb/1/badge)](https://uniqode-ab.visualstudio.com/BreaQ/_build/latest?definitionId=1&view=logs)
 
 # Breaq
 An app for finding your colleagues.
@@ -46,6 +46,18 @@ REACT_APP_FIREBASE_MESSAGEING_SENDER_ID=<messagingSenderId>
 The Firebase configuration data can be found in the Firebase console for the project. Do not under any circumstances commit any API keys.
 
 If you want to have a separate instance of Firebase for development, then you can create another Firebase project and create a `.env.local` file with the same keys as `.env` but with values from the other Firebase project. `.env.local` will take precedence over `.env`.
+
+## Google Maps
+Google Maps are used for creating the map as well as for adding location search support. To get Google Maps to work an API key is needed. In the `.env` file add the following:
+
+```
+REACT_APP_GOOGLE_MAPS_API_KEY=<API KEY>
+```
+
+where `<API KEY>` is your personal API key for Google Maps.
+
+### Google Maps in Production
+For production the API key should be the one named `Google Maps API Key` found in the [Google API Console](https://console.cloud.google.com/apis/). The API key is restricted to a single domain.
 
 ---
 ---
