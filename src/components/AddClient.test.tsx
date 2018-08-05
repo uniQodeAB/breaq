@@ -307,36 +307,3 @@ describe('AddClient', () => {
     expect(addClient.find('span').text()).toEqual('fail');
   });
 });
-
-/*
-it('renders a button that executes submitClient and clears state when clicked', async () => {
-  const submitClientStub:jest.Mock = jest.fn()
-  const props:IProps = {
-    createClient: submitClientStub,
-    updateClient: jest.fn(),
-  }
-  const wrapper = enzyme.shallow(<AddClient {...props} />);
-
-  // Change state
-  wrapper.find('input').simulate('change', { target: { value: 'My new value'} });
-  const expectedClient = {
-    name: 'My new value'
-  };
-  // Verify state change
-  expect(wrapper.state()).toEqual({ client: expectedClient, showMessage: false });
-
-  // Click button and wait for update as onSubmit function is async
-  wrapper.find('button').simulate('click');
-  await wrapper.update();
-
-  expect(submitClientStub).toBeCalledWith(expectedClient);
-  expect(wrapper.state()).toEqual({
-    client: {
-      name: ''
-    },
-    showMessage: false
-  });
-});
-
-
-*/
