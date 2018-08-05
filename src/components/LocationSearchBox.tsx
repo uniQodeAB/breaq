@@ -9,7 +9,7 @@ interface ISearchBoxProps extends StandaloneSearchBoxProps, IProps {
   onSearchBoxMounted(): void;
 }
 
-interface IProps extends StandaloneSearchBoxProps {
+export interface IProps extends StandaloneSearchBoxProps {
   placeholder: string;
   onChange: (location:ILocation) => void;
 }
