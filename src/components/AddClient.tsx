@@ -63,11 +63,11 @@ class AddClient extends React.Component<IProps, IState> {
               onChange={this.onLocationChange}
               placeholder={"Add location"}
             />
-            <button onClick={this.onSaveLocation} disabled={!address}>Save location</button>
+            <button id="save-location" onClick={this.onSaveLocation} disabled={!address}>Save location</button>
           </div>
         )}
 
-        <ol>
+        <ol id="locations">
           {client.locations && client.locations.map((location:ILocation) => (
               <li key={location.id}>
                 {location.address}
@@ -83,8 +83,8 @@ class AddClient extends React.Component<IProps, IState> {
         <div>
           <button onClick={this.resetState}>Cancel</button>
           {update
-            ? <button onClick={this.onUpdate}>Update</button>
-            : <button onClick={this.onCreate}>Save</button>}
+            ? <button id="update-client" onClick={this.onUpdate}>Update</button>
+            : <button id="create-client" onClick={this.onCreate}>Save</button>}
         </div>
       </div>
     )
