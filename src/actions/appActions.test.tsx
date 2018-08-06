@@ -9,7 +9,7 @@ const mockStore = configureMockStore(middlewares);
 import { firestore } from '../firebase';
 
 describe('submitClient', () => {
-  it('creates SUBMIT_CLIENT_SUCCESSFUL when submitting client is done', async () => {
+  it('creates CREATE_CLIENT_SUCCESSFUL when creating client is done', async () => {
     const docMock = () => ({
       set: jest.fn()
     });
@@ -23,18 +23,18 @@ describe('submitClient', () => {
     const actions = require('./appActions');
 
     const expectedActions = [
-      { type: constants.SUBMIT_CLIENT },
-      { type: constants.SUBMIT_CLIENT_SUCCESSFUL }
+      { type: constants.CREATE_CLIENT },
+      { type: constants.CREATE_CLIENT_SUCCESSFUL }
     ]
     const store = mockStore({ todos: [] })
 ​
-    const client:IClient = { name: '' };
-    await store.dispatch<any>(actions.submitClient(client));
+    const client:IClient = { id: '', name: 'abc', locations: [] };
+    await store.dispatch<any>(actions.createClient(client));
       // return of async actions
     expect(store.getActions()).toEqual(expectedActions)
   });
 
- it('creates SUBMIT_CLIENT_FAIL if submitting client fails', async () => {
+ it('creates CREATE_CLIENT_FAILED if creating client fails', async () => {
     const docMock = () => ({
       set: () => {
         throw new Error('Fail');
@@ -50,13 +50,19 @@ describe('submitClient', () => {
     const actions = require('./appActions');
 
     const expectedActions = [
-      { type: constants.SUBMIT_CLIENT },
-      { type: constants.SUBMIT_CLIENT_FAILED, payload: 'Fail' }
+      { type: constants.CREATE_CLIENT },
+      { type: constants.CREATE_CLIENT_FAILED, payload: 'Fail' }
     ]
     const store = mockStore({ })
 ​
-    const client:IClient = { name: '' };
-    await store.dispatch<any>(actions.submitClient(client));
+    const client:IClient = { id: '', name: 'abc', locations: [] };
+
+    try {
+      await store.dispatch<any>(actions.createClient(client));
+    } catch (e) {
+      // do nothing
+    }
+
       // return of async actions
     expect(store.getActions()).toEqual(expectedActions)
   });

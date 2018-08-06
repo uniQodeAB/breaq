@@ -1,14 +1,14 @@
 import {
   COMPLETE,
+  CREATE_CLIENT,
+  CREATE_CLIENT_FAILED,
+  CREATE_CLIENT_SUCCESSFUL,
   DELETE_CLIENT,
   DELETE_CLIENT_FAILED,
   DELETE_CLIENT_SUCCESSFUL,
   FAIL,
   INACTIVE,
-  SUBMIT,
-  SUBMIT_CLIENT,
-  SUBMIT_CLIENT_FAILED,
-  SUBMIT_CLIENT_SUCCESSFUL
+  SUBMIT
 } from '../constants';
 import { IStoreState } from '../types';
 import reducer from './appReducer';
@@ -31,7 +31,7 @@ describe('app reducer', () => {
 
   describe('add client', () => {
     it('should change the state of addClientState to "SUBMIT"', () => {
-      const newState = reducer(state, { type: SUBMIT_CLIENT });
+      const newState = reducer(state, { type: CREATE_CLIENT });
 
       expect(newState.addClientState).toEqual({
         message: '',
@@ -43,7 +43,7 @@ describe('app reducer', () => {
     });
 
     it('should change the state of addClientState to "COMPLETE"', () => {
-      const newState = reducer(state, { type: SUBMIT_CLIENT_SUCCESSFUL });
+      const newState = reducer(state, { type: CREATE_CLIENT_SUCCESSFUL });
 
       expect(newState.addClientState).toEqual({
         message: '',
@@ -57,7 +57,7 @@ describe('app reducer', () => {
     it('should change the state of addClientState to "FAIL" with an optional message', () => {
       const newState = reducer(state, {
         payload: 'test',
-        type: SUBMIT_CLIENT_FAILED,
+        type: CREATE_CLIENT_FAILED,
       });
 
       expect(newState.addClientState).toEqual({

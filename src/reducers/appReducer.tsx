@@ -1,15 +1,15 @@
 import { AppAction } from '../actions';
 import {
   COMPLETE,
+  CREATE_CLIENT,
+  CREATE_CLIENT_FAILED,
+  CREATE_CLIENT_SUCCESSFUL,
   DELETE_CLIENT,
   DELETE_CLIENT_FAILED,
   DELETE_CLIENT_SUCCESSFUL,
   FAIL,
   INACTIVE,
-  SUBMIT,
-  SUBMIT_CLIENT,
-  SUBMIT_CLIENT_FAILED,
-  SUBMIT_CLIENT_SUCCESSFUL
+  SUBMIT
 } from '../constants';
 import { IStoreState } from '../types/index';
 
@@ -26,7 +26,7 @@ export const initialState:IStoreState = {
 };
 export default function appReducer(state: IStoreState = initialState, action: AppAction): IStoreState {
   switch (action.type) {
-    case SUBMIT_CLIENT:
+    case CREATE_CLIENT:
       return {
         ...state,
         addClientState: {
@@ -35,7 +35,7 @@ export default function appReducer(state: IStoreState = initialState, action: Ap
           state: SUBMIT,
         }
       };
-    case SUBMIT_CLIENT_SUCCESSFUL:
+    case CREATE_CLIENT_SUCCESSFUL:
       return {
         ...state,
         addClientState: {
@@ -45,7 +45,7 @@ export default function appReducer(state: IStoreState = initialState, action: Ap
 
         }
       };
-    case SUBMIT_CLIENT_FAILED:
+    case CREATE_CLIENT_FAILED:
       return {
         ...state,
         addClientState: {
