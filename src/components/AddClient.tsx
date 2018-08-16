@@ -1,9 +1,11 @@
 import * as React from 'react';
 import Autocomplete from '../containers/ClientAutocomplete';
 import { firestore } from '../firebase';
+import '../styles/AddClient.css';
 import { IClient, ILocation } from '../types';
 import { ISuggestion } from './Autocomplete';
 import LocationSearchBox from './LocationSearchBox';
+
 export interface IProps {
   createClient: (client:IClient) => Promise<void>;
   updateClient: (client:IClient) => Promise<void>
@@ -41,7 +43,7 @@ class AddClient extends React.Component<IProps, IState> {
     const { client, message, addLocation, location: { address}, update } = this.state;
 
     return (
-      <div>
+      <div className="AddClient">
         {message && (
           <span>{message}</span>
         )}
